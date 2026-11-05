@@ -1,10 +1,10 @@
 ---
-title: Repository webhook setup
-description: Configure signed read-only webhooks for GitHub, GitLab, Forgejo, and Gitea repositories.
+title: 'Repository webhook setup'
+description: 'Configure signed read-only webhooks for GitHub, GitLab, Forgejo, and Gitea repositories.'
 ---
 
-> Archived source snapshot. Product labels have been normalized to Repovio. For this historical release,
-> use the configuration identifiers and container references from its tagged deployment files unchanged.
+> Archived source snapshot. Product labels use Repovio. Use the configuration identifiers and container references from
+> this release's tagged deployment files unchanged.
 
 Repovio can receive signed webhooks to synchronize a tracked repository sooner than its normal polling interval. It
 never creates, updates, deletes, or tests webhooks through provider APIs. An administrator configures every repository
@@ -19,29 +19,33 @@ callback URL. Repovio then reads current data through the configured read-only p
 enqueue a durable repository synchronization; deliveries received within 15 seconds are combined. The default fallback
 polling interval is 30 minutes.
 
+<a id="configure-a-repository-webhook"></a>
+
 ## Configure a repository webhook
 
 1. Add the repository to Repovio and open its **Repository webhook** card.
 2. Copy the callback URL.
-3. Generate a unique, high-entropy signing secret or paste the exact signing token supplied by the provider. Never
-   reuse an access token or another repository's secret.
+3. Generate a unique, high-entropy signing secret or paste the exact signing token supplied by the provider. Never reuse
+   an access token or another repository's secret.
 4. Save the secret. Repovio encrypts it with AES-256-GCM and never returns it through the API.
 5. Configure the callback URL and secret in that repository's provider settings.
 6. Keep TLS verification enabled and send a test delivery.
 
 The stable callbacks use `/api/webhooks/<provider>/<repository-id>`. Versioned
 `/api/v1/webhooks/<provider>/<repository-id>` callbacks are also available. Provider-account callback URLs from Repovio
-0.2.9 and earlier are no longer accepted. After upgrading, recreate every webhook with its repository callback and a
-new repository secret.
+0.2.9 and earlier are no longer accepted. After upgrading, recreate every webhook with its repository callback and a new
+repository secret.
 
 Successful deliveries return HTTP `202` with `{ "accepted": true }`. Repeated provider delivery IDs return
-`{ "accepted": true, "duplicate": true }` and do not enqueue another synchronization. Unknown or disabled
-repositories, disabled provider accounts, missing secrets, invalid signatures, mismatched provider repository IDs, and
-missing delivery IDs are rejected without exposing configuration details.
+`{ "accepted": true, "duplicate": true }` and do not enqueue another synchronization. Unknown or disabled repositories,
+disabled provider accounts, missing secrets, invalid signatures, mismatched provider repository IDs, and missing
+delivery IDs are rejected without exposing configuration details.
 
 Queued synchronization survives API restarts. Multiple instances use database leases and do not synchronize the same
 provider account concurrently. Rate-limit headers delay work for the affected account, while bounded retries handle
 transient failures.
+
+<a id="github-actions"></a>
 
 ## GitHub Actions
 
@@ -52,6 +56,8 @@ transient failures.
 
 Repovio verifies `X-Hub-Signature-256` over the raw body and uses `X-GitHub-Delivery` for idempotency. See GitHub's
 [webhook event documentation](https://docs.github.com/en/webhooks/webhook-events-and-payloads).
+
+<a id="gitlab-pipelines"></a>
 
 ## GitLab pipelines
 
@@ -64,6 +70,8 @@ Repovio verifies Standard Webhooks HMAC-SHA256 signatures and prefers `webhook-i
 `X-Gitlab-Token` and `X-Gitlab-Event-UUID` headers remain supported for older instances. See GitLab's
 [webhook documentation](https://docs.gitlab.com/user/project/integrations/webhooks/).
 
+<a id="forgejo-actions"></a>
+
 ## Forgejo Actions
 
 1. Open the repository's **Settings → Webhooks** and add a native **Forgejo** JSON webhook.
@@ -72,7 +80,10 @@ Repovio verifies Standard Webhooks HMAC-SHA256 signatures and prefers `webhook-i
 4. Keep TLS verification enabled and save the webhook.
 
 Repovio verifies `X-Forgejo-Signature` and uses `X-Forgejo-Delivery` for idempotency. Gitea-compatible headers remain
-accepted for Forgejo compatibility. See the Forgejo [webhook documentation](https://forgejo.org/docs/latest/user/repository/webhooks/).
+accepted for Forgejo compatibility. See the Forgejo
+[webhook documentation](https://forgejo.org/docs/latest/user/repository/webhooks/).
+
+<a id="gitea-actions"></a>
 
 ## Gitea Actions
 
@@ -83,6 +94,8 @@ accepted for Forgejo compatibility. See the Forgejo [webhook documentation](http
 
 Repovio verifies `X-Gitea-Signature` over the raw body and uses `X-Gitea-Delivery` for idempotency. See the Gitea
 [webhook documentation](https://docs.gitea.com/usage/repository/webhooks/).
+
+<a id="troubleshooting"></a>
 
 ## Troubleshooting
 

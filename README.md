@@ -7,6 +7,11 @@ Public English and German documentation sources for https://repovio.de.
 Edit `<locale>/docs/<version>/<slug>.md`. English is the editorial reference. Every page requires title and description
 frontmatter. Update both languages together and preserve executable examples and technical identifiers.
 
+The [feature coverage matrix](COVERAGE.md) maps the complete handbook to both reviewed application versions.
+`navigation.json` defines explicit tab, section, subgroup, and order metadata, plus legacy-page redirects. Never
+classify pages by their position in a version slug list. `locales.json` is the locale registry shared with the website
+consumer. Stable heading anchors are identical across translations.
+
 `versions.json` records exact application revisions, released page sets and the stable version. `next` is an internal
 editorial source, excluded from website routes, search, assets and indexing. The initial historical snapshot comes from
 application release 1.0.1; its original Git tag is recorded by exact commit rather than renamed or recreated. Product

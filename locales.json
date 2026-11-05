@@ -1,0 +1,20 @@
+{
+  "en": {
+    "language": "en-US",
+    "name": "English",
+    "dir": "ltr",
+    "ui": "en",
+    "og": "en_US",
+    "collection": "docs_en",
+    "flag": "🇺🇸"
+  },
+  "de": {
+    "language": "de-DE",
+    "name": "Deutsch",
+    "dir": "ltr",
+    "ui": "de",
+    "og": "de_DE",
+    "collection": "docs_de",
+    "flag": "🇩🇪"
+  }
+}

@@ -1,35 +1,54 @@
 ---
-title: Benachrichtigungen
-description: Kanäle, Regeln, Zustellversuche und Browser-Push konfigurieren.
+title: 'Benachrichtigungskanäle'
+description: 'Erstellen Sie globale Benachrichtigungsziele, abonnieren Sie Ereignisse und testen Sie die Zustellung.'
 ---
 
-> Historischer Quellstand. Produktbezeichnungen verwenden den aktuellen Namen. Für diesen Release die
-> Konfigurationsnamen und Image-Referenzen seiner versionierten Bereitstellungsdateien unverändert verwenden.
+> Archivierter Quell-Snapshot. Produktetiketten verwenden Repovio. Verwenden Sie die Konfigurations-IDs und
+> Container-Referenzen aus den getaggten Bereitstellungsdateien dieser Version unverändert.
 
-Der Bereich Benachrichtigungen enthält Kanäle, Regeln und Zustellhistorie. Kanäle unterstützen E-Mail, Gotify, ntfy,
-Discord, Browser-Push und eigene Apprise-URLs pro Repository. Regeln verknüpfen Workflow-Glob und Endzustand `SUCCESS`
-oder `FAILED` mit einem oder mehreren Kanälen.
+<a id="access-and-channel-list"></a>
 
-E-Mail-, Gotify-, ntfy- und Discord-Formulare werden von der API in kanonische Apprise-Service-URLs übersetzt. Die
-mitgelieferte Apprise-CLI übernimmt die Zustellung; ein zusätzlicher Apprise-Server ist nicht erforderlich.
+## Zugriff und Kanalliste
 
-Ziele werden mit `TOKEN_ENCRYPTION_KEY` verschlüsselt und niemals nach dem Speichern zurückgegeben. Bearbeiten erhält
-das vorhandene Ziel, bis dessen Ersetzung ausdrücklich ausgewählt wird. Ein anderer Kanaltyp benötigt einen neuen
-Kanal. Globale Rolle und Repository-Mitgliedschaft müssen die Verwaltung erlauben.
+Öffnen Sie **Operationen → Benachrichtigungen → Kanäle**. Kanäle sind globale Repovio-Konfigurationen, keine
+Repository-eigene Managerkonfiguration. Systemadministratoren erstellen, bearbeiten, testen, aktivieren/deaktivieren und
+löschen Kanäle. Der Repository-Manager-Status gewährt keine Kanalverwaltung. In der Tabelle werden Name, Typ, sichere
+Zielmetadaten, abonnierte Ereignisse, aktivierter Status und Aktualisierungszeit angezeigt. Verwenden Sie
+Typ-/aktivierte Filter, Sortierung, Spaltenoptionen und Paginierung.
 
-## Browser-Push
+<a id="create-a-destination"></a>
 
-Browser-Push ist ein eigener Transport. Aktiviere ihn mit `WEB_PUSH_VAPID_PUBLIC_KEY`, `WEB_PUSH_VAPID_PRIVATE_KEY` und
-`WEB_PUSH_VAPID_SUBJECT`. Schlüssel beispielsweise mit `npx web-push generate-vapid-keys` erzeugen. Der Subject-Wert
-muss eine `mailto:`- oder HTTPS-URI sein. Ohne vollständige Konfiguration wird der Transport als nicht verfügbar gezeigt.
+## Erstellen Sie ein Ziel
 
-Jeder Benutzer aktiviert Push ausdrücklich pro Browser. Ein Kanal gehört seinem Ersteller und sendet an dessen
-aktivierte Geräte. Endpunkte und Schlüssel sind verschlüsselt; nicht geheime Fingerabdrücke verhindern Duplikate.
-Abgelaufene Abonnements mit HTTP 404/410 werden entfernt.
+Wählen Sie **Kanal hinzufügen**, geben Sie einen Namen ein, wählen Sie einen Typ aus und konfigurieren Sie das Ziel:
 
-## Bestehende Kanäle und Historie
+- **E-Mail:** SMTP-Host/-Port, Transportsicherheit, Absender, optionale Authentifizierung und Empfänger.
+- **Gotify:** Server-URL, Anwendungstoken und Priorität.
+- **ntfy:** Server, Thema, optionale Authentifizierung/Token und Priorität.
+- **Discord:** Webhook-Ziel.
+- **Benutzerdefinierte Apprise-URL:** eine unterstützte Apprise-Dienst-URL.
+- **Browser-Push:** Empfängerbenutzer; Jeder Empfänger muss [ihr Gerät](/docs/v1.0/browser-push) aktivieren.
 
-Bestehende Apprise-Kanäle erhalten anhand ihres Schemas einen stabilen Typ. Unbekannte Schemas bleiben als eigene
-Apprise-URL nutzbar. Verschlüsselte Ziele, Repository-Zuordnung, Regeln und Zustellversuche bleiben erhalten.
-Die Historie zeigt sichere Fehler, Versuchszahl und Retry-Zustand ohne Zugangsdaten. Persistierte Versuche und
-Deduplizierung verhindern doppelte logische Zustellungen bei wiederholter Verarbeitung.
+Konfigurieren Sie [Ereignisabonnements und Vorschau](/docs/v1.0/notification-rules) im selben Dialog. Speichern Sie und
+warten Sie auf die Anfrage, bevor Sie schließen. Bei Validierungs- oder Speicherfehlern steht das Formular zur Korrektur
+zur Verfügung.
+
+<a id="edit-test-and-remove"></a>
+
+## Bearbeiten, testen und entfernen
+
+Das Ziel ist im Ruhezustand verschlüsselt. Sie können es speichern, aber nicht wieder lesen. Beim Bearbeiten bleiben die
+gespeicherten Anmeldeinformationen erhalten, es sei denn, **Zielkonfiguration ersetzen** ist ausgewählt. Der Kanaltyp
+kann nicht geändert werden; Erstellen Sie stattdessen einen neuen Kanal. Ein migrierter Kanal mit der Markierung
+**Neukonfiguration erforderlich** kann erst wieder aktiviert werden, wenn sein Ziel ersetzt wird. Browser-Push-Kanäle
+nutzen Benutzerabonnements und lehnen ein Transportzielgeheimnis ab.
+
+Verwenden Sie die Testaktion der Zeile, um eine echte Benachrichtigung an das konfigurierte Ziel zu senden. Es werden
+keine Anbieterdaten geändert. Überprüfen Sie das Ergebnis in [Lieferhistorie](/docs/v1.0/notification-history).
+Deaktivieren Sie einen Kanal, um die Zustellung zu unterbrechen, oder löschen Sie ihn, wenn er nicht mehr benötigt wird.
+Der Löschvorgang wird sofort ausgeführt. Fügen Sie niemals Anmeldeinformationen in Screenshots oder Supportberichte ein.
+
+E-Mail, Gotify, ntfy, Discord und benutzerdefinierte Ziele verwenden die gebündelte Apprise-CLI der API. Ein separater
+Apprise-Server ist nicht erforderlich. Wenn eine Anfrage fehlschlägt, versuchen Sie es nach der API-Wiederherstellung
+erneut. Eine leere Liste bedeutet, dass keine sichtbaren konfigurierten Kanäle den Filtern entsprechen. Löschen Sie die
+Filter oder erstellen Sie einen Kanal. Details zu Lieferfehlern enthalten nur bereinigte Fehler.

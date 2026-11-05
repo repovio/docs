@@ -1,42 +1,46 @@
 ---
-title: Notification management
-description: Configure channels, rules, delivery history, and optional browser push for Repovio workflow events.
+title: 'Notification channels'
+description: 'Create global notification destinations, subscribe to events, and test delivery.'
 ---
 
-The **Notifications** area contains three tabs:
+<a id="access-and-channel-list"></a>
 
-- **Channels** configures Email, Gotify, ntfy, Discord, browser push, or a custom Apprise URL per repository.
-- **Rules** selects which channels receive a completed `SUCCESS` or `FAILED` workflow run matching a workflow glob.
-- **Delivery history** shows workflow and test deliveries, retry state, and safe channel/device attempt details.
+## Access and channel list
 
-Email, Gotify, ntfy, and Discord forms are translated into canonical
-[Apprise service URLs](https://appriseit.com/services/) by the API. A separate Apprise server is not required;
-Repovio invokes its bundled Apprise CLI for these transports.
+Open **Operations → Notifications → Channels**. Channels are global Repovio configuration, not repository-owned manager
+configuration. System administrators create, edit, test, enable/disable, and delete channels. Repository-manager status
+does not grant channel administration. The table shows name, type, safe destination metadata, subscribed events, enabled
+state, and updated time; use type/enabled filters, sorting, column controls, and pagination.
 
-The complete destination configuration is encrypted with Repovio's `TOKEN_ENCRYPTION_KEY` before it is stored. It
-is write-only in the API and never returned to the web application, logs, delivery history, or error messages.
-Editing a channel preserves its existing destination unless **Replace destination configuration** is selected.
-Changing a channel type requires deleting and recreating the channel.
+<a id="create-a-destination"></a>
 
-## Browser push
+## Create a destination
 
-Browser push is a native Repovio transport and does not use Apprise. Configure all three variables to enable it:
+Choose **Add channel**, enter a name, select a type, and configure the destination:
 
-```dotenv
-WEB_PUSH_VAPID_PUBLIC_KEY=...
-WEB_PUSH_VAPID_PRIVATE_KEY=...
-WEB_PUSH_VAPID_SUBJECT=mailto:admin@example.com
-```
+- **Email:** SMTP host/port, transport security, sender, optional authentication, and recipients.
+- **Gotify:** server URL, application token, and priority.
+- **ntfy:** server, topic, optional authentication/token, and priority.
+- **Discord:** webhook destination.
+- **Custom Apprise URL:** a supported Apprise service URL.
+- **Browser push:** recipient users; each recipient must enable [their device](/docs/next/browser-push).
 
-Generate the VAPID key pair with `npx web-push generate-vapid-keys`. The subject must be a `mailto:` or `https:`
-URI. If the variables are omitted, browser push is shown as unavailable.
+Configure [event subscriptions and preview](/docs/next/notification-rules) in the same dialog. Save and wait for the
+request before closing. Validation or save failures leave the form available for correction.
 
-Each user explicitly enables push per browser with **Enable on this device**. Subscription endpoints and keys are
-encrypted and deduplicated by a non-secret fingerprint. A browser-push channel belongs to its creator and sends to
-all browsers that creator has enabled. Expired subscriptions reported with HTTP 404 or 410 are removed.
+<a id="edit-test-and-remove"></a>
 
-## Existing channels
+## Edit, test, and remove
 
-Existing Apprise channels are assigned a stable type from their stored URL scheme. Unknown schemes remain available
-as **Custom Apprise URL**. Existing encrypted URLs, repository ownership, rule links, and delivery records are not
-rewritten or exposed.
+The destination is encrypted at rest. You can save it, but you cannot read it back. Editing preserves its stored
+credentials unless **Replace destination configuration** is selected. Channel type cannot be changed; create a new
+channel instead. A migrated channel marked **Requires reconfiguration** cannot be reenabled until its destination is
+replaced. Browser-push channels use user subscriptions and reject a transport destination secret.
+
+Use the row test action to send a real notification to the configured destination; it does not modify provider data.
+Review the result in [Delivery history](/docs/next/notification-history). Disable a channel to pause delivery, or delete
+it when no longer needed. Deletion executes immediately. Never paste credentials into screenshots or support reports.
+
+Email, Gotify, ntfy, Discord, and custom destinations use the API's bundled Apprise CLI; a separate Apprise server is
+not required. If a request fails, retry after API recovery. An empty list means no visible configured channels match
+filters; clear the filters or create a channel. Delivery failure details contain sanitized errors only.

@@ -1,30 +1,111 @@
 import { readFile, access, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-/** Verify version/locale coverage, frontmatter, local links and content-image references. */
+/** Read the canonical locale registry shared by documentation and its website consumer. */
+export async function readLocales(root = '.') {
+  const locales = JSON.parse(await readFile(resolve(root, 'locales.json'), 'utf8'));
+  if (!locales.en || !locales.de || Object.keys(locales).some((code) => !/^[a-z]{2}(?:-[A-Z]{2})?$/.test(code))) {
+    throw new Error('Invalid documentation locales');
+  }
+  for (const locale of Object.values(locales)) {
+    if (!locale.name || !locale.collection || !['ltr', 'rtl'].includes(locale.dir)) {
+      throw new Error('Invalid locale metadata');
+    }
+  }
+  return locales;
+}
+
+/** Verify version/locale coverage, navigation, frontmatter, technical examples, local links, and image references. */
 export async function checkDocs(root = '.', { assetRoot, previewAssetRoot } = {}) {
   const manifest = JSON.parse(await readFile(resolve(root, 'versions.json'), 'utf8'));
-  if (!manifest.versions.some((version) => version.id === manifest.stable && version.status === 'stable'))
+  const locales = await readLocales(root);
+  const navigation = JSON.parse(await readFile(resolve(root, 'navigation.json'), 'utf8'));
+  if (!manifest.versions.some((version) => version.id === manifest.stable && version.status === 'stable')) {
     throw new Error('Invalid stable version');
-  if (manifest.versions.filter((version) => version.status === 'stable').length !== 1)
+  }
+  if (manifest.versions.filter((version) => version.status === 'stable').length !== 1) {
     throw new Error('Expected one stable version');
+  }
   const errors = [];
+  const entries = navigation.entries;
+  if (
+    new Set(entries.map((entry) => entry.slug)).size !== entries.length ||
+    new Set(entries.map((entry) => entry.order)).size !== entries.length
+  ) {
+    errors.push('Navigation entries must have unique slugs and order');
+  }
+  for (const entry of entries) {
+    if (
+      !['get-started', 'guides'].includes(entry.tab) ||
+      !(entry.tab === 'guides' ? ['overview', 'operations', 'administration'] : ['getting-started']).includes(
+        entry.section,
+      ) ||
+      !Number.isInteger(entry.order)
+    ) {
+      errors.push(`${entry.slug}: invalid navigation metadata`);
+    }
+  }
+  const texts = new Map();
+  const load = async (locale, version, slug) => {
+    const key = `${locale}/${version}/${slug}`;
+    if (!texts.has(key)) {
+      texts.set(key, await readFile(resolve(root, locale, 'docs', version, slug + '.md'), 'utf8'));
+    }
+    return texts.get(key);
+  };
   for (const version of manifest.versions) {
-    if (!/^[a-f0-9]{40}$/.test(version.revision) || !/^(v\d+\.\d+|next)$/.test(version.id))
+    if (!/^[a-f0-9]{40}$/.test(version.revision) || !/^(v\d+\.\d+|next)$/.test(version.id)) {
       throw new Error('Invalid version provenance');
-    for (const locale of ['en', 'de']) {
+    }
+    if (new Set(version.slugs).size !== version.slugs.length) errors.push(`${version.id}: duplicate slugs`);
+    for (const slug of version.slugs) {
+      if (!/^[a-z0-9-]+$/.test(slug) || entries.filter((entry) => entry.slug === slug).length !== 1) {
+        errors.push(`${version.id}/${slug}: missing or invalid navigation entry`);
+      }
+    }
+    for (const [alias, redirect] of Object.entries(navigation.redirects)) {
+      if (
+        version.slugs.includes(alias) ||
+        !version.slugs.includes(redirect.to) ||
+        Object.values(redirect.anchors).some((slug) => !version.slugs.includes(slug))
+      ) {
+        errors.push(`${version.id}/${alias}: invalid redirect`);
+      }
+    }
+    for (const locale of Object.keys(locales)) {
       const directory = resolve(root, locale, 'docs', version.id);
       const files = (await readdir(directory)).filter((name) => name.endsWith('.md')).sort();
-      if (JSON.stringify(files) !== JSON.stringify(version.slugs.map((slug) => slug + '.md').sort()))
+      if (JSON.stringify(files) !== JSON.stringify(version.slugs.map((slug) => slug + '.md').sort())) {
         errors.push(`${locale}/${version.id}: page coverage`);
+      }
       for (const slug of version.slugs) {
-        const text = await readFile(resolve(directory, slug + '.md'), 'utf8');
-        if (!/^---\n[\s\S]*?title: .+\n[\s\S]*?description: .+\n[\s\S]*?---/.test(text))
-          errors.push(`${locale}/${version.id}/${slug}: frontmatter`);
-        if (/\b(?:TODO|TBD)\b/.test(text)) errors.push(`${slug}: unfinished content`);
+        const text = await load(locale, version.id, slug);
+        const key = `${locale}/${version.id}/${slug}`;
+        const frontmatter = /^---\n([\s\S]*?)\n---/.exec(text)?.[1] || '';
+        if (
+          !['title', 'description'].every((field) =>
+            new RegExp(`^${field}:[ \t]*(?:[^\\s\\n][^\\n]*|\\n[ \t]+\\S[^\\n]*)`, 'm').test(frontmatter),
+          )
+        ) {
+          errors.push(`${key}: frontmatter`);
+        }
+        if (/\b(?:TODO|TBD)\b|ZXQ\w*QXZ/.test(text)) errors.push(`${key}: unfinished content`);
+        const anchors = [...text.matchAll(/<a id="([^"]+)"><\/a>/g)].map((match) => match[1]);
+        if (new Set(anchors).size !== anchors.length) errors.push(`${key}: duplicate anchors`);
+        if (locale !== 'en') {
+          const english = await load('en', version.id, slug);
+          const technical = (value) => (value.match(/```[\s\S]*?```|`[^`\n]+`/g) || []).sort();
+          if (JSON.stringify(technical(text)) !== JSON.stringify(technical(english))) {
+            errors.push(`${key}: translated technical identifiers or examples`);
+          }
+          if (text === english) errors.push(`${key}: untranslated English page`);
+          const originalAnchors = [...english.matchAll(/<a id="([^"]+)"><\/a>/g)].map((match) => match[1]);
+          if (JSON.stringify(anchors) !== JSON.stringify(originalAnchors)) errors.push(`${key}: anchor coverage`);
+        }
+        if (/\]\s+\(/.test(text)) errors.push(`${key}: malformed Markdown link`);
         for (const match of text.matchAll(/\]\(([^)]+)\)/g)) {
-          const url = match[1].split('#')[0];
-          if (!url || /^(?:https?:|mailto:)/.test(url)) continue;
+          const [url, anchor] = match[1].split('#');
+          if (/^(?:https?:|mailto:)/.test(url)) continue;
           if (url.startsWith('/images/')) {
             if (assetRoot) {
               try {
@@ -34,16 +115,27 @@ export async function checkDocs(root = '.', { assetRoot, previewAssetRoot } = {}
                     : resolve(assetRoot, url.slice(1));
                 await access(image);
               } catch {
-                errors.push(`${slug}: image ${url}`);
+                errors.push(`${key}: image ${url}`);
               }
             }
             continue;
           }
-          const path = url.replace(/^\/(?:en|de)(?=\/)/, '');
-          if (path.startsWith('/docs/')) {
-            const target = manifest.versions.find((v) => path.startsWith(`/docs/${v.id}/`));
-            if (!target || !target.slugs.includes(path.split('/').at(-1))) errors.push(`${slug}: link ${url}`);
-          } else errors.push(`${slug}: unresolved link ${url}`);
+          const segments = url.split('/');
+          if (Object.hasOwn(locales, segments[1])) segments.splice(1, 1);
+          const path = segments.join('/');
+          const targetMatch = /^\/docs\/([^/]+)\/([^/]+)$/.exec(path);
+          const target = targetMatch && manifest.versions.find((entry) => entry.id === targetMatch[1]);
+          if (!url && anchor) {
+            if (!anchors.includes(anchor)) errors.push(`${key}: missing anchor ${anchor}`);
+          } else if (!target || !target.slugs.includes(targetMatch[2])) {
+            errors.push(`${key}: unresolved link ${match[1]}`);
+          } else if (anchor) {
+            const targetText = await load(locale, target.id, targetMatch[2]);
+            if (!targetText.includes(`<a id="${anchor}"></a>`)) errors.push(`${key}: missing anchor ${match[1]}`);
+          }
+          if (version.status !== 'preview' && target?.status === 'preview') {
+            errors.push(`${key}: released page links to preview`);
+          }
         }
       }
     }
@@ -52,6 +144,9 @@ export async function checkDocs(root = '.', { assetRoot, previewAssetRoot } = {}
   return manifest;
 }
 if (process.argv[1] === new URL(import.meta.url).pathname) {
-  const manifest = await checkDocs(process.argv[2]);
-  console.log(`Validated ${manifest.versions.length} documentation versions in EN/DE.`);
+  const root = process.argv[2] || '.';
+  const manifest = await checkDocs(root);
+  console.log(
+    `Validated ${manifest.versions.length} documentation versions in ${Object.keys(await readLocales(root)).length} languages.`,
+  );
 }

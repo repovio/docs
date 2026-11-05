@@ -1,31 +1,38 @@
 ---
-title: Workflow dashboard
-description: Read workflow health, current failures, and approval queues from the Repovio dashboard.
+title: 'Dashboard'
+description: 'Read current workflow health, work summaries, and historical charts.'
 ---
 
-![Repovio dashboard with synthetic data](/images/docs/next/dashboard-en-light.png)
+<a id="scope-and-date-range"></a>
 
-## Read the summary
+## Scope and date range
 
-The dashboard combines data only from repositories visible to the signed-in user. Summary cards report active runs,
-workflows currently failing, runs awaiting provider approval, runtime totals, open and stale issues, and open pull or
-merge requests. Counts from different users can therefore differ without either view being incorrect.
+Every card and chart uses only repositories the signed-in user may read. Select **Last 7 days**, **Last 30 days**, or
+**Last 90 days** for historical statistics. The time range changes completed-run totals, success/error trends, duration,
+and status distribution. Current queue and work-item counts remain current-state summaries. Select **Refresh** to reload
+the dashboard; the control remains busy until its requests settle.
 
-Choose **Last 7 days**, **Last 30 days**, or **Last 90 days** to change historical charts and repository health. The time
-range affects completed-run summaries, success/error trends, status distribution, and repository health; current queues
-and the latest visible work-item counts remain current-state views. **Refresh** reloads all dashboard sections.
+<a id="summary-and-navigation"></a>
 
-## Investigate a result
+## Summary and navigation
 
-1. Start with **Failing now** to find workflows whose newest terminal run failed.
-2. Select **View all** to open the filtered [Needs attention](/docs/next/guide-workflow-queues#needs-attention) queue.
-3. Use **Latest runs** or **Open in provider** when you need the provider log and run details.
-4. Review **Repository health** and the trend chart to decide whether the failure is isolated or recurring.
-5. Open the issue or pull-request summaries when the failure belongs to active repository work.
+The workflow summary contains success rate/completed count, active queued/running count, median completed duration,
+current failures, awaiting-approval count, and runtime totals. Follow current failures to
+[Needs attention](/docs/next/needs-attention), or pending approvals to
+[Awaiting approval](/docs/next/awaiting-approval). Issue and pull-request summaries link to their own filtered lists.
+Managers and administrators also see security-alert summaries for repositories they manage.
 
-**Awaiting approval** is not a failure count. It identifies runs paused for a human decision and links to the separate
-approval queue. Repovio never performs that approval itself; every approval remains an external provider action.
+The active-runs card opens a removable `preset=active` filter; current work-item cards also open removable presets.
+Manual filter changes release the preset.
 
-If one request fails, available dashboard sections remain visible and an error banner identifies the partial load. Use
-**Refresh** to retry. Empty charts mean that no retained completed runs exist for the selected period, not that provider
-connectivity has been verified.
+The trend chart compares successful and failed completed runs over time. Status distribution groups normalized states.
+**Latest runs** shows recent workflow activity with links to the provider. It is not an embedded provider log viewer.
+Repovio cannot approve or rerun workflows from any dashboard widget.
+
+<a id="empty-and-partial-results"></a>
+
+## Empty and partial results
+
+No completed runs in the selected period produces empty charts. Zero current failures is different from a missing
+provider connection. If a request fails, an error banner identifies the partial load while available sections remain
+visible. Refresh after recovery, or inspect [Jobs](/docs/next/guide-jobs) and the repository's last synchronization.
