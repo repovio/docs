@@ -31,7 +31,7 @@
     {
       "id": "next",
       "release": null,
-      "revision": "d160f71be62e8efff261b06df430f0a43c022305",
+      "revision": "5da0384eae55e731f04067253c00881be19e2508",
       "status": "preview",
       "slugs": [
         "overview",
@@ -53,8 +53,7 @@
         "notifications",
         "mcp",
         "localization"
-      ],
-      "workingTreeSource": true
+      ]
     }
   ]
 }
