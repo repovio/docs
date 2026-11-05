@@ -1,0 +1,59 @@
+{
+  "stable": "v1.0",
+  "versions": [
+    {
+      "id": "v1.0",
+      "release": "1.0.1",
+      "revision": "b5ab70aeb9274603c505be0f7f0f8813ca90a7ab",
+      "status": "stable",
+      "slugs": [
+        "overview",
+        "installation",
+        "authentication",
+        "deployment",
+        "guide-sign-in-navigation",
+        "guide-dashboard",
+        "guide-workflow-queues",
+        "guide-issues-pull-requests",
+        "guide-repositories-notifications",
+        "guide-security-alerts",
+        "guide-jobs",
+        "guide-administration",
+        "repositories",
+        "provider-oauth",
+        "provider-webhooks",
+        "notifications",
+        "mcp",
+        "localization"
+      ],
+      "brandingOverlay": true
+    },
+    {
+      "id": "next",
+      "release": null,
+      "revision": "5da0384eae55e731f04067253c00881be19e2508",
+      "status": "preview",
+      "slugs": [
+        "overview",
+        "installation",
+        "authentication",
+        "deployment",
+        "branding-upgrade",
+        "guide-sign-in-navigation",
+        "guide-dashboard",
+        "guide-workflow-queues",
+        "guide-issues-pull-requests",
+        "guide-repositories-notifications",
+        "guide-security-alerts",
+        "guide-jobs",
+        "guide-administration",
+        "repositories",
+        "provider-oauth",
+        "provider-webhooks",
+        "notifications",
+        "mcp",
+        "localization"
+      ]
+    }
+  ]
+}
