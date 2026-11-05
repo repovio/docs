@@ -12,7 +12,10 @@ async function fixture(t) {
   t.after(() => rm(root, { recursive: true, force: true }));
   const json = (file, data) => writeFile(join(root, file), JSON.stringify(data));
   const navigation = {
-    entries: [{ slug: 'overview', tab: 'guides', section: 'overview', group: null, order: 0 }],
+    entries: [{ slug: 'overview', tab: 'guides', section: 'overview', group: 'dashboard', order: 0 }],
+    groups: [
+      { id: 'dashboard', section: 'overview', title: 'dashboard', icon: 'i-lucide-layout-dashboard', slug: 'overview' },
+    ],
     redirects: { legacy: { to: 'overview', anchors: { old: 'overview' } } },
   };
   await json('locales.json', {
@@ -42,6 +45,24 @@ test('rejects missing translated pages', async (t) => {
   const { root } = await fixture(t);
   await rm(join(root, 'de/docs/v1.0/overview.md'));
   await assert.rejects(checkDocs(root));
+});
+
+test('rejects unknown groups and groups in a different application section', async (t) => {
+  const { root, json, navigation } = await fixture(t);
+  navigation.entries[0].group = 'missing';
+  await json('navigation.json', navigation);
+  await assert.rejects(checkDocs(root), /invalid navigation metadata/);
+  navigation.entries[0].group = 'dashboard';
+  navigation.groups[0].section = 'operations';
+  await json('navigation.json', navigation);
+  await assert.rejects(checkDocs(root), /invalid navigation metadata/);
+});
+
+test('rejects duplicate group IDs and invalid landing pages', async (t) => {
+  const { root, json, navigation } = await fixture(t);
+  navigation.groups.push({ ...navigation.groups[0], slug: 'missing' });
+  await json('navigation.json', navigation);
+  await assert.rejects(checkDocs(root), /unique IDs[\s\S]*invalid navigation group/);
 });
 
 test('rejects a translation that changes a technical identifier', async (t) => {

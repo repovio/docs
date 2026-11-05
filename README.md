@@ -39,6 +39,12 @@ are independent; see the versioned localization guide.
 Run `node --test tests/*.test.mjs` and `node scripts/validate.mjs` before delivery. Validation rejects missing pages,
 changed technical examples, broken links/anchors, duplicate navigation entries, and untranslated English page copies.
 
+Guide entries in `navigation.json` reference an application destination in `groups`. Each group defines its section,
+translated title key, Lucide icon, and optional landing-page slug. A null landing page defines an expandable group. The
+website nests the remaining pages under that destination and derives function links from localized H2 headings; existing
+explicit anchors and page URLs remain intact. Group IDs must be unique, and pages must match their group's section. Keep
+this metadata compatible with the website consumer when updating its content submodule pin.
+
 ## API reference
 
 The `next` API pages are unpublished drafts. Before release, record the reviewed application merge revision and remove
