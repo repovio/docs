@@ -60,7 +60,7 @@
       "slug": "guide-dashboard",
       "tab": "guides",
       "section": "overview",
-      "group": null,
+      "group": "dashboard",
       "order": 8
     },
     {
@@ -88,14 +88,14 @@
       "slug": "guide-issues",
       "tab": "guides",
       "section": "overview",
-      "group": null,
+      "group": "issues",
       "order": 12
     },
     {
       "slug": "guide-pull-requests",
       "tab": "guides",
       "section": "overview",
-      "group": null,
+      "group": "pullRequests",
       "order": 13
     },
     {
@@ -137,7 +137,7 @@
       "slug": "guide-jobs",
       "tab": "guides",
       "section": "operations",
-      "group": null,
+      "group": "jobs",
       "order": 19
     },
     {
@@ -186,7 +186,7 @@
       "slug": "users",
       "tab": "guides",
       "section": "administration",
-      "group": null,
+      "group": "users",
       "order": 26
     },
     {
@@ -324,5 +324,84 @@
         "benutzer-und-rechte": "users"
       }
     }
-  }
+  },
+  "groups": [
+    {
+      "id": "dashboard",
+      "section": "overview",
+      "title": "guide-dashboard",
+      "icon": "i-lucide-layout-dashboard",
+      "slug": "guide-dashboard"
+    },
+    {
+      "id": "workflowRuns",
+      "section": "overview",
+      "title": "workflowRuns",
+      "icon": "i-lucide-list-tree",
+      "slug": null
+    },
+    {
+      "id": "issues",
+      "section": "overview",
+      "title": "guide-issues",
+      "icon": "i-lucide-circle-dot",
+      "slug": "guide-issues"
+    },
+    {
+      "id": "pullRequests",
+      "section": "overview",
+      "title": "guide-pull-requests",
+      "icon": "i-lucide-git-pull-request",
+      "slug": "guide-pull-requests"
+    },
+    {
+      "id": "securityAlerts",
+      "section": "overview",
+      "title": "securityAlerts",
+      "icon": "i-lucide-shield-alert",
+      "slug": null
+    },
+    {
+      "id": "repositories",
+      "section": "operations",
+      "title": "repositories",
+      "icon": "i-lucide-git-fork",
+      "slug": "repositories"
+    },
+    {
+      "id": "jobs",
+      "section": "operations",
+      "title": "guide-jobs",
+      "icon": "i-lucide-list-checks",
+      "slug": "guide-jobs"
+    },
+    {
+      "id": "notifications",
+      "section": "operations",
+      "title": "notifications",
+      "icon": "i-lucide-bell",
+      "slug": null
+    },
+    {
+      "id": "providerAccounts",
+      "section": "administration",
+      "title": "providerAccounts",
+      "icon": "i-lucide-plug-zap",
+      "slug": "provider-accounts"
+    },
+    {
+      "id": "users",
+      "section": "administration",
+      "title": "users",
+      "icon": "i-lucide-users",
+      "slug": "users"
+    },
+    {
+      "id": "settings",
+      "section": "administration",
+      "title": "settings",
+      "icon": "i-lucide-settings",
+      "slug": "settings"
+    }
+  ]
 }

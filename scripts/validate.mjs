@@ -29,6 +29,30 @@ export async function checkDocs(root = '.', { assetRoot, previewAssetRoot } = {}
   }
   const errors = [];
   const entries = navigation.entries;
+  const groups = navigation.groups || [];
+  if (new Set(groups.map((group) => group.id)).size !== groups.length) {
+    errors.push('Navigation groups must have unique IDs');
+  }
+  for (const group of groups) {
+    if (
+      !/^[a-zA-Z][a-zA-Z0-9]*$/.test(group.id) ||
+      !['overview', 'operations', 'administration'].includes(group.section) ||
+      typeof group.title !== 'string' ||
+      !group.title ||
+      !/^i-lucide-[a-z0-9-]+$/.test(group.icon) ||
+      !(
+        group.slug === null ||
+        entries.some(
+          (entry) =>
+            entry.tab === 'guides' &&
+            entry.slug === group.slug &&
+            entry.group === group.id &&
+            entry.section === group.section,
+        )
+      )
+    )
+      errors.push(`${group.id}: invalid navigation group`);
+  }
   if (
     new Set(entries.map((entry) => entry.slug)).size !== entries.length ||
     new Set(entries.map((entry) => entry.order)).size !== entries.length
@@ -45,7 +69,10 @@ export async function checkDocs(root = '.', { assetRoot, previewAssetRoot } = {}
             ? ['api']
             : ['getting-started']
       ).includes(entry.section) ||
-      !Number.isInteger(entry.order)
+      !Number.isInteger(entry.order) ||
+      (entry.tab === 'guides'
+        ? !groups.some((group) => group.id === entry.group && group.section === entry.section)
+        : entry.group !== null)
     ) {
       errors.push(`${entry.slug}: invalid navigation metadata`);
     }
