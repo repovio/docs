@@ -3,16 +3,18 @@ title: Interface localization
 description: Supported interface languages, fallback behavior, and the process for maintaining Repovio translations.
 ---
 
-> Archived source snapshot. Product labels have been normalized to Repovio. For this historical release,
-> use the configuration identifiers and container references from its tagged deployment files unchanged.
+> Archived source snapshot. Product labels have been normalized to Repovio. For this historical release, use the
+> configuration identifiers and container references from its tagged deployment files unchanged.
 
-Repovio ships its web interface in English (`en`), German (`de`), Spanish (`es`), French (`fr`), Italian (`it`),
-Dutch (`nl`), Polish (`pl`), and Portuguese (`pt`). The language menu in the application header is available to every
-signed-in user. Choosing a language saves the preference in the release-specific language cookie and applies it on
-future visits.
+Repovio ships its web interface in English (`en`), German (`de`), Spanish (`es`), French (`fr`), Italian (`it`), Dutch
+(`nl`), Polish (`pl`), and Portuguese (`pt`). The language menu in the application header is available to every
+signed-in user. Choosing a language saves the preference in the `ezrepo-locale` browser cookie and applies it on future
+visits.
 
 English is the deterministic default and fallback. When a browser preference or saved cookie does not identify a
 supported locale, Repovio renders English. Date, time, and number formatting use the selected locale.
+
+<a id="adding-or-updating-a-locale"></a>
 
 ## Adding or updating a locale
 
@@ -23,5 +25,5 @@ supported locale, Repovio renders English. Date, time, and number formatting use
    to every shipped locale.
 5. Run `pnpm --filter @repovio/web test`, `pnpm --filter @repovio/web typecheck`, and the affected Playwright test.
 
-Provider names, repository names, workflow names, and other provider-supplied data remain unchanged because they are
-not Repovio interface copy.
+Provider names, repository names, workflow names, and other provider-supplied data remain unchanged because they are not
+Repovio interface copy.

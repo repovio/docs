@@ -2,10 +2,15 @@
 
 <img src="branding/logo.svg" width="64" height="64" alt="Repovio" />
 
-Public English and German documentation sources for https://repovio.de.
+Public documentation sources in 13 languages for https://repovio.de.
 
 Edit `<locale>/docs/<version>/<slug>.md`. English is the editorial reference. Every page requires title and description
-frontmatter. Update both languages together and preserve executable examples and technical identifiers.
+frontmatter. Update every supported language together and preserve executable examples and technical identifiers.
+
+The [feature coverage matrix](COVERAGE.md) maps the complete handbook to both reviewed application versions.
+`navigation.json` defines explicit tab, section, subgroup, and order metadata, plus legacy-page redirects. Never
+classify pages by their position in a version slug list. `locales.json` is the locale registry shared with the website
+consumer. Stable heading anchors are identical across translations.
 
 `versions.json` records exact application revisions, released page sets and the stable version. `next` is an internal
 editorial source, excluded from website routes, search, assets and indexing. The initial historical snapshot comes from
@@ -24,6 +29,15 @@ reused as evidence for a release. See the private website deployment guide for c
 Report documentation problems through this repository's issue forms. Do not include tokens, private repository data or
 other credentials. Report vulnerabilities using the security policy. Support development at
 https://buymeacoffee.com/tobiaswaelde.
+
+## Supported languages
+
+English, German, Simplified Chinese, Hindi, Spanish, Arabic, French, Bengali, Brazilian Portuguese, Indonesian, Urdu,
+Russian, and Japanese. Arabic and Urdu use right-to-left presentation on the website. Application interface languages
+are independent; see the versioned localization guide.
+
+Run `node --test tests/*.test.mjs` and `node scripts/validate.mjs` before delivery. Validation rejects missing pages,
+changed technical examples, broken links/anchors, duplicate navigation entries, and untranslated English page copies.
 
 ## API reference
 

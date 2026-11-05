@@ -1,11 +1,13 @@
 ---
-title: Repovio overview
-description: Read-only workflow runs, repository work and security alerts across your providers.
+title: 'Repovio overview'
+description: 'Read-only workflow runs, repository work and security alerts across your providers.'
 ---
 
-Repovio is a self-hosted dashboard for GitHub Actions, GitLab pipelines, Forgejo Actions and Gitea Actions.
-Track selected workflow runs, issues and pull requests, identify current failures and send notifications without
-modifying provider resources.
+Repovio is a self-hosted dashboard for GitHub Actions, GitLab pipelines, Forgejo Actions and Gitea Actions. Track
+selected workflow runs, issues and pull requests, identify current failures and send notifications without modifying
+provider resources.
+
+<a id="one-permission-scoped-overview"></a>
 
 ## One permission-scoped overview
 
@@ -18,5 +20,5 @@ modifying provider resources.
 Provider changes, approvals, reviews and workflow reruns remain external actions. Repovio's own administration controls
 configure its local tracking and notifications; they do not grant provider write access.
 
-Start with [installation](/docs/next/installation), then follow [sign-in and navigation](/docs/next/guide-sign-in-navigation).
-For production operations, see [deployment and backups](/docs/next/deployment).
+Start with [installation](/docs/next/installation), then follow [sign-in and navigation](/docs/next/sign-in). For
+production operations, see [deployment and backups](/docs/next/deployment).

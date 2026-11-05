@@ -1,11 +1,16 @@
 ---
-title: Repovio overview
-description: Read-only workflow runs, repository work and security alerts across your providers.
+title: 'Repovio overview'
+description: 'Read-only workflow runs, repository work and security alerts across your providers.'
 ---
 
-Repovio is a self-hosted dashboard for GitHub Actions, GitLab pipelines, Forgejo Actions and Gitea Actions.
-Track selected workflow runs, issues and pull requests, identify current failures and send notifications without
-modifying provider resources.
+> Archived source snapshot. Product labels use Repovio. Use the configuration identifiers and container references from
+> this release's tagged deployment files unchanged.
+
+Repovio is a self-hosted dashboard for GitHub Actions, GitLab pipelines, Forgejo Actions and Gitea Actions. Track
+selected workflow runs, issues and pull requests, identify current failures and send notifications without modifying
+provider resources.
+
+<a id="one-permission-scoped-overview"></a>
 
 ## One permission-scoped overview
 
@@ -18,8 +23,5 @@ modifying provider resources.
 Provider changes, approvals, reviews and workflow reruns remain external actions. Repovio's own administration controls
 configure its local tracking and notifications; they do not grant provider write access.
 
-Start with [installation](/docs/v1.0/installation), then follow [sign-in and navigation](/docs/v1.0/guide-sign-in-navigation).
-For production operations, see [deployment and backups](/docs/v1.0/deployment).
-
-> Historical release 1.0.1. The handbook uses the current product name. Obtain deployment variable names, image references
-> and browser identifiers from this release's tagged source; those identifiers predate the branding change.
+Start with [installation](/docs/v1.0/installation), then follow [sign-in and navigation](/docs/v1.0/sign-in). For
+production operations, see [deployment and backups](/docs/v1.0/deployment).

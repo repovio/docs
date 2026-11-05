@@ -1,35 +1,59 @@
 ---
-title: Tracked repositories
-description: Repository identity, rename handling, metadata refresh behavior, and read-only synchronization rules.
+title: 'Repositories'
+description: 'Track repositories, inspect activity, and configure local synchronization and access.'
 ---
 
-> Archived source snapshot. Product labels have been normalized to Repovio. For this historical release,
-> use the configuration identifiers and container references from its tagged deployment files unchanged.
+> Archived source snapshot. Product labels use Repovio. Use the configuration identifiers and container references from
+> this release's tagged deployment files unchanged.
 
-Repovio identifies a tracked repository by its provider account and stable provider repository ID. The displayed owner,
-namespace, name, and URL are provider-owned metadata and are not editable as free-form local values.
+<a id="browse-and-open-details"></a>
 
-Before every workflow synchronization, Repovio reads the repository metadata from the provider. Renames and transfers
-therefore retain the existing workflow history, filters, memberships, notification rules, and notification channels.
-A system administrator can trigger the same read-only update immediately with **Refresh provider data** in the
-repository dialog opened from the repository table.
+## Browse and open details
 
-Repovio updates metadata only when the provider returns the same stable repository ID. If the repository was deleted,
-became inaccessible, or a different repository now uses the previous path, Repovio preserves the tracked repository and
-its history and reports a synchronization error. Add a recreated repository as a new tracked repository instead of
-reassigning the existing record.
+All signed-in users can list repositories they may read. The table shows owner/name, enabled state, members, retained
+run count, retention, and last synchronization. Use enabled filtering, sorting, column controls, and pagination. Open
+the provider link for the external repository, the detail page for synchronized activity, or the settings dialog for
+configuration. A missing membership or removed repository can produce an inaccessible detail state.
 
-## Members and profile pictures
+The detail page combines general information, retention, last sync/data age, configured interval, current job, and
+recent workflows, issues, and pull requests. Managers with repository management access and administrators also see
+security-alert activity. Pending/running jobs show progress; warnings and failures include categorized safe errors.
 
-The repository table shows the users with explicit access as a compact avatar group. Up to five members are visible;
-the remaining count is summarized when a repository has more members. Member identities are returned only together
-with repositories the signed-in user is allowed to read.
+<a id="add-and-maintain-tracking"></a>
 
-Every user can manage their personal name, login username, and profile picture in the **General** tab under Settings.
-Personal names are optional and become the preferred display identity, while the username remains visible for
-unambiguous account identification. Changing the login username requires the user's current password.
+## Add and maintain tracking
 
-JPEG, PNG, and WebP sources up to 2 MB can be uploaded or imported from a public HTTPS URL. Non-square sources must be
-cropped before they are saved. Repovio removes image metadata, renders a 256 × 256 WebP, and stores only that normalized
-image in PostgreSQL. The original file and remote URL are not retained. Users without a profile picture are represented
-by initials derived from their personal name or username.
+Only system administrators add repositories. Select an enabled provider account, wait for discovery, and select one or
+more untracked repositories. Already tracked repositories are excluded. If part of a multi-add fails, successful
+selections remain added and only failed selections remain for retry. An empty provider list requires connecting an
+enabled [provider account](/docs/v1.0/provider-accounts) first.
+
+Administrators can enable/disable tracking, **Refresh provider data**, and queue a read-only synchronization. Repository
+identity uses the provider account and stable provider repository ID. Renames/transfers preserve history, filters,
+memberships, and channels; metadata refresh rejects a different ID at the old path rather than reassigning it. Disabled
+repositories retain stored data but stop participating in synchronization.
+
+<a id="retention-filters-and-memberships"></a>
+
+## Retention, filters, and memberships
+
+Administrators set separate workflow-run, issue, and pull-request retention overrides, each from 1 to 3650 days. An
+empty value restores the corresponding [system default](/docs/v1.0/settings-system). Workflow filters accept **ALLOW**
+and **DENY** glob patterns; deny takes precedence. Add nonempty patterns or remove existing ones. Restrictive filters
+can explain absent runs.
+
+In memberships, add a non-administrator user as Viewer or Manager, change their repository role, or remove access.
+Administrators are excluded from member selection because they already have unrestricted access. A global Manager still
+needs Manager membership for repository-management capabilities such as security alerts.
+
+<a id="webhooks-and-failures"></a>
+
+## Webhooks and failures
+
+The repository webhook card shows callback URL, configured state, provider instructions, and last delivery. It can
+generate/copy a secret, save configuration, rotate with explicit confirmation, or remove configuration. A missing public
+URL must be fixed before provider registration. Secrets are shown only during configuration; keep them in a secret
+manager. Follow [Repository webhooks](/docs/v1.0/provider-webhooks) for setup and verification.
+
+Viewers and managers receive a read-only repository settings summary. Retry load/save errors after recovery; inspect
+[Jobs](/docs/v1.0/guide-jobs) for provider access, rate-limit, or synchronization failures.
