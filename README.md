@@ -24,3 +24,12 @@ reused as evidence for a release. See the private website deployment guide for c
 Report documentation problems through this repository's issue forms. Do not include tokens, private repository data or
 other credentials. Report vulnerabilities using the security policy. Support development at
 https://buymeacoffee.com/tobiaswaelde.
+
+## API reference
+
+The `next` API pages are unpublished drafts. Before release, record the reviewed application merge revision and remove
+`workingTreeSource` only after checking the documentation against that revision. Release promotion generates
+`openapi/<version>.json` from the exact released application. Its path, application revision, and SHA-256 digest are
+recorded in `versions.json`; `scripts/validate.mjs` validates released schemas and their local references. Existing
+archives without API pages do not require an OpenAPI snapshot. Never copy a deployment's secrets or server URL into an
+archive. The website bundles only released snapshots.

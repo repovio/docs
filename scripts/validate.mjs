@@ -1,5 +1,6 @@
 import { readFile, access, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { verifyOpenApiArchive } from './openapi.mjs';
 
 /** Verify version/locale coverage, frontmatter, local links and content-image references. */
 export async function checkDocs(root = '.', { assetRoot, previewAssetRoot } = {}) {
@@ -12,6 +13,7 @@ export async function checkDocs(root = '.', { assetRoot, previewAssetRoot } = {}
   for (const version of manifest.versions) {
     if (!/^[a-f0-9]{40}$/.test(version.revision) || !/^(v\d+\.\d+|next)$/.test(version.id))
       throw new Error('Invalid version provenance');
+    if (version.status !== 'preview') await verifyOpenApiArchive(root, version);
     for (const locale of ['en', 'de']) {
       const directory = resolve(root, locale, 'docs', version.id);
       const files = (await readdir(directory)).filter((name) => name.endsWith('.md')).sort();

@@ -52,8 +52,11 @@
         "provider-webhooks",
         "notifications",
         "mcp",
-        "localization"
-      ]
+        "localization",
+        "api-access",
+        "api-reference"
+      ],
+      "workingTreeSource": true
     }
   ]
 }
