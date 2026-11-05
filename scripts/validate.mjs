@@ -1,5 +1,6 @@
 import { readFile, access, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { verifyOpenApiArchive } from './openapi.mjs';
 
 /** Read the canonical locale registry shared by documentation and its website consumer. */
 export async function readLocales(root = '.') {
@@ -36,10 +37,14 @@ export async function checkDocs(root = '.', { assetRoot, previewAssetRoot } = {}
   }
   for (const entry of entries) {
     if (
-      !['get-started', 'guides'].includes(entry.tab) ||
-      !(entry.tab === 'guides' ? ['overview', 'operations', 'administration'] : ['getting-started']).includes(
-        entry.section,
-      ) ||
+      !['get-started', 'guides', 'api'].includes(entry.tab) ||
+      !(
+        entry.tab === 'guides'
+          ? ['overview', 'operations', 'administration']
+          : entry.tab === 'api'
+            ? ['api']
+            : ['getting-started']
+      ).includes(entry.section) ||
       !Number.isInteger(entry.order)
     ) {
       errors.push(`${entry.slug}: invalid navigation metadata`);
@@ -54,6 +59,7 @@ export async function checkDocs(root = '.', { assetRoot, previewAssetRoot } = {}
     return texts.get(key);
   };
   for (const version of manifest.versions) {
+    if (version.status !== 'preview') await verifyOpenApiArchive(root, version);
     if (!/^[a-f0-9]{40}$/.test(version.revision) || !/^(v\d+\.\d+|next)$/.test(version.id)) {
       throw new Error('Invalid version provenance');
     }

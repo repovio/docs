@@ -258,6 +258,20 @@
       "section": "administration",
       "group": "settings",
       "order": 36
+    },
+    {
+      "slug": "api-access",
+      "tab": "api",
+      "section": "api",
+      "group": null,
+      "order": 37
+    },
+    {
+      "slug": "api-reference",
+      "tab": "api",
+      "section": "api",
+      "group": null,
+      "order": 38
     }
   ],
   "redirects": {

@@ -108,3 +108,9 @@ service/controller is named. Each linked heading is also present in the matching
 | OIDC enable/issuer/client/scopes/groups, role precedence, unmatched policy, HTTP warning | `modules/settings/oidc-card.vue; oidc.service.ts`                         | [authentication](en/docs/next/authentication.md#openid-connect-single-sign-on)      | v1.0, next |
 | OIDC callback copy, secret preserve/replace/clear, observed groups, save-before-check    | `modules/settings/oidc-card.vue`                                          | [authentication](en/docs/next/authentication.md#openid-connect-single-sign-on)      | v1.0, next |
 | Independent 1–3650-day defaults, date/time preview, load/retry/save states               | `pages/admin/settings/system.vue`                                         | [settings-system](en/docs/next/settings-system.md#retention-defaults)               | v1.0, next |
+
+## API reference drafts
+
+The API access and static reference pages exist only in `next`. They retain the `workingTreeSource` publication guard
+until their application revision is reviewed. Released versions without an API snapshot remain supported. Contract
+identifiers and generated descriptions retain the language of the authoritative OpenAPI contract.

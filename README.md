@@ -38,3 +38,12 @@ are independent; see the versioned localization guide.
 
 Run `node --test tests/*.test.mjs` and `node scripts/validate.mjs` before delivery. Validation rejects missing pages,
 changed technical examples, broken links/anchors, duplicate navigation entries, and untranslated English page copies.
+
+## API reference
+
+The `next` API pages are unpublished drafts. Before release, record the reviewed application merge revision and remove
+`workingTreeSource` only after checking the documentation against that revision. Release promotion generates
+`openapi/<version>.json` from the exact released application. Its path, application revision, and SHA-256 digest are
+recorded in `versions.json`; `scripts/validate.mjs` validates released schemas and their local references. Existing
+archives without API pages do not require an OpenAPI snapshot. Never copy a deployment's secrets or server URL into an
+archive. The website bundles only released snapshots.

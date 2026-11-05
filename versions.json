@@ -88,8 +88,11 @@
         "mcp",
         "authentication",
         "settings-system",
-        "localization"
-      ]
+        "localization",
+        "api-access",
+        "api-reference"
+      ],
+      "workingTreeSource": true
     }
   ]
 }
