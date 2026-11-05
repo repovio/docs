@@ -8,9 +8,9 @@ Repovio kann signierte Webhooks empfangen, um ein verfolgtes Repository früher 
 synchronisieren. Es erstellt, aktualisiert, löscht oder testet niemals Webhooks über Anbieter-APIs. Ein Administrator
 konfiguriert jeden Repository-Webhook manuell in GitHub, GitLab, Forgejo oder Gitea.
 
-Öffnen Sie **Repositories**, wählen Sie ein verfolgtes Repository aus und verwenden Sie dessen
-**Repository-Webhook**-Karte. Die Karte zeigt die Repository-spezifische Rückruf-URL an, generiert oder akzeptiert ein
-Signaturgeheimnis und meldet die letzte akzeptierte Zustellung. Repovio sendet diese Konfiguration niemals an den
+Öffnen Sie **Repositories**, wählen Sie ein verfolgtes Repository aus und verwenden Sie
+dessen**Repository-Webhook**-Karte. Die Karte zeigt die Repository-spezifische Rückruf-URL an, generiert oder akzeptiert
+ein Signaturgeheimnis und meldet die letzte akzeptierte Zustellung. Repovio sendet diese Konfiguration niemals an den
 Anbieter.
 
 Webhooks sind eine Optimierung, nicht die Quelle der Wahrheit. Die signierte Nutzlast muss das über die Rückruf-URL
@@ -51,7 +51,7 @@ Konto, während begrenzte Wiederholungsversuche vorübergehende Fehler behandeln
 
 ## GitHub Aktionen
 
-1. Öffnen Sie **Einstellungen → Webhooks** des Repositorys und wählen Sie **Webhook hinzufügen**.
+1. Öffnen Sie **Einstellungen → Webhooks** des Repositorys und wählen Sie**Webhook hinzufügen**.
 2. Verwenden Sie `https://repovio.example.com/api/webhooks/github/<repository-id>` als Payload-URL.
 3. Wählen Sie `application/json` aus, fügen Sie das Repository-Geheimnis ein und abonnieren Sie
    **Workflow-Ausführungen** (`workflow_run`).
@@ -64,7 +64,7 @@ GitHubs [Webhook-Ereignisdokumentation](https://docs.github.com/en/webhooks/webh
 
 ## GitLab-Pipelines
 
-1. Öffnen Sie **Einstellungen → Webhooks** des Projekts und wählen Sie **Neuen Webhook hinzufügen**.
+1. Öffnen Sie **Einstellungen → Webhooks** des Projekts und wählen Sie**Neuen Webhook hinzufügen**.
 2. Verwenden Sie `https://repovio.example.com/api/webhooks/gitlab/<repository-id>` als URL.
 3. Generieren Sie ein **Signaturtoken** und speichern Sie seinen vollständigen Wert, einschließlich `whsec_`, auf der
    Repository-Karte Repovio.
@@ -79,7 +79,7 @@ Repovio überprüft Standard-Webhooks HMAC-SHA256-Signaturen und bevorzugt `webh
 
 ## Forgejo Aktionen
 
-1. Öffnen Sie **Einstellungen → Webhooks** des Repositorys und fügen Sie einen nativen **Forgejo** JSON-Webhook hinzu.
+1. Öffnen Sie **Einstellungen → Webhooks** des Repositorys und fügen Sie einen nativen**Forgejo** JSON-Webhook hinzu.
 2. Verwenden Sie `https://repovio.example.com/api/webhooks/forgejo/<repository-id>` als Ziel-URL.
 3. Fügen Sie das Repository-Geheimnis ein und wählen Sie **Push-Ereignisse** sowie alle verfügbaren Aktionsereignisse
    aus.
@@ -93,7 +93,7 @@ bleiben für die Forgejo-Kompatibilität akzeptiert. Siehe Forgejo
 
 ## Gitea Aktionen
 
-1. Öffnen Sie **Einstellungen → Webhooks** des Repositorys und fügen Sie einen nativen **Gitea** JSON-Webhook hinzu.
+1. Öffnen Sie **Einstellungen → Webhooks** des Repositorys und fügen Sie einen nativen**Gitea** JSON-Webhook hinzu.
 2. Verwenden Sie `https://repovio.example.com/api/webhooks/gitea/<repository-id>` als Ziel-URL.
 3. Fügen Sie das Repository-Geheimnis ein und wählen Sie **Push-Ereignisse** sowie alle verfügbaren Workflow-Ereignisse
    aus.

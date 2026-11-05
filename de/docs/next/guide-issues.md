@@ -1,20 +1,20 @@
 ---
-title: 'Probleme'
-description: 'Durchsuchen Sie synchronisierte Probleme, Filter und schreibgeschützte Details.'
+title: 'Issues'
+description: 'Durchsuchen Sie synchronisierte Issues, Filter und schreibgeschützte Details.'
 ---
 
 <a id="browse-and-filter"></a>
 
 ## Durchsuchen und filtern
 
-Öffnen Sie **Übersicht → Probleme**. Listen, Zusammenfassungen, Filteroptionen und Details verwenden
+Öffnen Sie **Übersicht → Issues**. Listen, Zusammenfassungen, Filteroptionen und Details verwenden
 Repository-Mitgliedschaften. Suche nach Titel oder Nummer; Filtern Sie nach Anbieter, Repository, Lebenszyklus, Autor,
 Beauftragter, Meilenstein, Labels und aktualisierter Zeit, sofern verfügbar. Aktualisierte Datumsgrenzen sind inklusive
 UTC. Mehrere ausgewählte Labels müssen alle übereinstimmen. Ändern Sie die Sortierung, die sichtbaren Spalten und die
 Paginierung mit den Tabellensteuerelementen. Zusammenfassungskarten zählen offene, kürzlich aktualisierte, zugewiesene
-und veraltete Probleme. Bei der ersten Synchronisierung werden alle offenen und geschlossenen Probleme gelesen, die in
-den letzten 90 Tagen aktualisiert wurden. Veraltetheit hilft, unbeaufsichtigte offene Arbeit zu finden; Der
-Anbieterstatus wird dadurch nicht geändert.
+und veraltete Issues. Bei der ersten Synchronisierung werden alle offenen und geschlossenen Issues gelesen, die in den
+letzten 90 Tagen aktualisiert wurden. Veraltetheit hilft, unbeaufsichtigte offene Arbeit zu finden; Der Anbieterstatus
+wird dadurch nicht geändert.
 
 <a id="inspect-details"></a>
 

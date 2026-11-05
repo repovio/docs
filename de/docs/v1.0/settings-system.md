@@ -18,7 +18,7 @@ die aus fehlenden Daten abgeleitet werden. Warten Sie auf die Einstellungsanfrag
 
 ## Aufbewahrungsvorgaben
 
-Legen Sie separate Standardaufbewahrungsfristen für Workflow-Ausführungen, Probleme und Pull-Anfragen fest. Jeder Wert
+Legen Sie separate Standardaufbewahrungsfristen für Workflow-Ausführungen, Probleme und Pull Requests fest. Jeder Wert
 muss zwischen 1 und 3650 Tagen liegen. Ein Repository kann jeden entsprechenden Wert unabhängig überschreiben; Durch
 eine Überschreibung eines leeren Repositorys wird dieser Systemstandard wiederhergestellt. Die Aufbewahrung wirkt sich
 auf den lokal gespeicherten Verlauf aus, nicht auf anbieterseitige Datensätze. Durch die Verkürzung der Aufbewahrung

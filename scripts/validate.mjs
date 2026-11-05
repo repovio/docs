@@ -99,6 +99,23 @@ export async function checkDocs(root = '.', { assetRoot, previewAssetRoot } = {}
             errors.push(`${key}: translated technical identifiers or examples`);
           }
           if (text === english) errors.push(`${key}: untranslated English page`);
+          const description = (value) =>
+            /^---\n[\s\S]*?description:([\s\S]*?)\n---/
+              .exec(value)?.[1]
+              .trim()
+              .replace(/^['"]|['"]$/g, '')
+              .replace(/\s+/g, ' ');
+          if (description(text) === description(english)) errors.push(`${key}: untranslated English description`);
+          const prose = (value) =>
+            value
+              .replace(/^---\n[\s\S]*?\n---/, '')
+              .replace(/```[\s\S]*?```/g, '')
+              .split('\n\n')
+              .map((part) => part.trim().replace(/\s+/g, ' '))
+              .filter((part) => part.length > 80 && !part.startsWith('<'));
+          const englishProse = new Set(prose(english));
+          if (prose(text).some((part) => englishProse.has(part))) errors.push(`${key}: untranslated English paragraph`);
+
           const originalAnchors = [...english.matchAll(/<a id="([^"]+)"><\/a>/g)].map((match) => match[1]);
           if (JSON.stringify(anchors) !== JSON.stringify(originalAnchors)) errors.push(`${key}: anchor coverage`);
         }

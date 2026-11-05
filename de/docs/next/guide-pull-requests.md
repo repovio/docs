@@ -1,13 +1,13 @@
 ---
-title: 'Pull-Anfragen'
-description: 'Durchsuchen Sie synchronisierte Pull-Anfragen, Filter und schreibgeschützte Details.'
+title: 'Pull Requests'
+description: 'Durchsuchen Sie synchronisierte Pull Requests, Filter und schreibgeschützte Details.'
 ---
 
 <a id="browse-and-filter"></a>
 
 ## Durchsuchen und filtern
 
-Öffnen Sie **Übersicht → Pull-Anfragen**. Listen, Zusammenfassungen, Filteroptionen und Details verwenden
+Öffnen Sie **Übersicht → Pull Requests**. Listen, Zusammenfassungen, Filteroptionen und Details verwenden
 Repository-Mitgliedschaften. Suche nach Titel oder Nummer; Filtern Sie nach Anbieter, Repository, Lebenszyklus, Autor,
 Beauftragter, Entwurfsstatus, Workflow-Status, Genehmigungsbedarf, Beschriftungen und Aktualisierungszeit. Aktualisierte
 Datumsgrenzen sind inklusive UTC. Mehrere ausgewählte Labels müssen alle übereinstimmen. Ändern Sie die Sortierung, die

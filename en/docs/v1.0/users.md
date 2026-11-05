@@ -36,3 +36,23 @@ Open a user's MCP-token dialog to list token metadata or revoke a token with con
 retrieve plaintext token values or create another user's token through this dialog. Users create their own tokens in
 [MCP settings](/docs/v1.0/mcp). Empty lists and load errors are distinct; retry after API recovery. Never copy token
 values into support reports or screenshots.
+
+<a id="local-user-api"></a>
+
+## Provision a local user through the API
+
+Use an API client over HTTPS to send `POST /api/v1/users` with administrator bearer authentication and
+`Content-Type: application/json`. Supply this request body, replacing placeholders in the client's protected inputs:
+
+```json
+{
+  "username": "new-user",
+  "password": "REPLACE_WITH_A_PASSWORD_OF_AT_LEAST_12_CHARACTERS",
+  "role": "VIEWER"
+}
+```
+
+Valid roles are `VIEWER`, `MANAGER`, and `SYSTEM_ADMIN`. Assign only the required role, then grant repository
+memberships separately. The response contains safe user metadata, not the password or its hash. A duplicate username or
+invalid request must be corrected before retrying. Do not store passwords or bearer tokens in tracked files, shell
+history, screenshots, or issue reports.

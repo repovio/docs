@@ -1,5 +1,5 @@
 ---
-title: 'Armaturenbrett'
+title: 'Dashboard'
 description: 'Lesen Sie den aktuellen Workflow-Zustand, Arbeitszusammenfassungen und historische Diagramme.'
 ---
 
@@ -11,8 +11,8 @@ description: 'Lesen Sie den aktuellen Workflow-Zustand, Arbeitszusammenfassungen
 ## Geltungsbereich und Datumsbereich
 
 Jede Karte und jedes Diagramm verwendet nur Repositorys, die der angemeldete Benutzer lesen darf. Wählen Sie **Letzte 7
-Tage**, **Letzte 30 Tage** oder **Letzte 90 Tage** für historische Statistiken. Der Zeitbereich ändert die Gesamtzahl
-der abgeschlossenen Läufe, Erfolgs-/Fehlertrends, Dauer und Statusverteilung. Die aktuellen Warteschlangen- und
+Tage**,**Letzte 30 Tage** oder**Letzte 90 Tage** für historische Statistiken. Der Zeitbereich ändert die Gesamtzahl der
+abgeschlossenen Läufe, Erfolgs-/Fehlertrends, Dauer und Statusverteilung. Die aktuellen Warteschlangen- und
 Arbeitsaufgabenzahlen bleiben Zusammenfassungen des aktuellen Status. Wählen Sie **Aktualisieren**, um das Dashboard neu
 zu laden; Die Steuerung bleibt beschäftigt, bis ihre Anforderungen erledigt sind.
 
@@ -22,8 +22,8 @@ zu laden; Die Steuerung bleibt beschäftigt, bis ihre Anforderungen erledigt sin
 
 Die Workflow-Zusammenfassung enthält die Anzahl der Erfolge/Abschlüsse, die Anzahl der aktiven
 Warteschlangen/Ausführungen, die mittlere abgeschlossene Dauer, aktuelle Fehler, die Anzahl der wartenden Genehmigungen
-und die Gesamtlaufzeit. Befolgen Sie aktuelle Fehler gemäß [Braucht Aufmerksamkeit](/docs/v1.0/needs-attention) oder
-ausstehende Genehmigungen gemäß [Warten auf Genehmigung](/docs/v1.0/awaiting-approval). Issue- und
+und die Gesamtlaufzeit. Befolgen Sie aktuelle Fehler gemäß [Handlungsbedarf](/docs/v1.0/needs-attention) oder
+ausstehende Genehmigungen gemäß [Ausstehende Freigaben](/docs/v1.0/awaiting-approval). Issue- und
 Pull-Request-Zusammenfassungen sind mit ihren eigenen gefilterten Listen verknüpft. Manager und Administratoren sehen
 außerdem Zusammenfassungen der Sicherheitswarnungen für die von ihnen verwalteten Repositorys.
 

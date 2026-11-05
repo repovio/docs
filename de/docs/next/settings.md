@@ -8,8 +8,8 @@ description:
 
 ## Registerkarten „Einstellungen“.
 
-Öffnen Sie **Einstellungen** im Benutzermenü. Jeder authentifizierte Benutzer kann auf **Allgemein** und **MCP**
-zugreifen. Systemadministratoren sehen auch **Authentifizierung** und **System**. Die Administratorgruppierung der
+Öffnen Sie **Einstellungen** im Benutzermenü. Jeder authentifizierte Benutzer kann auf**Allgemein** und**MCP**
+zugreifen. Systemadministratoren sehen auch **Authentifizierung** und**System**. Die Administratorgruppierung der
 Seitenleiste hindert andere angemeldete Benutzer nicht daran, ihre persönlichen Einstellungen über das Benutzermenü zu
 öffnen.
 

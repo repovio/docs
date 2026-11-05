@@ -30,8 +30,8 @@ Läufen fehlt möglicherweise die Abschlusszeit oder Enddauer. Normalisierte Zus
 Verwenden Sie die externe Zeilenaktion, um die Anbieterausführung und ihre Protokolle zu öffnen. Repovio bietet keinen
 separaten bearbeitbaren Ausführungsbildschirm, lädt keine Anbieterartefakte herunter und synchronisiert keine
 vollständigen Protokolle. Genehmigen, erneut ausführen, stornieren oder versenden nur beim Anbieter mit Ihrem
-Anbieterkonto. Für aktuelle Ausfälle verwenden Sie [Braucht Aufmerksamkeit](/docs/v1.0/needs-attention); Für Tore
-verwenden Sie [Warten auf Genehmigung](/docs/v1.0/awaiting-approval).
+Anbieterkonto. Für aktuelle Ausfälle verwenden Sie [Handlungsbedarf](/docs/v1.0/needs-attention); Für Tore verwenden Sie
+[Ausstehende Freigaben](/docs/v1.0/awaiting-approval).
 
 <a id="missing-or-stale-history"></a>
 

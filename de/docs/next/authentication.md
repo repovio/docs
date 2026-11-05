@@ -66,10 +66,10 @@ und Nachnamen aus verifizierten Ansprüchen synchronisiert; Anmeldename, Profiln
 geändert werden. Repository-Mitgliedschaften bleiben in Repovio verwaltet und werden niemals von
 Identitätsanbietergruppen abgeleitet.
 
-Sicherheitsrelevante Konfigurations- oder Rollenänderungen machen vorhandene OIDC-Bearer-Token ungültig. Eine bloße
-Änderung des Anzeigenamens des Anbieters ist nicht möglich. Das Deaktivieren oder Entfernen einer
-Identitätsanbietergruppe verhindert, dass das betroffene Konto eine neue Sitzung erhält, und macht seine vorherigen
-Sitzungen nach der nächsten verweigerten Anmeldung ungültig.
+Sicherheitsrelevante Konfigurations- oder Rollenänderungen machen vorhandene OIDC-Bearer-Token ungültig. Eine Änderung
+nur des Anzeigenamens macht bestehende OIDC-Token nicht ungültig. Wenn eine Identitätsanbietergruppe deaktiviert oder
+entfernt wird, erhält das betroffene Konto keine neue Sitzung. Nach der nächsten abgewiesenen Anmeldung werden auch
+seine bisherigen Sitzungen ungültig.
 
 <a id="provider-examples"></a>
 

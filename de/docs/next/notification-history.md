@@ -1,5 +1,5 @@
 ---
-title: 'Lieferhistorie'
+title: 'Zustellhistorie'
 description: 'Überprüfen Sie die Benachrichtigungsergebnisse und die sicheren Zustellungsdetails pro Versuch.'
 ---
 

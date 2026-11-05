@@ -63,3 +63,38 @@ test('rejects duplicate navigation and combined-page redirect targets without a 
   await json('navigation.json', navigation);
   await assert.rejects(checkDocs(root), /unique slugs and order[\s\S]*invalid redirect/);
 });
+
+test('ships the full canonical language set with Arabic and Urdu direction metadata', async () => {
+  const { readLocales } = await import('../scripts/validate.mjs');
+  const locales = await readLocales(new URL('../', import.meta.url).pathname);
+  assert.deepEqual(Object.keys(locales), [
+    'en',
+    'de',
+    'zh-CN',
+    'hi',
+    'es',
+    'ar',
+    'fr',
+    'bn',
+    'pt-BR',
+    'id',
+    'ur',
+    'ru',
+    'ja',
+  ]);
+  assert.deepEqual(
+    Object.entries(locales)
+      .filter(([, value]) => value.dir === 'rtl')
+      .map(([code]) => code),
+    ['ar', 'ur'],
+  );
+});
+
+test('rejects an untranslated description even when the page body is localized', async (t) => {
+  const { root, page } = await fixture(t);
+  await writeFile(
+    join(root, 'de/docs/v1.0/overview.md'),
+    page('Deutsch').replace('description: Deutsch guide', 'description: en guide'),
+  );
+  await assert.rejects(checkDocs(root), /untranslated English description/);
+});

@@ -15,7 +15,7 @@ externe Repository, die Detailseite für synchronisierte Aktivitäten oder den E
 Eine fehlende Mitgliedschaft oder ein entferntes Repository kann zu einem unzugänglichen Detailstatus führen.
 
 Auf der Detailseite werden allgemeine Informationen, Aufbewahrung, Alter der letzten Synchronisierung/Daten,
-konfiguriertes Intervall, aktueller Job sowie aktuelle Workflows, Probleme und Pull-Anfragen zusammengefasst. Manager
+konfiguriertes Intervall, aktueller Job sowie aktuelle Workflows, Probleme und Pull Requests zusammengefasst. Manager
 mit Repository-Verwaltungszugriff und Administratoren sehen auch Sicherheitswarnungsaktivitäten. Ausstehende/laufende
 Jobs zeigen den Fortschritt an; Warnungen und Fehler umfassen kategorisierte sichere Fehler.
 
@@ -42,8 +42,8 @@ teil.
 
 Administratoren legen separate Aufbewahrungsüberschreibungen für Workflow-Ausführung, Issue und Pull-Request fest,
 jeweils von 1 bis 3650 Tagen. Ein leerer Wert stellt den entsprechenden [Systemstandard](/docs/next/settings-system)
-wieder her. Workflow-Filter akzeptieren die Glob-Muster **ALLOW** und **DENY**; leugnen hat Vorrang. Fügen Sie nicht
-leere Muster hinzu oder entfernen Sie vorhandene. Restriktive Filter können fehlende Läufe erklären.
+wieder her. Workflow-Filter akzeptieren die Glob-Muster **ALLOW** und**DENY**; DENY hat Vorrang. Fügen Sie nicht leere
+Muster hinzu oder entfernen Sie vorhandene. Restriktive Filter können fehlende Läufe erklären.
 
 Fügen Sie in Mitgliedschaften einen Benutzer ohne Administratorrechte als Betrachter oder Manager hinzu, ändern Sie
 seine Repository-Rolle oder entfernen Sie den Zugriff. Administratoren sind von der Mitgliederauswahl ausgeschlossen, da
@@ -57,8 +57,8 @@ für Repository-Verwaltungsfunktionen wie Sicherheitswarnungen.
 Die Repository-Webhook-Karte zeigt die Rückruf-URL, den konfigurierten Status, die Anweisungen des Anbieters und die
 letzte Zustellung. Es kann ein Geheimnis generieren/kopieren, die Konfiguration speichern, mit expliziter Bestätigung
 rotieren oder die Konfiguration entfernen. Eine fehlende öffentliche URL muss vor der Anbieterregistrierung behoben
-werden. Geheimnisse werden nur während der Konfiguration angezeigt; Bewahren Sie sie in einem geheimen Manager auf.
-Folgen Sie [Repository-Webhooks](/docs/next/provider-webhooks) für die Einrichtung und Überprüfung.
+werden. Geheimnisse werden nur während der Konfiguration angezeigt; Bewahren Sie sie in einem Secret-Manager auf. Folgen
+Sie [Repository-Webhooks](/docs/next/provider-webhooks) für die Einrichtung und Überprüfung.
 
 Betrachter und Manager erhalten eine schreibgeschützte Zusammenfassung der Repository-Einstellungen. Nach der
 Wiederherstellung Lade-/Speicherfehler erneut versuchen; Überprüfen Sie [Jobs](/docs/next/guide-jobs) auf

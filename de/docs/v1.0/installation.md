@@ -24,7 +24,7 @@ gemacht.
 
 Repovio verwendet drei Anwendungsrollen:
 
-- **Viewer** kann explizit zugewiesene Repositorys, Workflows, Probleme und Pull-Requests überprüfen.
+- **Viewer** kann explizit zugewiesene Repositorys, Workflows, Issues und Pull-Requests überprüfen.
 - **Manager** hat Lesezugriff und kann Sicherheitswarnungen für Repositorys überprüfen, bei denen die Mitgliedschaft
   ebenfalls **Manager** ist. Benachrichtigungskanäle, Abonnements, Tests und Verlauf werden global von
   Systemadministratoren verwaltet.
@@ -40,9 +40,9 @@ Anbieterstatus ändert, öffnet Repovio die Anbieterschnittstelle, anstatt die A
 
 1. [anmelden](/docs/v1.0/sign-in), lernen Sie [Navigation](/docs/v1.0/navigation) und probieren Sie
    [suchen](/docs/v1.0/search) aus.
-2. Überprüfen Sie [Armaturenbrett](/docs/v1.0/guide-dashboard), [Alle Läufe](/docs/v1.0/workflow-runs),
-   [Braucht Aufmerksamkeit](/docs/v1.0/needs-attention) und [Warten auf Genehmigung](/docs/v1.0/awaiting-approval).
-3. Überprüfen Sie [Probleme](/docs/v1.0/guide-issues) und [Pull-Anfragen](/docs/v1.0/guide-pull-requests).
+2. Überprüfen Sie [Dashboard](/docs/v1.0/guide-dashboard), [Alle Läufe](/docs/v1.0/workflow-runs),
+   [Handlungsbedarf](/docs/v1.0/needs-attention) und [Ausstehende Freigaben](/docs/v1.0/awaiting-approval).
+3. Überprüfen Sie [Issues](/docs/v1.0/guide-issues) und [Pull Requests](/docs/v1.0/guide-pull-requests).
 4. Öffnen Sie [Repositories](/docs/v1.0/repositories), um die angezeigten Daten zu verstehen.
 5. Administratoren konfigurieren [Benachrichtigungskanäle](/docs/v1.0/notifications) und
    [Ereignisabonnements](/docs/v1.0/notification-rules).

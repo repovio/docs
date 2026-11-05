@@ -7,11 +7,11 @@ description: 'Finden Sie Anwendungsziele, Status, persönliche Einstellungen und
 
 ## Seitenleiste
 
-**Übersicht** enthält Dashboard, Workflow-Ausführungen, Probleme, Pull-Anfragen und unterstützte Sicherheitswarnungen.
-**Operationen** enthält Repositorys, Jobs und Benachrichtigungen. **Administration** enthält Anbieterkonten, Benutzer
-und Einstellungen für Systemadministratoren. Workflow-Ausführungen werden zu „Alle Ausführungen“, „Warten auf
-Genehmigung“ und „Benötigt Aufmerksamkeit“ erweitert. Die Benachrichtigungsnavigation zeigt Kanäle und, für
-Administratoren, den Lieferverlauf an.
+**Übersicht** enthält Dashboard, Workflow-Ausführungen, Issues, Pull Requests und unterstützte
+Sicherheitswarnungen.**Operationen** enthält Repositorys, Jobs und Benachrichtigungen.**Administration** enthält
+Anbieterkonten, Benutzer und Einstellungen für Systemadministratoren. Workflow-Ausführungen werden zu „Alle
+Ausführungen“, „Warten auf Genehmigung“ und „Benötigt Aufmerksamkeit“ erweitert. Die Benachrichtigungsnavigation zeigt
+Kanäle und, für Administratoren, den Lieferverlauf an.
 
 Die Seitenleiste bietet nur Ziele an, auf die Ihre Rolle zugreifen kann. Für Sicherheitswarnungen ist eine
 Verwaltungsberechtigung erforderlich. Durch Reduzieren der Seitenleiste bleiben gekennzeichnete Ziele erhalten.

@@ -1,5 +1,5 @@
 ---
-title: 'Warten auf Genehmigung'
+title: 'Ausstehende Freigaben'
 description: 'Finden Sie Anbieter-Genehmigungstore und öffnen Sie deren externe Genehmigungsbildschirme.'
 ---
 
@@ -7,12 +7,12 @@ description: 'Finden Sie Anbieter-Genehmigungstore und öffnen Sie deren externe
 
 ## Genehmigungstore identifizieren
 
-Öffnen Sie **Workflow-Ausführungen → Warten auf Genehmigung**, um synchronisierte Workflows anzuzeigen, die wegen einer
+Öffnen Sie **Workflow-Ausführungen → Ausstehende Freigaben**, um synchronisierte Workflows anzuzeigen, die wegen einer
 menschlichen Entscheidung angehalten wurden. Suchen Sie nach Workflow oder Repository und überprüfen Sie Repository,
 Anbieter und den zugehörigen Pull-/Merge-Anforderungskontext. Das Seitenleistenabzeichen spiegelt sichtbare
 übereinstimmende Läufe wider; Mitgliedschaftsbeschränkungen gelten sowohl für das Abzeichen als auch für den Tisch.
 
-Verwenden Sie **Pull-Anfrage öffnen** für den Kontext oder **Im Anbieter genehmigen**, um die Workflow-Seite des
+Verwenden Sie **Pull-Anfrage öffnen** für den Kontext oder**Im Anbieter genehmigen**, um die Workflow-Seite des
 Anbieters zu öffnen. GitLab kann die zugehörige Änderung als Zusammenführungsanforderung bezeichnen. Die
 Workflow-Genehmigung unterscheidet sich von der Codeüberprüfung oder der Zusammenführungsgenehmigung.
 

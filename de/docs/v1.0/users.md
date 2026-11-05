@@ -40,3 +40,25 @@ widerrufen. Administratoren können über dieses Dialogfeld keine Klartext-Token
 Benutzers erstellen. Benutzer erstellen ihre eigenen Token in [MCP-Einstellungen](/docs/v1.0/mcp). Leere Listen und
 Ladefehler sind unterschiedlich; Versuchen Sie es nach der API-Wiederherstellung erneut. Kopieren Sie niemals Tokenwerte
 in Supportberichte oder Screenshots.
+
+<a id="local-user-api"></a>
+
+## Stellen Sie einen lokalen Benutzer über die API bereit
+
+Verwenden Sie einen API-Client über HTTPS, um `POST /api/v1/users` mit Administrator-Bearer-Authentifizierung und
+`Content-Type: application/json` zu senden. Geben Sie diesen Anforderungstext an und ersetzen Sie Platzhalter in den
+geschützten Eingaben des Clients:
+
+```json
+{
+  "username": "new-user",
+  "password": "REPLACE_WITH_A_PASSWORD_OF_AT_LEAST_12_CHARACTERS",
+  "role": "VIEWER"
+}
+```
+
+Gültige Rollen sind `VIEWER`, `MANAGER` und `SYSTEM_ADMIN`. Weisen Sie nur die erforderliche Rolle zu und gewähren Sie
+dann separat Repository-Mitgliedschaften. Die Antwort enthält sichere Benutzermetadaten, nicht das Passwort oder seinen
+Hash. Ein doppelter Benutzername oder eine ungültige Anfrage muss vor einem erneuten Versuch korrigiert werden.
+Speichern Sie Passwörter oder Bearer-Tokens nicht in nachverfolgten Dateien, im Shell-Verlauf, in Screenshots oder in
+Problemberichten.

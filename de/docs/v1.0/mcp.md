@@ -19,7 +19,7 @@ Synchronisierung, genehmigt keine Workflows und ändert die Repovio-Konfiguratio
 
 ## Erstellen Sie ein Zugriffstoken
 
-Öffnen Sie **Einstellungen**, wählen Sie die Registerkarte **MCP-Zugriff** und erstellen Sie ein benanntes Token. Der
+Öffnen Sie **Einstellungen**, wählen Sie die Registerkarte**MCP-Zugriff** und erstellen Sie ein benanntes Token. Der
 Ablauf ist optional. Kopieren Sie das vollständige Token aus dem Erstellungsdialog, da Repovio es nur einmal anzeigt und
 nur seinen SHA-256-Hash speichert.
 
@@ -50,15 +50,15 @@ Umgebungsvariable.
 
 ## Verfügbare Tools
 
-| Werkzeug                 | Zweck                                                                                  |
-| ------------------------ | -------------------------------------------------------------------------------------- |
-| `list_repositories`      | Sichtbare verfolgte Repositorys auflisten.                                             |
-| `get_repository`         | Ein sichtbares, verfolgtes Repository lesen.                                           |
-| `list_workflow_runs`     | Fragen Sie normalisierte sichtbare Workflow-Ausführungen ab.                           |
-| `list_needs_attention`   | Listen Sie Workflow-Kontexte auf, deren letzte Terminalausführung fehlgeschlagen ist.  |
-| `list_awaiting_approval` | Listen Sie aktuelle sichtbare Läufe auf, die auf die Genehmigung des Anbieters warten. |
-| `get_dashboard_summary`  | Fassen Sie den sichtbaren Workflow-Zustand für einen umfassenden Zeitraum zusammen.    |
-| `get_workflow_trend`     | Fassen Sie sichtbare Erfolgs- und Misserfolgstrend-Buckets zusammen.                   |
+| Werkzeug                 | Zweck                                                                                                         |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| `list_repositories`      | Sichtbare verfolgte Repositorys auflisten.                                                                    |
+| `get_repository`         | Ein sichtbares, verfolgtes Repository lesen.                                                                  |
+| `list_workflow_runs`     | Fragen Sie normalisierte sichtbare Workflow-Ausführungen ab.                                                  |
+| `list_needs_attention`   | Listen Sie Workflow-Kontexte auf, deren letzte zuletzt abgeschlossene Workflow-Ausführung fehlgeschlagen ist. |
+| `list_awaiting_approval` | Listen Sie aktuelle sichtbare Läufe auf, die auf die Genehmigung des Anbieters warten.                        |
+| `get_dashboard_summary`  | Fassen Sie den sichtbaren Workflow-Zustand für einen umfassenden Zeitraum zusammen.                           |
+| `get_workflow_trend`     | Fassen Sie sichtbare Erfolgs- und Misserfolgstrend-Buckets zusammen.                                          |
 
 Listentools geben standardmäßig 25 Ergebnisse pro Seite an und akzeptieren höchstens 100. Die Toolausgabe enthält
 strukturiertes JSON und eine passende Textdarstellung. Für Datumsangaben werden UTC-Werte gemäß ISO 8601 verwendet.

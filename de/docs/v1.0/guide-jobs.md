@@ -6,7 +6,7 @@ description: 'Überwachen und starten Sie manuell Repovio-Repository-Synchronisi
 > Archivierter Quell-Snapshot. Produktetiketten verwenden Repovio. Verwenden Sie die Konfigurations-IDs und
 > Container-Referenzen aus den getaggten Bereitstellungsdateien dieser Version unverändert.
 
-Öffnen Sie **Jobs** im Abschnitt **Operations**, um die Synchronisierungsarbeit für jedes aktivierte Repository zu
+Öffnen Sie **Jobs** im Abschnitt**Operations**, um die Synchronisierungsarbeit für jedes aktivierte Repository zu
 überprüfen, auf das Sie zugreifen können. Die Zusammenfassung zeigt laufende, wartende, fehlgeschlagene und inaktive
 Jobs. Die Tabelle identifiziert das Repository, den Anbieter, die synchronisierten Domänen, die aktuelle Phase, den
 Elementfortschritt, den Versuch und die neueste sichere Fehlermeldung.
@@ -22,7 +22,7 @@ Elementfortschritt, den Versuch und die neueste sichere Fehlermeldung.
   Warteschlange gestellt wird. – **Warnung** bedeutet, dass andere Bereiche abgeschlossen wurden, während eine oder
   mehrere Arten von Sicherheitswarnungen nicht verfügbar waren.
 
-Die Spalte „Bereiche“ gibt an, ob der Job Workflows, Probleme, Pull-Requests, Sicherheitswarnungen oder eine Kombination
+Die Spalte „Bereiche“ gibt an, ob der Job Workflows, Issues, Pull-Requests, Sicherheitswarnungen oder eine Kombination
 davon liest. Eine Wartezeit kann sich auf Webhook-Zusammenführung, Wiederholungs-Backoff oder Anweisungen zur
 Ratenbegrenzung des Anbieters beziehen. Durch wiederholtes Aktualisieren der Seite wird die geplante Zeit nicht nach
 vorne verschoben.
@@ -32,14 +32,14 @@ vorne verschoben.
 ## Synchronisierung starten oder erneut versuchen
 
 Ein Systemadministrator kann jeden derzeit inaktiven, fehlgeschlagenen oder Warnauftrag mit **Alle ausführen** starten
-oder **Ausführen** oder **Wiederholen** für eine Repository-Zeile verwenden. Aufträge, die bereits ausstehen oder
+oder **Ausführen** oder**Wiederholen** für eine Repository-Zeile verwenden. Aufträge, die bereits ausstehen oder
 ausgeführt werden, werden nicht erneut in die Warteschlange gestellt. Die initiierende Schaltfläche bleibt in ihrem
 Ladezustand, bis die Anforderung abgeschlossen ist. Folgen Sie dann der Zeile, während sie sich durch „Ausstehend“,
 „Wird ausgeführt“ und „Leerlauf“ oder „Fehler“ bewegt.
 
 Manuelle Jobs verwenden dieselbe dauerhafte, schreibgeschützte Anbietersynchronisierungswarteschlange wie geplante
-Abstimmungen und überprüfte Webhooks. Sie rufen Anbieterdaten ab, können jedoch keine Repositorys, Workflows, Probleme
-oder Pull-Anfragen ändern.
+Abstimmungen und überprüfte Webhooks. Sie rufen Anbieterdaten ab, können jedoch keine Repositorys, Workflows, Issues
+oder Pull Requests ändern.
 
 Erfolgreiche Jobs kehren in den **Leerlauf** zurück und werden nicht als Ausführungsverlauf gespeichert. Fehlgeschlagene
 Jobs bleiben sichtbar, bis sie durch einen späteren Webhook, einen Abgleichszyklus oder einen manuellen

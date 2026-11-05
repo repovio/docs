@@ -21,7 +21,7 @@ gemacht.
 
 Repovio verwendet drei Anwendungsrollen:
 
-- **Viewer** kann explizit zugewiesene Repositorys, Workflows, Probleme und Pull-Requests überprüfen.
+- **Viewer** kann explizit zugewiesene Repositorys, Workflows, Issues und Pull-Requests überprüfen.
 - **Manager** hat Lesezugriff und kann Sicherheitswarnungen für Repositorys überprüfen, bei denen die Mitgliedschaft
   ebenfalls **Manager** ist. Benachrichtigungskanäle, Abonnements, Tests und Verlauf werden global von
   Systemadministratoren verwaltet.
@@ -37,9 +37,9 @@ Anbieterstatus ändert, öffnet Repovio die Anbieterschnittstelle, anstatt die A
 
 1. [anmelden](/docs/next/sign-in), lernen Sie [Navigation](/docs/next/navigation) und probieren Sie
    [suchen](/docs/next/search) aus.
-2. Überprüfen Sie [Armaturenbrett](/docs/next/guide-dashboard), [Alle Läufe](/docs/next/workflow-runs),
-   [Braucht Aufmerksamkeit](/docs/next/needs-attention) und [Warten auf Genehmigung](/docs/next/awaiting-approval).
-3. Überprüfen Sie [Probleme](/docs/next/guide-issues) und [Pull-Anfragen](/docs/next/guide-pull-requests).
+2. Überprüfen Sie [Dashboard](/docs/next/guide-dashboard), [Alle Läufe](/docs/next/workflow-runs),
+   [Handlungsbedarf](/docs/next/needs-attention) und [Ausstehende Freigaben](/docs/next/awaiting-approval).
+3. Überprüfen Sie [Issues](/docs/next/guide-issues) und [Pull Requests](/docs/next/guide-pull-requests).
 4. Öffnen Sie [Repositories](/docs/next/repositories), um die angezeigten Daten zu verstehen.
 5. Administratoren konfigurieren [Benachrichtigungskanäle](/docs/next/notifications) und
    [Ereignisabonnements](/docs/next/notification-rules).

@@ -7,7 +7,7 @@ description: 'Wählen Sie System-, Hell- oder Dunkeldarstellung, ohne die Reposi
 
 ## Farbmodus
 
-Öffnen Sie die Design-/Darstellungssteuerung des Benutzermenüs und wählen Sie **System**, **Hell** oder **Dunkel**. Das
+Öffnen Sie die Design-/Darstellungssteuerung des Benutzermenüs und wählen Sie **System**,**Hell** oder**Dunkel**. Das
 System folgt der Farbpräferenz des Betriebssystems des Browsers. Hell und Dunkel wählen ein festes Thema. Der Browser
 merkt sich die Präferenz lokal; Ein anderes Gerät kann einen anderen Modus verwenden. Das Ändern des Themas hat keine
 Auswirkungen auf die Repository-Daten, Kontorollen oder Anbietereinstellungen.

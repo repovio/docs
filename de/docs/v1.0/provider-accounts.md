@@ -22,8 +22,8 @@ Listendaten zurückgegeben.
 Wählen Sie **Anbieter hinzufügen** und dann GitHub, GitLab, Forgejo oder Gitea. Geben Sie einen erkennbaren Namen und
 die korrekte Instanz-Basis-URL ein. Gitea erfordert eines. Wählen Sie eine der Authentifizierungsmethoden aus, die die
 API gemäß der Konfiguration meldet. Ohne passenden OAuth-Client verwenden Sie ein persönliches Zugriffstoken. **Anbieter
-überprüfen und hinzufügen** prüft die PAT-Anmeldeinformationen, bevor sie gespeichert werden. **Connect-Anbieter**
-leitet zur Einwilligung des Anbieters weiter und kehrt mit einer Erfolgs- oder Fehlerbenachrichtigung zurück.
+überprüfen und hinzufügen** prüft die PAT-Anmeldeinformationen, bevor sie gespeichert werden.**Connect-Anbieter** leitet
+zur Einwilligung des Anbieters weiter und kehrt mit einer Erfolgs- oder Fehlerbenachrichtigung zurück.
 
 Verwenden Sie nur die Lesebereiche in [Einrichtung des Anbieters OAuth](/docs/v1.0/provider-oauth). Der Anbieter OAuth
 verbindet Repository-Daten; es ist getrennt von [OIDC Benutzeranmeldung](/docs/v1.0/authentication). Repovio
