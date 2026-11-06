@@ -1,13 +1,18 @@
 ---
 title: 'Mise à niveau de la marque Repovio'
-description:
-  "Conservez les données et les informations d'identification de la base de données lors du passage au nom Repovio."
+description: "Conservez les données et les informations d'identification de la base de données lors du passage au nom Repovio."
 ---
 
 Ce changement de nom constitue un changement de configuration radical. Mettez à jour toutes les anciennes variables
 d'environnement préfixées par le produit avec le préfixe `REPOVIO_`, notamment `REPOVIO_ENV_FILE`, `REPOVIO_VERSION`,
 `REPOVIO_API_PORT` et `REPOVIO_WEB_PORT`. Utilisez l'API et les images Web sous `ghcr.io/repovio/repovio-api` et
 `ghcr.io/repovio/repovio-web`.
+
+Terminez d’abord le changement de marque sur la version précédente avec PostgreSQL 17. La configuration Compose actuelle
+vise PostgreSQL 18 ; suivez la [mise à niveau PostgreSQL 18 distincte](/docs/next/postgresql-18-upgrade) avant de
+l’utiliser. Ne montez jamais les fichiers PostgreSQL 17 dans le service PostgreSQL 18. Les étapes ci-dessous utilisent
+la configuration PostgreSQL 17 conservée, y compris `compose.yml` et `compose.upgrade.yml`. Le changement de marque seul
+ne convertit pas les données ; le changement de version majeure est une opération distincte.
 
 ## Préserver les données PostgreSQL
 

@@ -7,6 +7,12 @@ Essa renomeação é uma alteração significativa na configuração. Atualize t
 prefixo de produto para o prefixo `REPOVIO_`, incluindo `REPOVIO_ENV_FILE`, `REPOVIO_VERSION`, `REPOVIO_API_PORT` e
 `REPOVIO_WEB_PORT`. Use a API e as imagens da web em `ghcr.io/repovio/repovio-api` e `ghcr.io/repovio/repovio-web`.
 
+Conclua primeiro a mudança de marca na versão anterior com PostgreSQL 17. A configuração Compose atual usa PostgreSQL
+18; siga a [atualização separada para PostgreSQL 18](/docs/next/postgresql-18-upgrade) antes de usá-la. Nunca monte
+arquivos PostgreSQL 17 no serviço PostgreSQL 18. Os passos abaixo usam a configuração PostgreSQL 17 preservada,
+incluindo `compose.yml` e `compose.upgrade.yml`. Apenas a mudança de marca não exige conversão de dados; a atualização
+da versão principal é uma operação separada.
+
 ## Preservar dados PostgreSQL
 
 1. Faça backup do banco de dados existente e confirme se o backup pode ser restaurado antes de alterar a implantação.

@@ -130,3 +130,11 @@ identifiers and generated descriptions retain the language of the authoritative 
 The next handbook also covers local account creation, administrative password resets, local access groups, and additive
 repository group grants on the Users, Repositories, Authentication, Password, and Setup pages. Installation includes
 complete local-account and Authentik Compose examples. These additions do not alter the immutable v1.0 archive.
+
+## Unpublished operations handbook updates
+
+The `next` handbook additionally contains `postgresql-18-upgrade`: the PostgreSQL 17-to-18 dump/restore procedure,
+separate-volume requirements, verification, and recovery limits. Its branding guide explicitly separates the rename on
+PostgreSQL 17 from the later major upgrade. Its localization guide also covers sign-in/setup controls and local flag
+assets. These updates are editorial drafts for all 13 documentation languages; the immutable `v1.0` archive remains
+unchanged and does not gain these instructions retroactively.

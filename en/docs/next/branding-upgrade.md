@@ -7,6 +7,12 @@ This rename is a breaking configuration change. Update every former product-pref
 `REPOVIO_` prefix, including `REPOVIO_ENV_FILE`, `REPOVIO_VERSION`, `REPOVIO_API_PORT` and `REPOVIO_WEB_PORT`. Use the
 API and web images under `ghcr.io/repovio/repovio-api` and `ghcr.io/repovio/repovio-web`.
 
+Complete the branding rename on the previous PostgreSQL 17 release first. The current Compose configuration targets
+PostgreSQL 18; follow the [separate PostgreSQL 18 upgrade](/docs/next/postgresql-18-upgrade) before using it. Never
+mount PostgreSQL 17 data files into the PostgreSQL 18 service. The steps below use the retained PostgreSQL 17 release
+configuration, including its `compose.yml` and `compose.upgrade.yml`. Branding alone needs no data conversion; a
+PostgreSQL major upgrade is a separate operation.
+
 ## Preserve PostgreSQL data
 
 1. Back up the existing database and confirm that the backup can be restored before changing the deployment.

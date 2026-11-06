@@ -7,6 +7,11 @@ description: 'Repovio 名に移動するときに、データベース データ
 など、`REPOVIO_` 接頭辞に更新します。 `ghcr.io/repovio/repovio-api` および `ghcr.io/repovio/repovio-web`
 の API と Web イメージを使用します。
 
+先に以前の PostgreSQL 17 リリースで名前変更を完了してください。現在の Compose 設定は PostgreSQL
+18 用です。使用前に[別途 PostgreSQL 18 へのアップグレード](/docs/next/postgresql-18-upgrade)を行ってください。PostgreSQL
+17 のファイルを PostgreSQL 18 サービスにマウントしてはいけません。以下は保存した PostgreSQL 17 の設定で、`compose.yml`
+と `compose.upgrade.yml` を含みます。名前変更だけでは変換不要ですが、メジャーバージョンの更新は別の操作です。
+
 ## PostgreSQL データを保存する
 
 1. 既存のデータベースをバックアップし、展開を変更する前にバックアップを復元できることを確認します。

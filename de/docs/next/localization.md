@@ -1,7 +1,6 @@
 ---
 title: 'Schnittstellenlokalisierung'
-description:
-  'Unterstützte Schnittstellensprachen, Fallback-Verhalten und der Prozess zur Pflege von Repovio-Übersetzungen.'
+description: 'Unterstützte Schnittstellensprachen, Fallback-Verhalten und der Prozess zur Pflege von Repovio-Übersetzungen.'
 ---
 
 Repovio liefert seine Weboberfläche in Englisch (`en`), Deutsch (`de`), Spanisch (`es`), Französisch (`fr`), Italienisch
@@ -12,6 +11,23 @@ jedem angemeldeten Benutzer zur Verfügung. Durch die Auswahl einer Sprache wird
 Englisch ist die deterministische Standard- und Ersatzsprache. Wenn eine Browsereinstellung oder ein gespeichertes
 Cookie kein unterstütztes Gebietsschema identifiziert, rendert Repovio Englisch. Datums-, Uhrzeit- und
 Zahlenformatierung verwenden das ausgewählte Gebietsschema.
+
+<a id="sign-in-controls-and-language-flags"></a>
+
+## Anmeldebedienung und Sprachflaggen
+
+Anmeldung und Einrichtung des ersten Administrators bieten unter dem Formular eine Sprachauswahl mit aktiver Sprache und
+Flagge. Während des Ladens bleibt sie beschäftigt. Eine separate Theme-Schaltfläche wechselt zwischen System, Hell und
+Dunkel und speichert die Auswahl. Ihr Symbol zeigt die aktuelle Einstellung; Tooltip und zugänglicher Name beschreiben
+diese und die nächste Aktion.
+
+Das Sprachmenü zeigt dekorative lokale SVG-Flaggen neben den muttersprachlichen Namen. Namen bleiben die zugänglichen
+Beschriftungen; Flaggen ersetzen sie nicht. Die Zuordnung von Sprache zu Land lautet: `en` → GB, `de` → DE, `es` → ES,
+`fr` → FR, `it` → IT, `nl` → NL, `pl` → PL, `pt` → PT.
+
+Die Dateien in `apps/web/public/flags` stammen aus [flag-icons v7.5.0](https://github.com/lipis/flag-icons/tree/v7.5.0)
+unter der beiliegenden MIT-Lizenz. Externe Bildanfragen sind nicht erforderlich. Bei einer neuen Sprache auch Flagge und
+Zuordnung in `useLocales` ergänzen.
 
 <a id="adding-or-updating-a-locale"></a>
 
