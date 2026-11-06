@@ -3,6 +3,9 @@ title: '提供商 OAuth 设置'
 description: '注册 OAuth 应用程序并为 Repovio 配置只读提供商身份验证。'
 ---
 
+本页 PAT/OAuth 说明使用每个仓库单独配置的 Webhook。GitHub App 连接使用一个中央 Webhook，并通过 GitHub
+App 对话框进行设置。
+
 Repovio 通过 OAuth 或个人访问令牌 (PAT) 连接提供商帐户。当至少配置了一个提供商 OAuth 客户端时，OAuth 可用。如果没有任何配置的 OAuth 客户端，提供商帐户屏幕仅提供 PAT 身份验证。 Repovio 仅将生成的凭证用于其只读提供程序 API，并在将其写入 PostgreSQL 之前对其进行加密。
 
 <a id="register-oauth-applications"></a>
@@ -46,3 +49,5 @@ FORGEJO_OAUTH_CLIENT_SECRET=...
 
 Repovio 的适配器仅公开验证、发现、工作流同步和 Webhook 验证。它们不会创建、更新、分派、重新运行、取消或删除提供程序资源。 OAuth 客户端机密保留在 API 环境中，并且 Repovio
 API 永远不会返回提供者令牌。
+
+[设置 GitHub App](/docs/next/github-app)

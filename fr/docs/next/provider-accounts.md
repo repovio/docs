@@ -4,6 +4,9 @@ description:
   'Connectez-vous et administrez les informations d’identification du fournisseur cryptées et en lecture seule.'
 ---
 
+Les instructions PAT/OAuth de cette page utilisent des webhooks par dépôt. Les connexions GitHub App utilisent un
+webhook central et se configurent dans leur boîte de dialogue.
+
 <a id="access-and-list"></a>
 
 ## Accès et liste
@@ -45,3 +48,5 @@ référentiels, une instance incorrecte, des étendues de lecture insuffisantes 
 valides. Distinguer les échecs de chargement des options d'authentification, les erreurs de vérification, les
 notifications de rappel OAuth et les échecs d'API ; corrigez la cause avant de réessayer. Inspectez les tâches pour
 détecter les échecs de synchronisation en cours.
+
+[Configurer GitHub App](/docs/next/github-app)

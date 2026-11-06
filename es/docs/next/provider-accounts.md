@@ -3,6 +3,9 @@ title: 'Cuentas de proveedores'
 description: 'Conecte y administre credenciales de proveedor cifradas y de solo lectura.'
 ---
 
+Las instrucciones PAT/OAuth de esta página usan webhooks por repositorio. Las conexiones GitHub App usan un webhook
+central y se configuran desde su diálogo.
+
 <a id="access-and-list"></a>
 
 ## Acceso y lista
@@ -42,3 +45,5 @@ repositorios rastreados individuales, no a cuentas de proveedores. El descubrimi
 repositorios, una instancia incorrecta, alcances de lectura insuficientes o credenciales no válidas. Distinguir fallas
 de carga de opciones de autenticación, errores de verificación, avisos de devolución de llamada OAuth y fallas de API;
 corrija la causa antes de volver a intentarlo. Inspeccione los trabajos en busca de fallas de sincronización continuas.
+
+[Configurar GitHub App](/docs/next/github-app)

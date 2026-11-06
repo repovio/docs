@@ -3,6 +3,9 @@ title: '存储库 Webhook 设置'
 description: '为 GitHub、GitLab、Forgejo 和 Gitea 存储库配置签名的只读 Webhook。'
 ---
 
+本页 PAT/OAuth 说明使用每个仓库单独配置的 Webhook。GitHub App 连接使用一个中央 Webhook，并通过 GitHub
+App 对话框进行设置。
+
 Repovio 可以接收签名的 Webhook，以比正常轮询间隔更早同步跟踪的存储库。它从不通过提供者 API 创建、更新、删除或测试 Webhook。管理员在 GitHub、GitLab、Forgejo 或 Gitea 中手动配置每个存储库 Webhook。
 
 打开 **Repositories**，选择一个跟踪的存储库，然后使用其**Repository webhook**
@@ -90,3 +93,5 @@ Repovio 在原始主体上验证 `X-Gitea-Signature` 并使用 `X-Gitea-Delivery
 - 检查 `/api/health` 的持久提供程序同步状态。
 - 将 `SCHEDULER_SYNC_INTERVAL_SECONDS=1800` 设置为 30 分钟后备。
 - `SCHEDULER_ENABLED=false` 保留排队的请求，但暂停回退排队和处理。
+
+[设置 GitHub App](/docs/next/github-app)

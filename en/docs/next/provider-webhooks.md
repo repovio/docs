@@ -3,6 +3,9 @@ title: 'Repository webhook setup'
 description: 'Configure signed read-only webhooks for GitHub, GitLab, Forgejo, and Gitea repositories.'
 ---
 
+The PAT/OAuth instructions on this page use per-repository webhooks. GitHub App connections instead use one central
+webhook and are configured through the GitHub App dialog.
+
 Repovio can receive signed webhooks to synchronize a tracked repository sooner than its normal polling interval. It
 never creates, updates, deletes, or tests webhooks through provider APIs. An administrator configures every repository
 webhook manually in GitHub, GitLab, Forgejo, or Gitea.
@@ -103,3 +106,5 @@ Repovio verifies `X-Gitea-Signature` over the raw body and uses `X-Gitea-Deliver
 - Check `/api/health` for persisted provider synchronization status.
 - Set `SCHEDULER_SYNC_INTERVAL_SECONDS=1800` for the 30-minute fallback.
 - `SCHEDULER_ENABLED=false` retains queued requests but pauses fallback enqueueing and processing.
+
+[GitHub App setup](/docs/next/github-app)

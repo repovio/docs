@@ -4,6 +4,9 @@ description:
   'Konfigurieren Sie signierte schreibgeschützte Webhooks für die Repositorys GitHub, GitLab, Forgejo und Gitea.'
 ---
 
+Die PAT-/OAuth-Anweisungen dieser Seite verwenden Webhooks pro Repository. GitHub-App-Verbindungen nutzen stattdessen
+einen zentralen Webhook und werden über den GitHub-App-Dialog eingerichtet.
+
 Repovio kann signierte Webhooks empfangen, um ein verfolgtes Repository früher als sein normales Abfrageintervall zu
 synchronisieren. Es erstellt, aktualisiert, löscht oder testet niemals Webhooks über Anbieter-APIs. Ein Administrator
 konfiguriert jeden Repository-Webhook manuell in GitHub, GitLab, Forgejo oder Gitea.
@@ -115,3 +118,5 @@ oder die Liefer-ID nicht überprüfen konnte. Bestätigen Sie die Repository-UUI
 - Legen Sie `SCHEDULER_SYNC_INTERVAL_SECONDS=1800` für den 30-minütigen Fallback fest. – `SCHEDULER_ENABLED=false`
   behält in der Warteschlange befindliche Anforderungen bei, unterbricht jedoch die Einreihung und Verarbeitung des
   Fallbacks.
+
+[GitHub App einrichten](/docs/next/github-app)

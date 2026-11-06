@@ -3,6 +3,9 @@ title: 'Anbieterkonten'
 description: 'Verbinden und verwalten Sie verschlüsselte, schreibgeschützte Anbieteranmeldeinformationen.'
 ---
 
+Die PAT-/OAuth-Anweisungen dieser Seite verwenden Webhooks pro Repository. GitHub-App-Verbindungen nutzen stattdessen
+einen zentralen Webhook und werden über den GitHub-App-Dialog eingerichtet.
+
 <a id="access-and-list"></a>
 
 ## Zugriff und Liste
@@ -43,3 +46,5 @@ eine falsche Instanz, unzureichende Lesebereiche oder ungültige Anmeldeinformat
 zwischen Ladefehlern bei Authentifizierungsoptionen, Überprüfungsfehlern, OAuth-Rückrufbenachrichtigungen und
 API-Fehlern. Beheben Sie die Ursache, bevor Sie es erneut versuchen. Untersuchen Sie Jobs auf laufende
 Synchronisierungsfehler.
+
+[GitHub App einrichten](/docs/next/github-app)

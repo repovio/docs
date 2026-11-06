@@ -272,6 +272,13 @@
       "section": "api",
       "group": null,
       "order": 38
+    },
+    {
+      "slug": "github-app",
+      "tab": "guides",
+      "section": "administration",
+      "group": "providerAccounts",
+      "order": 39
     }
   ],
   "redirects": {

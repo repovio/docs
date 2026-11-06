@@ -3,6 +3,9 @@ title: 'Provider accounts'
 description: 'Connect and administer encrypted, read-only provider credentials.'
 ---
 
+The PAT/OAuth instructions on this page use per-repository webhooks. GitHub App connections instead use one central
+webhook and are configured through the GitHub App dialog.
+
 <a id="access-and-list"></a>
 
 ## Access and list
@@ -38,3 +41,5 @@ tracked repositories, not provider accounts. Empty discovery can mean no reposit
 insufficient read scopes, or invalid credentials. Distinguish authentication-options loading failures, verification
 errors, OAuth callback notices, and API failures; correct the cause before retrying. Inspect jobs for ongoing
 synchronization failures.
+
+[GitHub App setup](/docs/next/github-app)
