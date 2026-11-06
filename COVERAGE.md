@@ -122,6 +122,6 @@ identifiers and generated descriptions retain the language of the authoritative 
   installation connections, rotation and troubleshooting in all 13 locales.
 - Application implementation: [repovio/repovio#22](https://github.com/repovio/repovio/issues/22); documentation task:
   [#6](https://github.com/repovio/docs/issues/6).
-- Source under review: application revision `953b94b89f321c9076dea7c8ffe60eddf78c523c` on `codex/22-github-app`.
-  This feature revision is not merged or released; historical `v1.0` does not include this feature. The existing
+- Source under review: application revision `953b94b89f321c9076dea7c8ffe60eddf78c523c` on `codex/22-github-app`. This
+  feature revision is not merged or released; historical `v1.0` does not include this feature. The existing
   `workingTreeSource` publication guard remains until the application merge revision is reviewed.
