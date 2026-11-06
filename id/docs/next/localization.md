@@ -12,6 +12,23 @@ Bahasa Inggris adalah default dan fallback deterministik. Ketika preferensi brow
 mengidentifikasi lokal yang didukung, Repovio menerjemahkan bahasa Inggris. Pemformatan tanggal, waktu, dan angka
 menggunakan lokal yang dipilih.
 
+<a id="sign-in-controls-and-language-flags"></a>
+
+## Kontrol masuk dan bendera bahasa
+
+Halaman masuk dan penyiapan administrator pertama menyediakan pemilih bahasa di bawah formulir dengan bahasa aktif dan
+benderanya. Pemilih tetap sibuk saat bahasa dimuat. Tombol tema terpisah bergilir antara Sistem, Terang, dan Gelap serta
+menyimpan pilihan. Ikonnya menunjukkan pilihan saat ini; tooltip dan nama aksesibelnya menjelaskan pilihan saat ini dan
+tindakan berikutnya.
+
+Menu menampilkan bendera SVG lokal dekoratif di samping nama bahasa asli. Nama tetap menjadi label aksesibel; bendera
+tidak menggantikannya. Pemetaan bahasa ke negara adalah: `en` → GB, `de` → DE, `es` → ES, `fr` → FR, `it` → IT, `nl` →
+NL, `pl` → PL, `pt` → PT.
+
+Aset di `apps/web/public/flags` berasal dari [flag-icons v7.5.0](https://github.com/lipis/flag-icons/tree/v7.5.0) dengan
+lisensi MIT yang disertakan. Tidak memerlukan permintaan gambar eksternal. Saat menambah bahasa, tambahkan bendera serta
+pemetaannya di `useLocales`.
+
 <a id="adding-or-updating-a-locale"></a>
 
 ## Menambah atau memperbarui lokal

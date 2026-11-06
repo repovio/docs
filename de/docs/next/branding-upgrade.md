@@ -8,6 +8,13 @@ Umgebungsvariablen mit Produktpräfix auf das Präfix `REPOVIO_`, einschließlic
 `REPOVIO_API_PORT` und `REPOVIO_WEB_PORT`. Verwenden Sie die API und Webbilder unter `ghcr.io/repovio/repovio-api` und
 `ghcr.io/repovio/repovio-web`.
 
+Schließen Sie die Branding-Umbenennung zuerst mit dem bisherigen PostgreSQL-17-Release ab. Die aktuelle
+Compose-Konfiguration verwendet PostgreSQL 18; befolgen Sie vor deren Nutzung das
+[separate PostgreSQL-18-Upgrade](/docs/next/postgresql-18-upgrade). Mounten Sie niemals PostgreSQL-17-Dateien in den
+PostgreSQL-18-Dienst. Die folgenden Schritte verwenden die bisherige PostgreSQL-17-Konfiguration einschließlich
+`compose.yml` und `compose.upgrade.yml`. Branding allein benötigt keine Datenkonvertierung; das
+PostgreSQL-Hauptversionsupgrade ist ein separater Vorgang.
+
 ## PostgreSQL-Daten beibehalten
 
 1. Sichern Sie die vorhandene Datenbank und stellen Sie sicher, dass die Sicherung wiederhergestellt werden kann, bevor

@@ -57,6 +57,13 @@
       "order": 7
     },
     {
+      "slug": "postgresql-18-upgrade",
+      "tab": "get-started",
+      "section": "getting-started",
+      "group": null,
+      "order": 40
+    },
+    {
       "slug": "guide-dashboard",
       "tab": "guides",
       "section": "overview",

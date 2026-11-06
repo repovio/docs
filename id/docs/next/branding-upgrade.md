@@ -8,6 +8,12 @@ lingkungan dengan awalan produk sebelumnya ke awalan `REPOVIO_`, termasuk `REPOV
 `REPOVIO_API_PORT`, dan `REPOVIO_WEB_PORT`. Gunakan API dan gambar web di bawah `ghcr.io/repovio/repovio-api` dan
 `ghcr.io/repovio/repovio-web`.
 
+Selesaikan perubahan merek dahulu pada rilis PostgreSQL 17 sebelumnya. Konfigurasi Compose saat ini menargetkan
+PostgreSQL 18; ikuti [pemutakhiran PostgreSQL 18 terpisah](/docs/next/postgresql-18-upgrade) sebelum memakainya. Jangan
+pasang berkas PostgreSQL 17 pada layanan PostgreSQL 18. Langkah berikut memakai konfigurasi PostgreSQL 17 yang disimpan,
+termasuk `compose.yml` dan `compose.upgrade.yml`. Perubahan merek saja tidak memerlukan konversi data; pemutakhiran
+versi utama adalah operasi terpisah.
+
 ## Pertahankan data PostgreSQL
 
 1. Cadangkan database yang ada dan konfirmasikan bahwa cadangan dapat dipulihkan sebelum mengubah penerapan.

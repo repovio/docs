@@ -7,6 +7,11 @@ description: '移动到 Repovio 名称时保留数据库数据和凭据。'
 `REPOVIO_ENV_FILE`、`REPOVIO_VERSION`、`REPOVIO_API_PORT` 和
 `REPOVIO_WEB_PORT`。使用`ghcr.io/repovio/repovio-api`和`ghcr.io/repovio/repovio-web`下的API和Web图像。
 
+先在之前的 PostgreSQL 17 版本上完成品牌更名。当前 Compose 配置使用 PostgreSQL
+18；使用前请完成[独立的 PostgreSQL 18 升级](/docs/next/postgresql-18-upgrade)。绝不要将 PostgreSQL
+17 文件挂载到 PostgreSQL 18 服务。以下步骤使用保留的 PostgreSQL 17 配置，包括其 `compose.yml` 和
+`compose.upgrade.yml`。品牌更名本身无需数据转换；PostgreSQL 主版本升级是另一项操作。
+
 ## 保留PostgreSQL数据
 
 1. 更改部署之前，备份现有数据库并确认备份可以恢复。

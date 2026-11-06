@@ -7,6 +7,11 @@ description: 'احتفظ ببيانات قاعدة البيانات وبيانا
 ذلك `REPOVIO_ENV_FILE`، و`REPOVIO_VERSION`، و`REPOVIO_API_PORT`، و`REPOVIO_WEB_PORT`. استخدم واجهة برمجة التطبيقات وصور
 الويب ضمن `ghcr.io/repovio/repovio-api` و`ghcr.io/repovio/repovio-web`.
 
+أكمل تغيير العلامة أولًا على الإصدار السابق الذي يستخدم PostgreSQL 17. إعدادات Compose الحالية تستهدف PostgreSQL 18؛
+اتبع [ترقية PostgreSQL 18 المنفصلة](/docs/next/postgresql-18-upgrade) قبل استخدامها. لا تربط ملفات PostgreSQL 17 بخدمة
+PostgreSQL 18 مطلقًا. الخطوات التالية تستخدم إعدادات PostgreSQL 17 المحفوظة، بما فيها `compose.yml`
+و`compose.upgrade.yml`. تغيير العلامة وحده لا يحتاج تحويل البيانات؛ ترقية الإصدار الرئيسي عملية منفصلة.
+
 ## الحفاظ على بيانات PostgreSQL
 
 1. قم بعمل نسخة احتياطية من قاعدة البيانات الموجودة وتأكد من إمكانية استعادة النسخة الاحتياطية قبل تغيير النشر.

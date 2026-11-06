@@ -60,6 +60,7 @@
         "search",
         "deployment",
         "branding-upgrade",
+        "postgresql-18-upgrade",
         "guide-dashboard",
         "workflow-runs",
         "awaiting-approval",

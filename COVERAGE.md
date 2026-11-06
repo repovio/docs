@@ -126,3 +126,11 @@ identifiers and generated descriptions retain the language of the authoritative 
   [repovio/repovio#24](https://github.com/repovio/repovio/pull/24). The feature is merged but unreleased; historical
   `v1.0` does not include it. The existing `workingTreeSource` publication guard still protects the API reference drafts
   until their release review.
+
+## Unpublished operations handbook updates
+
+The `next` handbook additionally contains `postgresql-18-upgrade`: the PostgreSQL 17-to-18 dump/restore procedure,
+separate-volume requirements, verification, and recovery limits. Its branding guide explicitly separates the rename on
+PostgreSQL 17 from the later major upgrade. Its localization guide also covers sign-in/setup controls and local flag
+assets. These updates are editorial drafts for all 13 documentation languages; the immutable `v1.0` archive remains
+unchanged and does not gain these instructions retroactively.

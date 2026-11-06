@@ -7,6 +7,12 @@ description: 'Сохраните данные базы данных и учет�
 префикса `REPOVIO_`, включая `REPOVIO_ENV_FILE`, `REPOVIO_VERSION`, `REPOVIO_API_PORT` и `REPOVIO_WEB_PORT`. Используйте
 API и веб-образы под `ghcr.io/repovio/repovio-api` и `ghcr.io/repovio/repovio-web`.
 
+Сначала завершите переименование на предыдущем выпуске с PostgreSQL 17. Текущая конфигурация Compose использует
+PostgreSQL 18; до её использования выполните [отдельное обновление PostgreSQL 18](/docs/next/postgresql-18-upgrade).
+Никогда не монтируйте файлы PostgreSQL 17 в сервис PostgreSQL 18. Ниже используется сохранённая конфигурация PostgreSQL
+17, включая `compose.yml` и `compose.upgrade.yml`. Само переименование не требует преобразования данных; смена основной
+версии — отдельная операция.
+
 ## Сохранить данные PostgreSQL
 
 1. Создайте резервную копию существующей базы данных и убедитесь, что резервную копию можно восстановить, прежде чем

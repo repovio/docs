@@ -11,6 +11,22 @@ aplica em visitas futuras.
 O inglês é o padrão determinístico e o substituto. Quando uma preferência do navegador ou um cookie salvo não identifica
 uma localidade suportada, Repovio renderiza o inglês. A formatação de data, hora e número usa a localidade selecionada.
 
+<a id="sign-in-controls-and-language-flags"></a>
+
+## Controles de acesso e bandeiras
+
+As páginas de acesso e configuração do primeiro administrador oferecem abaixo do formulário um seletor com idioma ativo
+e bandeira. Ele permanece ocupado durante o carregamento. Um botão separado alterna entre Sistema, Claro e Escuro e
+salva a preferência. Seu ícone mostra a opção atual; a dica e o nome acessível descrevem essa opção e a próxima ação.
+
+O menu mostra bandeiras SVG locais decorativas ao lado dos nomes nativos. Os nomes continuam sendo os rótulos
+acessíveis; as bandeiras não os substituem. A correspondência entre idioma e país é: `en` → GB, `de` → DE, `es` → ES,
+`fr` → FR, `it` → IT, `nl` → NL, `pl` → PL, `pt` → PT.
+
+Os arquivos em `apps/web/public/flags` vêm de [flag-icons v7.5.0](https://github.com/lipis/flag-icons/tree/v7.5.0), sob
+a licença MIT incluída. Não exigem solicitações externas de imagens. Ao adicionar um idioma, incluir a bandeira e sua
+correspondência em `useLocales`.
+
 <a id="adding-or-updating-a-locale"></a>
 
 ## Adicionando ou atualizando uma localidade
