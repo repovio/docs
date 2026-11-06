@@ -36,3 +36,14 @@ Wenn die Einrichtung fehlschlägt, überprüfen Sie die API-/Datenbankverfügbar
 Anmeldeinformationen zu veröffentlichen. Setzen Sie die Datenbank nicht zurück, um die Einrichtung zu wiederholen.
 Informationen zu einem vorhandenen lokalen Administrator finden Sie unter
 [Passwortwiederherstellung](/docs/next/authentication#reset-a-forgotten-password).
+
+<a id="local-user-and-group-management"></a>
+
+## Lokale Konten erstellen und zurücksetzen
+
+Unter Administration → Benutzer in der Toolbar Neuer Benutzer wählen. Eindeutigen Benutzernamen, optional Vor- und
+Nachnamen, Passwort mit 12–256 Zeichen samt Bestätigung und eine Rolle angeben; Standard ist Leseberechtigung. Das
+Erstellen bleibt bei aktiviertem OIDC verfügbar. OIDC-Konten entstehen beim Identitätsanbieter und werden nicht anhand
+gleicher lokaler Benutzernamen verknüpft.
+
+[Lokale Zugriffsgruppen](/docs/next/users#local-access-groups)

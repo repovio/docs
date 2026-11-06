@@ -1,54 +1,298 @@
 ---
-title: 'Repovio उपयोगकर्ता मार्गदर्शिका'
-description: 'रिपॉजिटरी, वर्कफ़्लो स्थिति और आवश्यक अनुमोदन क्रियाओं को देखने के लिए Repovio का उपयोग शुरू करें।'
+title: 'Repovio स्थापित करें'
+description: 'स्थानीय खातों या पूर्ण Authentik OIDC स्टैक के Docker Compose उदाहरण।'
 ---
-
-Repovio एक रीड-ओनली वर्कफ़्लो स्टेटस डैशबोर्ड है। यह अधिकृत उपयोगकर्ताओं को GitHub, GitLab, Forgejo, या Gitea पर कुछ भी
-बनाए, पुन: चलाने, स्वीकृत करने या हटाए बिना रिपॉजिटरी गतिविधि का निरीक्षण करने देता है।
 
 <a id="before-you-begin"></a>
 
-## शुरू करने से पहले
+## Repovio स्थापित करें
 
-आपको Repovio इंस्टॉलेशन का URL और एक स्थानीय या कॉन्फ़िगर OIDC खाता चाहिए। पहला व्यवस्थापक एक बार का सेटअप पूरा करता है;
-अतिरिक्त स्थानीय उपयोगकर्ताओं को संरक्षित एपीआई के माध्यम से प्रावधान किया जाता है, या उपयोगकर्ता कॉन्फ़िगर किए गए OIDC
-के माध्यम से साइन इन करते हैं। प्रदाता डेटा तक पहुंच आपकी भूमिका और रिपॉजिटरी सदस्यता पर निर्भर करती है; साइन इन करने से
-प्रत्येक कॉन्फ़िगर की गई रिपॉजिटरी स्वचालित रूप से उजागर नहीं होती है।
+नई स्थापना के लिए एक उदाहरण चुनें। Docker Engine, Compose v2, सार्वजनिक DNS और TLS रिवर्स प्रॉक्सी आवश्यक हैं। Repovio
+और Authentik के लिए अलग HTTPS होस्टनाम रखें। निजी इमेज के लिए GHCR पहुँच चाहिए। मौजूदा स्थापना में संस्करण के अनुरूप
+परिनियोजन और PostgreSQL अपग्रेड निर्देश अपनाएँ; इन उदाहरणों में पुराने डेटाबेस वॉल्यूम दोबारा न लगाएँ।
 
-Repovio तीन अनुप्रयोग भूमिकाओं का उपयोग करता है:
+<a id="shared-compose-configuration"></a>
 
-- **व्यूअर** स्पष्ट रूप से निर्दिष्ट रिपॉजिटरी, वर्कफ़्लो, मुद्दों और पुल अनुरोधों का निरीक्षण कर सकता है।
-- **प्रबंधक** के पास पढ़ने की पहुंच है और वह रिपॉजिटरी के लिए सुरक्षा अलर्ट का निरीक्षण कर सकता है जहां सदस्यता
-  भी**प्रबंधक** है। अधिसूचना चैनल, सदस्यता, परीक्षण और इतिहास को विश्व स्तर पर सिस्टम प्रशासकों द्वारा प्रशासित किया
-  जाता है।
-- **सिस्टम एडमिनिस्ट्रेटर** प्रत्येक रिपॉजिटरी तक पहुंच सकता है और प्रदाता खातों, रिपॉजिटरी, सदस्यता, उपयोगकर्ताओं, MCP
-  टोकन और एप्लिकेशन डिफ़ॉल्ट को प्रबंधित कर सकता है।
+## साझा विन्यास
 
-एप्लिकेशन भूमिकाएं कभी भी GitHub, GitLab, Forgejo, या Gitea पर लिखने की पहुंच प्रदान नहीं करती हैं। यदि कोई कार्रवाई
-प्रदाता स्थिति बदलती है, तो Repovio कार्रवाई करने के बजाय प्रदाता इंटरफ़ेस खोलता है।
+चुना हुआ YAML compose.yml और नीचे के मान निजी निर्देशिका में .env के रूप में रखें। सभी स्थानधारक बदलें और दोनों Repovio
+इमेज का एक ही सटीक रिलीज़ टैग चुनें। पहले आदेश से डेटाबेस पासवर्ड और JWT रहस्य अलग-अलग, दूसरे से एन्क्रिप्शन कुंजी
+बनाएँ। हेक्स पासवर्ड URL एन्कोडिंग की गलतियाँ रोकते हैं।
+
+```bash
+openssl rand -hex 32
+openssl rand -base64 32
+```
+
+```dotenv
+REPOVIO_VERSION=REPLACE_WITH_EXACT_RELEASE_TAG
+POSTGRES_PASSWORD=REPLACE_WITH_RANDOM_HEX_PASSWORD
+AUTH_JWT_SECRET=REPLACE_WITH_RANDOM_HEX_SECRET
+TOKEN_ENCRYPTION_KEY=REPLACE_WITH_BASE64_32_BYTE_KEY
+```
+
+<a id="docker-compose-without-oidc"></a>
+
+## OIDC के बिना
+
+स्टैक स्थानीय खाते उपयोग करता है। प्रारंभिक सेटअप में पहला सिस्टम व्यवस्थापक बनाएँ। OIDC बंद रखें और प्रशासन →
+उपयोगकर्ता से अतिरिक्त खाते बनाएँ।
+
+```yaml
+services:
+  postgres:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: repovio
+      POSTGRES_USER: repovio
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U repovio -d repovio']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    volumes:
+      - repovio-postgres:/var/lib/postgresql
+  migrate:
+    image: ghcr.io/repovio/repovio-api:${REPOVIO_VERSION:?Set an exact release version}
+    restart: 'no'
+    command: ['node_modules/.bin/prisma', 'migrate', 'deploy', '--config', 'prisma.config.ts']
+    environment: &api-environment
+      NODE_ENV: production
+      PORT: 3001
+      DATABASE_URL: postgresql://repovio:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@postgres:5432/repovio?schema=public
+      SHADOW_DATABASE_URL:
+        postgresql://repovio:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@postgres:5432/repovio_shadow?schema=public
+      AUTH_JWT_SECRET: ${AUTH_JWT_SECRET:?Set AUTH_JWT_SECRET}
+      TOKEN_ENCRYPTION_KEY: ${TOKEN_ENCRYPTION_KEY:?Set TOKEN_ENCRYPTION_KEY}
+      PUBLIC_URL: https://repovio.example.com
+      CORS_ORIGIN: https://repovio.example.com
+    depends_on:
+      postgres:
+        condition: service_healthy
+  api:
+    image: ghcr.io/repovio/repovio-api:${REPOVIO_VERSION:?Set an exact release version}
+    restart: unless-stopped
+    environment: *api-environment
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports:
+      - '127.0.0.1:3001:3001'
+  web:
+    image: ghcr.io/repovio/repovio-web:${REPOVIO_VERSION:?Set an exact release version}
+    restart: unless-stopped
+    environment:
+      PORT: 3000
+      NUXT_PUBLIC_API_BASE_URL: https://repovio.example.com/api/v1
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - '127.0.0.1:3000:3000'
+volumes:
+  repovio-postgres:
+```
+
+<a id="docker-compose-with-authentik"></a>
+
+## Authentik के साथ
+
+यह पूर्ण वैकल्पिक स्टैक चलाएँ, दोनों उदाहरण साथ नहीं। नीचे के Authentik मान .env में जोड़ें; अलग डेटाबेस पासवर्ड और
+गुप्त कुंजी बनाएँ। निश्चित संस्करण अपना PostgreSQL, सर्वर और वर्कर उपयोग करता है; OIDC उदाहरण के लिए Redis या Docker
+सॉकेट नहीं चाहिए।
+
+```dotenv
+AUTHENTIK_POSTGRES_PASSWORD=REPLACE_WITH_SEPARATE_RANDOM_HEX_PASSWORD
+AUTHENTIK_SECRET_KEY=REPLACE_WITH_RANDOM_HEX_SECRET
+```
+
+```yaml
+services:
+  postgres:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: repovio
+      POSTGRES_USER: repovio
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U repovio -d repovio']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    volumes:
+      - repovio-postgres:/var/lib/postgresql
+  migrate:
+    image: ghcr.io/repovio/repovio-api:${REPOVIO_VERSION:?Set an exact release version}
+    restart: 'no'
+    command: ['node_modules/.bin/prisma', 'migrate', 'deploy', '--config', 'prisma.config.ts']
+    environment: &api-environment
+      NODE_ENV: production
+      PORT: 3001
+      DATABASE_URL: postgresql://repovio:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@postgres:5432/repovio?schema=public
+      SHADOW_DATABASE_URL:
+        postgresql://repovio:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@postgres:5432/repovio_shadow?schema=public
+      AUTH_JWT_SECRET: ${AUTH_JWT_SECRET:?Set AUTH_JWT_SECRET}
+      TOKEN_ENCRYPTION_KEY: ${TOKEN_ENCRYPTION_KEY:?Set TOKEN_ENCRYPTION_KEY}
+      PUBLIC_URL: https://repovio.example.com
+      CORS_ORIGIN: https://repovio.example.com
+      OIDC_CALLBACK_URL: https://repovio.example.com/api/v1/auth/oidc/callback
+    depends_on:
+      postgres:
+        condition: service_healthy
+  api:
+    image: ghcr.io/repovio/repovio-api:${REPOVIO_VERSION:?Set an exact release version}
+    restart: unless-stopped
+    environment: *api-environment
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports:
+      - '127.0.0.1:3001:3001'
+  web:
+    image: ghcr.io/repovio/repovio-web:${REPOVIO_VERSION:?Set an exact release version}
+    restart: unless-stopped
+    environment:
+      PORT: 3000
+      NUXT_PUBLIC_API_BASE_URL: https://repovio.example.com/api/v1
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - '127.0.0.1:3000:3000'
+  authentik-postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: authentik
+      POSTGRES_USER: authentik
+      POSTGRES_PASSWORD: ${AUTHENTIK_POSTGRES_PASSWORD:?Set AUTHENTIK_POSTGRES_PASSWORD}
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U authentik -d authentik']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    volumes:
+      - authentik-postgres:/var/lib/postgresql/data
+  authentik-server:
+    image: ghcr.io/goauthentik/server:2026.8.5
+    command: server
+    restart: unless-stopped
+    shm_size: 512mb
+    environment: &authentik-environment
+      AUTHENTIK_POSTGRESQL__HOST: authentik-postgres
+      AUTHENTIK_POSTGRESQL__NAME: authentik
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${AUTHENTIK_POSTGRES_PASSWORD:?Set AUTHENTIK_POSTGRES_PASSWORD}
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:?Set AUTHENTIK_SECRET_KEY}
+    depends_on:
+      authentik-postgres:
+        condition: service_healthy
+    ports:
+      - '127.0.0.1:9000:9000'
+    healthcheck:
+      test: ['CMD', 'ak', 'healthcheck']
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 90s
+    volumes:
+      - authentik-data:/data
+      - authentik-templates:/templates
+  authentik-worker:
+    image: ghcr.io/goauthentik/server:2026.8.5
+    command: worker
+    restart: unless-stopped
+    shm_size: 512mb
+    environment: *authentik-environment
+    depends_on:
+      authentik-postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', 'ak', 'healthcheck']
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 90s
+    volumes:
+      - authentik-data:/data
+      - authentik-templates:/templates
+volumes:
+  repovio-postgres:
+  authentik-postgres:
+  authentik-data:
+  authentik-templates:
+```
+
+<a id="compose-proxy-and-startup"></a>
+
+## प्रॉक्सी और आरंभ
+
+YAML, वातावरण और प्रॉक्सी में उदाहरण डोमेन बदलें। प्रॉक्सी Docker होस्ट पर चलता है; दोनों नामों के वैध TLS प्रमाणपत्र
+चाहिए। कंटेनर प्रॉक्सी के लिए उसके loopback की जगह साझा Docker नेटवर्क उपयोग करें। डेटाबेस पोर्ट निजी रखें।
+
+```caddy
+repovio.example.com {
+  reverse_proxy /api/* 127.0.0.1:3001
+  reverse_proxy /socket.io/* 127.0.0.1:3001
+  reverse_proxy /mcp 127.0.0.1:3001
+  reverse_proxy 127.0.0.1:3000
+}
+auth.example.com {
+  reverse_proxy 127.0.0.1:9000
+}
+```
+
+<a id="configure-authentik-oidc"></a>
+
+## OIDC सेट करें
+
+Authentik खोलकर akadmin सेटअप पूरा करें। repovio slug, गोपनीय क्लाइंट, प्राधिकरण कोड प्रवाह, हस्ताक्षर कुंजी,
+प्रति-प्रदाता issuer और नीचे के सटीक strict redirect URI वाला OAuth2/OpenID अनुप्रयोग तथा प्रदाता बनाएँ। openid,
+profile, email मैपिंग जोड़ें; profile में groups दावे के अंतर्गत समूह नाम आने चाहिए।
+
+```text
+Issuer: https://auth.example.com/application/o/repovio/
+Discovery: https://auth.example.com/application/o/repovio/.well-known/openid-configuration
+Redirect URI: https://repovio.example.com/api/v1/auth/oidc/callback
+```
+
+पहले स्थानीय व्यवस्थापक से Repovio में आएँ। सेटिंग → प्रमाणीकरण में issuer, क्लाइंट ID और रहस्य दें; groups और openid
+profile email स्कोप चुनें। Authentik में repovio-admins, repovio-managers, repovio-viewers बनाकर भूमिकाएँ मैप करें।
+जाँचें, OIDC चालू करें, फिर गैर-व्यवस्थापक और बिना भूमिका खाते का परीक्षण करें। सेटिंग Repovio में रहती हैं, काल्पनिक
+OIDC वातावरण चर में नहीं। स्थानीय प्रवेश पुनर्प्राप्ति हेतु उपलब्ध रहता है।
+
+OIDC समूह केवल वैश्विक भूमिकाएँ देते हैं। स्थानीय समूह और सीधे रिपॉज़िटरी आवंटन अलग पहुँच देते हैं; मैनेजर को रिपॉज़िटरी
+पर Manager अनुदान भी चाहिए। OIDC समूह समकालिकरण नहीं होता।
+
+<a id="verify-compose-installation"></a>
+
+## सत्यापन और अपग्रेड
+
+रहस्य छापे बिना विन्यास जाँचें और आरंभ करें। माइग्रेशन, API और वेब जाँचें; दूसरे उदाहरण में Authentik स्वास्थ्य और OIDC
+प्रवेश भी। .env निजी रखें और दोनों डेटाबेस तथा Authentik वॉल्यूम का बैकअप लें। पुराने वॉल्यूम नाम बनाए रखें। पुराना
+संस्करण समूह अधिकार अनदेखा करता है: रोलबैक से विरासत पहुँच हट सकती है, सीधे आवंटन बने रहते हैं।
+
+```bash
+chmod 600 .env
+docker compose config --quiet
+docker compose pull
+docker compose up --detach --wait
+docker compose logs migrate
+curl --fail http://127.0.0.1:3001/api/health
+```
 
 <a id="recommended-first-session"></a>
 
-## अनुशंसित पहला सत्र
+## आगे के निर्देश
 
-1. [दाखिल करना](/docs/next/sign-in), [मार्गदर्शन](/docs/next/navigation) सीखें, और [खोज](/docs/next/search) आज़माएँ।
-2. [डैशबोर्ड](/docs/next/guide-dashboard), [सभी निष्पादन](/docs/next/workflow-runs),
-   [ध्यान देने की जरूरत है](/docs/next/needs-attention), और [मंजूरी का इंतजार](/docs/next/awaiting-approval) की समीक्षा
-   करें।
-3. [समस्याएँ](/docs/next/guide-issues) और [पुल अनुरोध](/docs/next/guide-pull-requests) का निरीक्षण करें।
-4. आप जो डेटा देख सकते हैं उसे समझने के लिए [डेटा संग्रह स्थान](/docs/next/repositories) खोलें।
-5. प्रशासक [अधिसूचना चैनल](/docs/next/notifications) और [इवेंट सदस्यता](/docs/next/notification-rules) को कॉन्फ़िगर करते
-   हैं।
+[आगे के निर्देश](/docs/next/setup) · [Repovio](/docs/next/deployment) · [OIDC](/docs/next/authentication)
 
-सिस्टम प्रशासकों को तब [प्रशासन और सेटिंग्स](/docs/next/provider-accounts) के साथ जारी रखना चाहिए। परिनियोजन, प्रदाता
-पंजीकरण, वेबहुक सेटअप, बैकअप और पुनर्प्राप्ति संबंधित हैंडबुक पृष्ठों से जुड़े हुए हैं।
+आगे के निर्देश: [Authentik Compose](https://docs.goauthentik.io/install-config/install/docker-compose/) ·
+[Authentik OIDC](https://docs.goauthentik.io/add-secure-apps/providers/oauth2/)
 
 <a id="when-a-page-is-empty-or-unavailable"></a>
 
-## जब कोई पृष्ठ खाली या अनुपलब्ध हो
-
-एक खाली पृष्ठ का मतलब यह हो सकता है कि कोई भी मिलान प्रदाता डेटा सिंक्रनाइज़ नहीं किया गया है, फ़िल्टर सभी परिणामों को
-बाहर कर देता है, या आपके खाते में रिपॉजिटरी के लिए कोई सदस्यता नहीं है। सक्रिय फ़िल्टर साफ़ करें और पहले रिपॉजिटरी चयन
-की जाँच करें। लोड-त्रुटि संदेश का अर्थ है कि अनुरोधित डेटा पुनर्प्राप्त नहीं किया जा सका; पृष्ठ क्रिया का पुनः प्रयास
-करें और यदि त्रुटि बनी रहती है तो इंस्टॉलेशन व्यवस्थापक से एपीआई और सिंक्रोनाइज़ेशन नौकरियों का निरीक्षण करने के लिए
-कहें।
+[आगे के निर्देश](/docs/next/repositories)

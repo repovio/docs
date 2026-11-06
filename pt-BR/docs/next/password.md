@@ -24,3 +24,13 @@ provedor. Repovio deliberadamente não possui fluxo de redefinição baseado em 
 usar o [comando de recuperação local](/docs/next/authentication#reset-a-forgotten-password) documentado; rejeita contas
 OIDC e invalida sessões existentes. Nunca coloque uma senha substituta no histórico do shell ou em um relatório de
 problemas.
+
+<a id="local-user-and-group-management"></a>
+
+## Criar e redefinir contas locais
+
+A ação Redefinir senha permite ao administrador substituir uma senha local sem a anterior. Informe e confirme a nova
+senha. Sessões JWT existentes ficam inválidas; redefinir a própria encerra a sessão. Contas OIDC não mostram essa ação.
+Tokens MCP permanecem válidos.
+
+[Grupos de acesso locais](/docs/next/users#local-access-groups)

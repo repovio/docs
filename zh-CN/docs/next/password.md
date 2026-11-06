@@ -18,3 +18,11 @@ description: '更改本地密码并了解会话失效和恢复。'
 
 OIDC 管理的帐户没有本地密码形式。更改该提供商的身份提供商密码。 Repovio 故意没有基于电子邮件的重置流程。部署操作员可以使用记录的
 [本地恢复命令](/docs/next/authentication#reset-a-forgotten-password)；它拒绝 OIDC 帐户并使现有会话无效。切勿将替换密码放入 shell 历史记录或问题报告中。
+
+<a id="local-user-and-group-management"></a>
+
+## 创建和重置本地账户
+
+本地账户行的重置密码操作允许系统管理员在不知道旧密码时设置新密码。输入并确认密码。旧 JWT 会话失效，重置自己的账户会退出登录。OIDC 账户没有该操作。MCP 令牌不被撤销。
+
+[本地访问组](/docs/next/users#local-access-groups)

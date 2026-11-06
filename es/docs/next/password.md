@@ -25,3 +25,13 @@ identidad en ese proveedor. Repovio deliberadamente no tiene un flujo de reinici
 operador de implementación puede utilizar el documento
 [comando de recuperación local](/docs/next/authentication#reset-a-forgotten-password); rechaza cuentas OIDC e invalida
 sesiones existentes. Nunca coloque una contraseña de reemplazo en el historial del shell ni en un informe de problemas.
+
+<a id="local-user-and-group-management"></a>
+
+## Crear y restablecer cuentas locales
+
+La acción de fila Restablecer contraseña permite al administrador fijar una nueva sin conocer la anterior. Escriba
+contraseña y confirmación. Las sesiones JWT anteriores dejan de funcionar; cambiar la propia cierra la sesión. No
+aparece para cuentas OIDC. Los tokens MCP se conservan.
+
+[Grupos de acceso locales](/docs/next/users#local-access-groups)

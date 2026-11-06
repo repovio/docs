@@ -27,3 +27,11 @@ description: '创建第一个本地管理员并了解一次性设置。'
 
 如果设置失败，请检查 API/数据库可用性和部署日志，而无需发布凭据。不要重置数据库来重复设置。请参阅
 [密码恢复](/docs/next/authentication#reset-a-forgotten-password) 了解现有本地管理员。
+
+<a id="local-user-and-group-management"></a>
+
+## 创建和重置本地账户
+
+在管理 → 用户工具栏选择新建用户。输入唯一用户名、可选姓名、12–256 字符密码及确认，并选择角色，默认 Viewer。启用 OIDC 后仍可创建。OIDC 身份由身份提供程序配置，不会因用户名相同而与本地账户关联。
+
+[本地访问组](/docs/next/users#local-access-groups)

@@ -54,3 +54,15 @@ manager. Follow [Repository webhooks](/docs/next/provider-webhooks) for setup an
 
 Viewers and managers receive a read-only repository settings summary. Retry load/save errors after recovery; inspect
 [Jobs](/docs/next/guide-jobs) for provider access, rate-limit, or synchronization failures.
+
+<a id="local-user-and-group-management"></a>
+
+## Local access groups
+
+In a repository’s Group access section, select a group and assign Viewer or Manager; change the role or remove the
+assignment there. Direct and group grants combine, with Manager winning over Viewer. Manager capabilities still require
+the global Manager role; system administrators retain unrestricted access. Removing a membership or grant takes effect
+on the next request, unless another grant preserves access. Groups are local, work with local and OIDC accounts, and are
+not synchronized from OIDC claims.
+
+[Local access groups](/docs/next/users#local-access-groups)

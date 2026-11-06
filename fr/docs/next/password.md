@@ -27,3 +27,13 @@ opérateur de déploiement peut utiliser le
 [commande de récupération locale](/docs/next/authentication#reset-a-forgotten-password) documenté ; il rejette les
 comptes OIDC et invalide les sessions existantes. Ne mettez jamais de mot de passe de remplacement dans l'historique du
 shell ou dans un rapport de problème.
+
+<a id="local-user-and-group-management"></a>
+
+## Créer et réinitialiser les comptes locaux
+
+L’action Réinitialiser le mot de passe permet à un administrateur de remplacer un mot de passe local sans connaître le
+précédent. Confirmez le nouveau mot de passe. Les sessions JWT existantes deviennent invalides ; votre propre
+réinitialisation vous déconnecte. Les comptes OIDC ne proposent pas cette action. Les jetons MCP sont conservés.
+
+[Groupes d’accès locaux](/docs/next/users#local-access-groups)

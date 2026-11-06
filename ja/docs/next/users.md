@@ -16,8 +16,7 @@ description: 'ローカルおよび ID 管理のユーザー、ロール、削�
 
 ## プロビジョニングと削除
 
-「ユーザー」ページには、ユーザー作成フォームやユーザー編集フォームがありません。追加のローカル ユーザーは、ユーザー名、パスワード、およびロールを使用して、管理者専用の保護されたユーザー API を通じて作成されます。 OIDC ユーザーは、構成された ID ログインを通じてプロビジョニングされます。マッピングとアカウントの分離については、[認証](/docs/next/authentication)
-を参照してください。自分の [設定] ページに編集可能なプロファイルが存在することから、ユーザーの編集アクションを推測しないでください。
+管理 → ユーザーの新規作成を選びます。一意なユーザー名、任意の氏名、12–256文字のパスワードと確認、役割を入力します。初期値は Viewer です。OIDC 有効時も作成できます。OIDC アカウントは提供元で登録され、ローカル名の一致では関連付けられません。
 
 削除アクションは他のユーザーが使用でき、すぐに実行されます。アカウントを選択する前に確認してください。この API または画面から自分のアカウントを削除することはできません。 Repovio ユーザーを削除すると、ローカル アクセスが削除されます。 GitHub、GitLab、Forgejo、または Gitea のプロバイダー アカウントは削除されません。削除する前に、影響を受けるユーザーのアクセスを確認してください。
 
@@ -47,3 +46,32 @@ HTTPS 経由で API クライアントを使用して、管理者ベアラー認
 
 有効なロールは、`VIEWER`、`MANAGER`、および `SYSTEM_ADMIN`
 です。必要なロールのみを割り当ててから、リポジトリ メンバーシップを個別に付与します。応答には、パスワードやそのハッシュではなく、安全なユーザー メタデータが含まれます。重複したユーザー名または無効なリクエストは、再試行する前に修正する必要があります。パスワードやベアラー トークンを追跡ファイル、シェル履歴、スクリーンショット、または発行レポートに保存しないでください。
+
+<a id="create-and-reset-local-accounts"></a>
+
+## ローカルアカウントの作成とリセット
+
+ローカルアカウントのパスワードリセット操作では、管理者が旧パスワードなしで新しい値を設定できます。新パスワードと確認を入力します。既存 JWT セッションは無効化され、自分のリセットではログアウトします。OIDC アカウントには表示されません。MCP トークンは取り消しません。
+
+<a id="local-access-groups"></a>
+
+## ローカルアクセスグループ
+
+管理 → ユーザーグループで作成、名前変更、削除、メンバー追加と削除を行います。名前は一意で空にできません。ユーザー検索とページ送りに対応し、複数グループへの所属が可能です。入れ子は使えません。削除は確認を求め、所属と継承権限を除去しますが直接割り当ては残します。
+
+リポジトリのグループアクセスで Viewer または Manager を付与し、変更や削除ができます。直接権限と継承権限を合算し、Manager が優先します。管理には全体の Manager 役割も必要で、システム管理者は制限されません。取り消しは次の要求で有効ですが、別の権限があればアクセスは残ります。ローカルと OIDC アカウントを扱い、OIDC クレームからの同期は行いません。
+
+```text
+POST   /api/v1/users                              { username, password, role, firstName?, lastName? }
+PUT    /api/v1/users/:id/password                 { newPassword }
+GET    /api/v1/user-groups                       ?page=1&perPage=10
+POST   /api/v1/user-groups                       { name }
+PUT    /api/v1/user-groups/:id                    { name }
+DELETE /api/v1/user-groups/:id
+GET    /api/v1/user-groups/:id/members            ?page=1&perPage=10
+PUT    /api/v1/user-groups/:id/members/:userId
+DELETE /api/v1/user-groups/:id/members/:userId
+GET    /api/v1/repositories/:id/group-memberships
+PUT    /api/v1/repositories/:id/group-memberships/:groupId  { role }
+DELETE /api/v1/repositories/:id/group-memberships/:groupId
+```

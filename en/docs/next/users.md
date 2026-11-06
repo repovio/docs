@@ -16,10 +16,10 @@ create those memberships.
 
 ## Provisioning and deletion
 
-The Users page has no create-user or edit-user form. Additional local users are created through the administrator-only
-protected user API using username, password, and role. OIDC users are provisioned through configured identity login. See
-[Authentication](/docs/next/authentication) for mapping and account separation. Do not infer a user-edit action from the
-presence of an editable profile on your own Settings page.
+In Administration → Users, select New user in the toolbar. Enter a unique username, optional first and last name, a
+password of 12–256 characters and its confirmation, and a role; Viewer is the default. Creation remains available with
+OIDC enabled. OIDC identities are provisioned through their identity provider and are never linked by matching a local
+username.
 
 The delete action is available for other users and executes immediately; review the account before selecting it. You
 cannot delete your own account through this API or screen. Deleting a Repovio user removes local access; it does not
@@ -53,3 +53,41 @@ Valid roles are `VIEWER`, `MANAGER`, and `SYSTEM_ADMIN`. Assign only the require
 memberships separately. The response contains safe user metadata, not the password or its hash. A duplicate username or
 invalid request must be corrected before retrying. Do not store passwords or bearer tokens in tracked files, shell
 history, screenshots, or issue reports.
+
+<a id="create-and-reset-local-accounts"></a>
+
+## Create and reset local accounts
+
+For a local account, the row action Reset password lets a system administrator set a replacement without the old
+password. Enter the new password and confirmation. Existing JWT sessions become invalid; resetting your own account
+signs you out. OIDC accounts have no reset action. MCP tokens are not revoked by this operation.
+
+<a id="local-access-groups"></a>
+
+## Local access groups
+
+Open Administration → User groups to create, rename or delete a group and add or remove members. Names must be unique
+and nonempty. Membership selection supports searching and pagination; users may belong to multiple groups. Nested groups
+are not supported. Deleting a group requires confirmation and removes its memberships and repository grants, preserving
+direct assignments.
+
+In a repository’s Group access section, select a group and assign Viewer or Manager; change the role or remove the
+assignment there. Direct and group grants combine, with Manager winning over Viewer. Manager capabilities still require
+the global Manager role; system administrators retain unrestricted access. Removing a membership or grant takes effect
+on the next request, unless another grant preserves access. Groups are local, work with local and OIDC accounts, and are
+not synchronized from OIDC claims.
+
+```text
+POST   /api/v1/users                              { username, password, role, firstName?, lastName? }
+PUT    /api/v1/users/:id/password                 { newPassword }
+GET    /api/v1/user-groups                       ?page=1&perPage=10
+POST   /api/v1/user-groups                       { name }
+PUT    /api/v1/user-groups/:id                    { name }
+DELETE /api/v1/user-groups/:id
+GET    /api/v1/user-groups/:id/members            ?page=1&perPage=10
+PUT    /api/v1/user-groups/:id/members/:userId
+DELETE /api/v1/user-groups/:id/members/:userId
+GET    /api/v1/repositories/:id/group-memberships
+PUT    /api/v1/repositories/:id/group-memberships/:groupId  { role }
+DELETE /api/v1/repositories/:id/group-memberships/:groupId
+```

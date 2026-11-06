@@ -17,11 +17,10 @@ paginieren. Der Repository-Zugriff für einen Viewer oder Manager erfordert eine
 
 ## Bereitstellung und Löschung
 
-Auf der Seite „Benutzer“ gibt es kein Formular zum Erstellen oder Bearbeiten von Benutzern. Zusätzliche lokale Benutzer
-werden über die nur für Administratoren geschützte Benutzer-API unter Verwendung von Benutzername, Kennwort und Rolle
-erstellt. OIDC-Benutzer werden über eine konfigurierte Identitätsanmeldung bereitgestellt. Informationen zur Zuordnung
-und Kontentrennung finden Sie unter [Authentifizierung](/docs/next/authentication). Schließen Sie keine
-Benutzerbearbeitungsaktion aus dem Vorhandensein eines bearbeitbaren Profils auf Ihrer eigenen Einstellungsseite ab.
+Unter Administration → Benutzer in der Toolbar Neuer Benutzer wählen. Eindeutigen Benutzernamen, optional Vor- und
+Nachnamen, Passwort mit 12–256 Zeichen samt Bestätigung und eine Rolle angeben; Standard ist Leseberechtigung. Das
+Erstellen bleibt bei aktiviertem OIDC verfügbar. OIDC-Konten entstehen beim Identitätsanbieter und werden nicht anhand
+gleicher lokaler Benutzernamen verknüpft.
 
 Die Löschaktion ist für andere Benutzer verfügbar und wird sofort ausgeführt; Überprüfen Sie das Konto, bevor Sie es
 auswählen. Sie können Ihr eigenes Konto nicht über diese API oder diesen Bildschirm löschen. Durch das Löschen eines
@@ -59,3 +58,41 @@ dann separat Repository-Mitgliedschaften. Die Antwort enthält sichere Benutzerm
 Hash. Ein doppelter Benutzername oder eine ungültige Anfrage muss vor einem erneuten Versuch korrigiert werden.
 Speichern Sie Passwörter oder Bearer-Tokens nicht in nachverfolgten Dateien, im Shell-Verlauf, in Screenshots oder in
 Problemberichten.
+
+<a id="create-and-reset-local-accounts"></a>
+
+## Lokale Konten erstellen und zurücksetzen
+
+Bei lokalen Konten setzt die Zeilenaktion Passwort zurücksetzen ein neues Passwort ohne Kenntnis des bisherigen. Neues
+Passwort und Bestätigung eingeben. Bestehende JWT-Sitzungen werden ungültig; beim eigenen Konto folgt die Abmeldung.
+OIDC-Konten bieten diese Aktion nicht. MCP-Tokens bleiben bestehen.
+
+<a id="local-access-groups"></a>
+
+## Lokale Zugriffsgruppen
+
+Unter Administration → Benutzergruppen Gruppen erstellen, umbenennen oder löschen und Mitglieder hinzufügen oder
+entfernen. Namen müssen eindeutig und nicht leer sein. Die Benutzerauswahl unterstützt Suche und Seiten; Benutzer dürfen
+mehreren Gruppen angehören. Verschachtelte Gruppen sind nicht vorgesehen. Löschen erfordert Bestätigung und entfernt
+Mitgliedschaften und Gruppenrechte, erhält aber direkte Zuweisungen.
+
+Im Bereich Gruppenzugriff eines Repositorys eine Gruppe mit Leseberechtigung oder Repository-Verwaltung zuweisen, Rolle
+ändern oder Zuweisung entfernen. Direkte und geerbte Rechte werden kombiniert; Manager gewinnt vor Viewer.
+Verwaltungsrechte benötigen weiterhin die globale Manager-Rolle; Systemadministration bleibt uneingeschränkt. Entzug
+wirkt beim nächsten Request, sofern kein anderer Zugriff verbleibt. Gruppen sind lokal, unterstützen lokale sowie
+OIDC-Konten und werden nicht aus OIDC-Claims synchronisiert.
+
+```text
+POST   /api/v1/users                              { username, password, role, firstName?, lastName? }
+PUT    /api/v1/users/:id/password                 { newPassword }
+GET    /api/v1/user-groups                       ?page=1&perPage=10
+POST   /api/v1/user-groups                       { name }
+PUT    /api/v1/user-groups/:id                    { name }
+DELETE /api/v1/user-groups/:id
+GET    /api/v1/user-groups/:id/members            ?page=1&perPage=10
+PUT    /api/v1/user-groups/:id/members/:userId
+DELETE /api/v1/user-groups/:id/members/:userId
+GET    /api/v1/repositories/:id/group-memberships
+PUT    /api/v1/repositories/:id/group-memberships/:groupId  { role }
+DELETE /api/v1/repositories/:id/group-memberships/:groupId
+```

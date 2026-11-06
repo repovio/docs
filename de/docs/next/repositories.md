@@ -63,3 +63,15 @@ Sie [Repository-Webhooks](/docs/next/provider-webhooks) für die Einrichtung und
 Betrachter und Manager erhalten eine schreibgeschützte Zusammenfassung der Repository-Einstellungen. Nach der
 Wiederherstellung Lade-/Speicherfehler erneut versuchen; Überprüfen Sie [Jobs](/docs/next/guide-jobs) auf
 Anbieterzugriffs-, Ratenbegrenzungs- oder Synchronisierungsfehler.
+
+<a id="local-user-and-group-management"></a>
+
+## Lokale Zugriffsgruppen
+
+Im Bereich Gruppenzugriff eines Repositorys eine Gruppe mit Leseberechtigung oder Repository-Verwaltung zuweisen, Rolle
+ändern oder Zuweisung entfernen. Direkte und geerbte Rechte werden kombiniert; Manager gewinnt vor Viewer.
+Verwaltungsrechte benötigen weiterhin die globale Manager-Rolle; Systemadministration bleibt uneingeschränkt. Entzug
+wirkt beim nächsten Request, sofern kein anderer Zugriff verbleibt. Gruppen sind lokal, unterstützen lokale sowie
+OIDC-Konten und werden nicht aus OIDC-Claims synchronisiert.
+
+[Lokale Zugriffsgruppen](/docs/next/users#local-access-groups)
