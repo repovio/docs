@@ -125,3 +125,14 @@ unset REPOVIO_NEW_PASSWORD
 Substitua `USERNAME` pelo nome de usuário de login exato. O comando requer uma senha entre 12 e 256 caracteres, atualiza
 apenas a conta local e invalida todos os seus tokens de acesso existentes. Faça login novamente com a nova senha depois.
 O comando rejeita contas gerenciadas por OIDC porque elas não possuem senha local.
+
+<a id="local-user-and-group-management"></a>
+
+## Grupos de acesso locais
+
+Em Acesso de grupos do repositório, atribua Viewer ou Manager, altere ou remova a concessão. Direitos diretos e herdados
+se somam; Manager prevalece. Gerenciamento ainda exige papel global Manager; administradores mantêm acesso total.
+Remoções valem na próxima solicitação, salvo outra concessão. Grupos locais aceitam contas locais e OIDC, sem
+sincronizar claims OIDC.
+
+[Grupos de acesso locais](/docs/next/users#local-access-groups)

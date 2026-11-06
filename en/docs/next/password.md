@@ -23,3 +23,13 @@ OIDC-managed accounts do not have a local password form. Change the identity-pro
 deliberately has no email-based reset flow. A deployment operator can use the documented
 [local recovery command](/docs/next/authentication#reset-a-forgotten-password); it rejects OIDC accounts and invalidates
 existing sessions. Never put a replacement password in shell history or an issue report.
+
+<a id="local-user-and-group-management"></a>
+
+## Create and reset local accounts
+
+For a local account, the row action Reset password lets a system administrator set a replacement without the old
+password. Enter the new password and confirmation. Existing JWT sessions become invalid; resetting your own account
+signs you out. OIDC accounts have no reset action. MCP tokens are not revoked by this operation.
+
+[Local access groups](/docs/next/users#local-access-groups)

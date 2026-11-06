@@ -32,3 +32,14 @@ identity-provider-managed accounts. New non-administrators need explicit reposit
 If setup fails, check API/database availability and the deployment logs without publishing credentials. Do not reset the
 database to repeat setup. See [Password recovery](/docs/next/authentication#reset-a-forgotten-password) for an existing
 local administrator.
+
+<a id="local-user-and-group-management"></a>
+
+## Create and reset local accounts
+
+In Administration → Users, select New user in the toolbar. Enter a unique username, optional first and last name, a
+password of 12–256 characters and its confirmation, and a role; Viewer is the default. Creation remains available with
+OIDC enabled. OIDC identities are provisioned through their identity provider and are never linked by matching a local
+username.
+
+[Local access groups](/docs/next/users#local-access-groups)

@@ -126,3 +126,7 @@ identifiers and generated descriptions retain the language of the authoritative 
   [repovio/repovio#24](https://github.com/repovio/repovio/pull/24). The feature is merged but unreleased; historical
   `v1.0` does not include it. The existing `workingTreeSource` publication guard still protects the API reference drafts
   until their release review.
+
+The next handbook also covers local account creation, administrative password resets, local access groups, and additive
+repository group grants on the Users, Repositories, Authentication, Password, and Setup pages. Installation includes
+complete local-account and Authentik Compose examples. These additions do not alter the immutable v1.0 archive.

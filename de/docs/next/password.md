@@ -28,3 +28,13 @@ Bereitstellungsbetreiber kann das dokumentierte
 [lokaler Wiederherstellungsbefehl](/docs/next/authentication#reset-a-forgotten-password) verwenden; Es lehnt OIDC-Konten
 ab und macht bestehende Sitzungen ungültig. Fügen Sie niemals ein Ersatzkennwort in den Shell-Verlauf oder einen
 Problembericht ein.
+
+<a id="local-user-and-group-management"></a>
+
+## Lokale Konten erstellen und zurücksetzen
+
+Bei lokalen Konten setzt die Zeilenaktion Passwort zurücksetzen ein neues Passwort ohne Kenntnis des bisherigen. Neues
+Passwort und Bestätigung eingeben. Bestehende JWT-Sitzungen werden ungültig; beim eigenen Konto folgt die Abmeldung.
+OIDC-Konten bieten diese Aktion nicht. MCP-Tokens bleiben bestehen.
+
+[Lokale Zugriffsgruppen](/docs/next/users#local-access-groups)

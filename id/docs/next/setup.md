@@ -33,3 +33,13 @@ keanggotaan repositori yang eksplisit.
 Jika penyiapan gagal, periksa ketersediaan API/database dan log penerapan tanpa menerbitkan kredensial. Jangan mereset
 database untuk mengulangi pengaturan. Lihat [Pemulihan kata sandi](/docs/next/authentication#reset-a-forgotten-password)
 untuk administrator lokal yang ada.
+
+<a id="local-user-and-group-management"></a>
+
+## Membuat dan mereset akun lokal
+
+Di Administrasi → Pengguna pilih Pengguna baru pada toolbar. Isi nama unik, nama depan/belakang opsional, sandi 12–256
+karakter dengan konfirmasi dan peran; standar Viewer. Pembuatan tetap tersedia ketika OIDC aktif. Identitas OIDC dibuat
+melalui providernya dan tidak ditautkan berdasarkan kesamaan nama lokal.
+
+[Grup akses lokal](/docs/next/users#local-access-groups)

@@ -18,11 +18,10 @@ adhésions.
 
 ## Provisionnement et suppression
 
-La page Utilisateurs n'a pas de formulaire de création d'utilisateur ou de modification d'utilisateur. Des utilisateurs
-locaux supplémentaires sont créés via l'API utilisateur protégée uniquement par l'administrateur à l'aide d'un nom
-d'utilisateur, d'un mot de passe et d'un rôle. Les utilisateurs OIDC sont provisionnés via une connexion d'identité
-configurée. Voir [Authentification](/docs/next/authentication) pour le mappage et la séparation des comptes. Ne déduisez
-pas une action de modification par l'utilisateur de la présence d'un profil modifiable sur votre propre page Paramètres.
+Dans Administration → Utilisateurs, choisissez Nouvel utilisateur. Saisissez un identifiant unique, les noms
+facultatifs, un mot de passe de 12–256 caractères et sa confirmation, puis le rôle ; Viewer est la valeur initiale. La
+création reste possible avec OIDC. Les identités OIDC proviennent de leur fournisseur et ne sont jamais liées par
+correspondance avec un nom local.
 
 L'action de suppression est disponible pour les autres utilisateurs et s'exécute immédiatement ; examinez le compte
 avant de le sélectionner. Vous ne pouvez pas supprimer votre propre compte via cette API ou cet écran. La suppression
@@ -60,3 +59,39 @@ adhésions au référentiel séparément. La réponse contient des métadonnées
 son hachage. Un nom d'utilisateur en double ou une demande invalide doit être corrigé avant de réessayer. Ne stockez pas
 les mots de passe ou les jetons du porteur dans les fichiers suivis, l'historique du shell, les captures d'écran ou les
 rapports de problèmes.
+
+<a id="create-and-reset-local-accounts"></a>
+
+## Créer et réinitialiser les comptes locaux
+
+L’action Réinitialiser le mot de passe permet à un administrateur de remplacer un mot de passe local sans connaître le
+précédent. Confirmez le nouveau mot de passe. Les sessions JWT existantes deviennent invalides ; votre propre
+réinitialisation vous déconnecte. Les comptes OIDC ne proposent pas cette action. Les jetons MCP sont conservés.
+
+<a id="local-access-groups"></a>
+
+## Groupes d’accès locaux
+
+Ouvrez Administration → Groupes pour créer, renommer, supprimer et gérer les membres. Le nom doit être unique et non
+vide. La sélection permet recherche et pagination ; plusieurs groupes par utilisateur sont autorisés, sans imbrication.
+La suppression demande confirmation et retire membres et droits hérités, en conservant les attributions directes.
+
+Dans Accès des groupes du dépôt, attribuez Viewer ou Manager, modifiez ou retirez le rôle. Les droits directs et hérités
+se combinent ; Manager prévaut. La gestion nécessite toujours le rôle global Manager ; les administrateurs restent sans
+restriction. Le retrait agit à la requête suivante sauf autre droit conservé. Les groupes locaux acceptent les comptes
+locaux et OIDC, sans synchronisation des claims OIDC.
+
+```text
+POST   /api/v1/users                              { username, password, role, firstName?, lastName? }
+PUT    /api/v1/users/:id/password                 { newPassword }
+GET    /api/v1/user-groups                       ?page=1&perPage=10
+POST   /api/v1/user-groups                       { name }
+PUT    /api/v1/user-groups/:id                    { name }
+DELETE /api/v1/user-groups/:id
+GET    /api/v1/user-groups/:id/members            ?page=1&perPage=10
+PUT    /api/v1/user-groups/:id/members/:userId
+DELETE /api/v1/user-groups/:id/members/:userId
+GET    /api/v1/repositories/:id/group-memberships
+PUT    /api/v1/repositories/:id/group-memberships/:groupId  { role }
+DELETE /api/v1/repositories/:id/group-memberships/:groupId
+```

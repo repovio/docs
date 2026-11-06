@@ -60,3 +60,13 @@ dan verifikasi.
 Pemirsa dan pengelola menerima ringkasan pengaturan repositori hanya-baca. Coba lagi memuat/menyimpan kesalahan setelah
 pemulihan; periksa [Tugas sinkronisasi](/docs/next/guide-jobs) untuk akses penyedia, batas kecepatan, atau kegagalan
 sinkronisasi.
+
+<a id="local-user-and-group-management"></a>
+
+## Grup akses lokal
+
+Pada Akses grup repositori, berikan Viewer atau Manager, ubah atau hapus hak. Hak langsung dan turunan digabung; Manager
+menang. Pengelolaan tetap memerlukan peran global Manager; administrator sistem tidak dibatasi. Pencabutan berlaku pada
+permintaan berikutnya kecuali ada hak lain. Grup menerima akun lokal dan OIDC tanpa sinkronisasi klaim OIDC.
+
+[Grup akses lokal](/docs/next/users#local-access-groups)
