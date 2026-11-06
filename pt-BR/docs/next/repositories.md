@@ -60,3 +60,14 @@ durante a configuração; mantenha-os em um gerenciador secreto. Siga
 Os visualizadores e gerentes recebem um resumo das configurações do repositório somente leitura. Tentar novamente erros
 de carregamento/salvamento após a recuperação; inspecione [Tarefas de sincronização](/docs/next/guide-jobs) em busca de
 acesso do provedor, limite de taxa ou falhas de sincronização.
+
+<a id="local-user-and-group-management"></a>
+
+## Grupos de acesso locais
+
+Em Acesso de grupos do repositório, atribua Viewer ou Manager, altere ou remova a concessão. Direitos diretos e herdados
+se somam; Manager prevalece. Gerenciamento ainda exige papel global Manager; administradores mantêm acesso total.
+Remoções valem na próxima solicitação, salvo outra concessão. Grupos locais aceitam contas locais e OIDC, sem
+sincronizar claims OIDC.
+
+[Grupos de acesso locais](/docs/next/users#local-access-groups)

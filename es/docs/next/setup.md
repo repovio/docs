@@ -36,3 +36,13 @@ Si la configuración falla, verifique la disponibilidad de la API/base de datos 
 publicar las credenciales. No reinicie la base de datos para repetir la configuración. Consulte
 [Recuperación de contraseña](/docs/next/authentication#reset-a-forgotten-password) para conocer un administrador local
 existente.
+
+<a id="local-user-and-group-management"></a>
+
+## Crear y restablecer cuentas locales
+
+En Administración → Usuarios, elija Nuevo usuario en la barra. Indique nombre único, nombres opcionales, contraseña de
+12–256 caracteres y confirmación, y rol; el valor inicial es Viewer. También funciona con OIDC activo. Las identidades
+OIDC se crean mediante su proveedor y nunca se vinculan por coincidencia de nombre local.
+
+[Grupos de acceso locales](/docs/next/users#local-access-groups)

@@ -67,3 +67,14 @@ Los espectadores y administradores reciben un resumen de la configuración del r
 intentar cargar/guardar errores después de la recuperación; Inspeccione
 [Tareas de sincronización](/docs/next/guide-jobs) para detectar errores de acceso, límite de velocidad o sincronización
 del proveedor.
+
+<a id="local-user-and-group-management"></a>
+
+## Grupos de acceso locales
+
+En Acceso de grupos del repositorio asigne Viewer o Manager y cambie o retire el permiso. Los permisos directos y
+heredados se combinan; Manager prevalece. La gestión sigue requiriendo rol global Manager; los administradores tienen
+acceso total. La retirada se aplica en la siguiente solicitud salvo otro permiso vigente. Los grupos admiten cuentas
+locales y OIDC, sin sincronización de claims OIDC.
+
+[Grupos de acceso locales](/docs/next/users#local-access-groups)

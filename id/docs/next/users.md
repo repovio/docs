@@ -16,11 +16,9 @@ terpisah; kelompok penyedia identitas tidak membuat keanggotaan tersebut.
 
 ## Penyediaan dan penghapusan
 
-Halaman Pengguna tidak memiliki formulir buat-pengguna atau edit-pengguna. Pengguna lokal tambahan dibuat melalui API
-pengguna yang dilindungi khusus administrator menggunakan nama pengguna, kata sandi, dan peran. Pengguna OIDC disediakan
-melalui login identitas yang dikonfigurasi. Lihat [Otentikasi](/docs/next/authentication) untuk pemetaan dan pemisahan
-akun. Jangan menyimpulkan tindakan edit pengguna dari keberadaan profil yang dapat diedit di halaman Pengaturan Anda
-sendiri.
+Di Administrasi → Pengguna pilih Pengguna baru pada toolbar. Isi nama unik, nama depan/belakang opsional, sandi 12–256
+karakter dengan konfirmasi dan peran; standar Viewer. Pembuatan tetap tersedia ketika OIDC aktif. Identitas OIDC dibuat
+melalui providernya dan tidak ditautkan berdasarkan kesamaan nama lokal.
 
 Tindakan penghapusan tersedia untuk pengguna lain dan segera dijalankan; tinjau akun sebelum memilihnya. Anda tidak
 dapat menghapus akun Anda sendiri melalui API atau layar ini. Menghapus pengguna Repovio akan menghapus akses lokal; itu
@@ -55,3 +53,38 @@ Peran yang valid adalah `VIEWER`, `MANAGER`, dan `SYSTEM_ADMIN`. Tetapkan hanya 
 keanggotaan repositori secara terpisah. Responsnya berisi metadata pengguna yang aman, bukan kata sandi atau hashnya.
 Nama pengguna duplikat atau permintaan yang tidak valid harus diperbaiki sebelum mencoba lagi. Jangan menyimpan kata
 sandi atau token pembawa dalam file yang dilacak, riwayat shell, tangkapan layar, atau laporan masalah.
+
+<a id="create-and-reset-local-accounts"></a>
+
+## Membuat dan mereset akun lokal
+
+Aksi Reset sandi pada baris akun lokal memungkinkan administrator mengganti sandi tanpa sandi lama. Isi sandi baru dan
+konfirmasi. Sesi JWT lama tidak berlaku; mereset akun sendiri mengeluarkan Anda. Akun OIDC tidak memiliki aksi ini.
+Token MCP tidak dicabut.
+
+<a id="local-access-groups"></a>
+
+## Grup akses lokal
+
+Buka Administrasi → Grup pengguna untuk membuat, mengganti nama, menghapus serta mengelola anggota. Nama harus unik dan
+tidak kosong. Pemilihan mendukung pencarian dan halaman; pengguna boleh bergabung beberapa grup tanpa grup bersarang.
+Penghapusan memerlukan konfirmasi dan menghapus keanggotaan serta hak turunan, tetapi mempertahankan penetapan langsung.
+
+Pada Akses grup repositori, berikan Viewer atau Manager, ubah atau hapus hak. Hak langsung dan turunan digabung; Manager
+menang. Pengelolaan tetap memerlukan peran global Manager; administrator sistem tidak dibatasi. Pencabutan berlaku pada
+permintaan berikutnya kecuali ada hak lain. Grup menerima akun lokal dan OIDC tanpa sinkronisasi klaim OIDC.
+
+```text
+POST   /api/v1/users                              { username, password, role, firstName?, lastName? }
+PUT    /api/v1/users/:id/password                 { newPassword }
+GET    /api/v1/user-groups                       ?page=1&perPage=10
+POST   /api/v1/user-groups                       { name }
+PUT    /api/v1/user-groups/:id                    { name }
+DELETE /api/v1/user-groups/:id
+GET    /api/v1/user-groups/:id/members            ?page=1&perPage=10
+PUT    /api/v1/user-groups/:id/members/:userId
+DELETE /api/v1/user-groups/:id/members/:userId
+GET    /api/v1/repositories/:id/group-memberships
+PUT    /api/v1/repositories/:id/group-memberships/:groupId  { role }
+DELETE /api/v1/repositories/:id/group-memberships/:groupId
+```

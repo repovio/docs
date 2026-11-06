@@ -39,3 +39,11 @@ description: '跟踪存储库、检查活动并配置本地同步和访问。'
 
 查看者和管理者会收到只读存储库设置摘要。恢复后重试加载/保存错误；检查 [同步任务](/docs/next/guide-jobs)
 的提供者访问、速率限制或同步失败。
+
+<a id="local-user-and-group-management"></a>
+
+## 本地访问组
+
+在仓库的组访问区域分配 Viewer 或 Manager，修改或移除授权。直接与继承授权取并集，Manager 优先。管理仍需全局 Manager 角色，系统管理员不受限制。移除在下一请求生效，其他授权仍可保留访问。组支持本地和 OIDC 账户，不从 OIDC 声明同步。
+
+[本地访问组](/docs/next/users#local-access-groups)

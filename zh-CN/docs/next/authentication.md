@@ -100,3 +100,11 @@ unset REPOVIO_NEW_PASSWORD
 
 将 `USERNAME`
 替换为准确的登录用户名。该命令需要 12 到 256 个字符之间的密码，仅更新该本地帐户，并使所有现有的访问令牌失效。之后使用新密码再次登录。该命令拒绝 OIDC 管理的帐户，因为它们没有本地密码。
+
+<a id="local-user-and-group-management"></a>
+
+## 本地访问组
+
+在仓库的组访问区域分配 Viewer 或 Manager，修改或移除授权。直接与继承授权取并集，Manager 优先。管理仍需全局 Manager 角色，系统管理员不受限制。移除在下一请求生效，其他授权仍可保留访问。组支持本地和 OIDC 账户，不从 OIDC 声明同步。
+
+[本地访问组](/docs/next/users#local-access-groups)

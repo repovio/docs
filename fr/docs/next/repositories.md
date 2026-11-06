@@ -65,3 +65,14 @@ vérification.
 Les visualiseurs et les gestionnaires reçoivent un résumé des paramètres du référentiel en lecture seule. Réessayez de
 charger/enregistrer les erreurs après la récupération ; inspectez [Tâches de synchronisation](/docs/next/guide-jobs)
 pour détecter les échecs d’accès au fournisseur, de limite de débit ou de synchronisation.
+
+<a id="local-user-and-group-management"></a>
+
+## Groupes d’accès locaux
+
+Dans Accès des groupes du dépôt, attribuez Viewer ou Manager, modifiez ou retirez le rôle. Les droits directs et hérités
+se combinent ; Manager prévaut. La gestion nécessite toujours le rôle global Manager ; les administrateurs restent sans
+restriction. Le retrait agit à la requête suivante sauf autre droit conservé. Les groupes locaux acceptent les comptes
+locaux et OIDC, sans synchronisation des claims OIDC.
+
+[Groupes d’accès locaux](/docs/next/users#local-access-groups)

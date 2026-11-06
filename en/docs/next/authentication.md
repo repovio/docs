@@ -116,3 +116,15 @@ unset REPOVIO_NEW_PASSWORD
 Replace `USERNAME` with the exact login username. The command requires a password between 12 and 256 characters, updates
 only that local account, and invalidates all of its existing access tokens. Sign in again with the new password
 afterward. The command rejects OIDC-managed accounts because they have no local password.
+
+<a id="local-user-and-group-management"></a>
+
+## Local access groups
+
+In a repository’s Group access section, select a group and assign Viewer or Manager; change the role or remove the
+assignment there. Direct and group grants combine, with Manager winning over Viewer. Manager capabilities still require
+the global Manager role; system administrators retain unrestricted access. Removing a membership or grant takes effect
+on the next request, unless another grant preserves access. Groups are local, work with local and OIDC accounts, and are
+not synchronized from OIDC claims.
+
+[Local access groups](/docs/next/users#local-access-groups)

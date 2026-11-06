@@ -36,3 +36,14 @@ Si l'installation échoue, vérifiez la disponibilité de l'API/de la base de do
 publier les informations d'identification. Ne réinitialisez pas la base de données pour répéter l'installation. Voir
 [Récupération de mot de passe](/docs/next/authentication#reset-a-forgotten-password) pour un administrateur local
 existant.
+
+<a id="local-user-and-group-management"></a>
+
+## Créer et réinitialiser les comptes locaux
+
+Dans Administration → Utilisateurs, choisissez Nouvel utilisateur. Saisissez un identifiant unique, les noms
+facultatifs, un mot de passe de 12–256 caractères et sa confirmation, puis le rôle ; Viewer est la valeur initiale. La
+création reste possible avec OIDC. Les identités OIDC proviennent de leur fournisseur et ne sont jamais liées par
+correspondance avec un nom local.
+
+[Groupes d’accès locaux](/docs/next/users#local-access-groups)

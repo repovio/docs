@@ -17,11 +17,9 @@ associações.
 
 ## Provisionamento e exclusão
 
-A página Usuários não possui formulário de criação de usuário ou edição de usuário. Usuários locais adicionais são
-criados por meio da API de usuário protegida somente pelo administrador usando nome de usuário, senha e função. Os
-usuários OIDC são provisionados por meio de login de identidade configurado. Consulte
-[Autenticação](/docs/next/authentication) para mapeamento e separação de contas. Não deduza uma ação de edição do
-usuário pela presença de um perfil editável em sua própria página Configurações.
+Em Administração → Usuários, selecione Novo usuário na barra. Informe nome único, nomes opcionais, senha de 12–256
+caracteres com confirmação e papel; Viewer é o padrão. A criação funciona com OIDC ativo. Identidades OIDC vêm do
+provedor e nunca são vinculadas por nome local coincidente.
 
 A ação de exclusão fica disponível para outros usuários e é executada imediatamente; revise a conta antes de
 selecioná-la. Você não pode excluir sua própria conta por meio desta API ou tela. A exclusão de um usuário Repovio
@@ -58,3 +56,39 @@ As funções válidas são `VIEWER`, `MANAGER` e `SYSTEM_ADMIN`. Atribua apenas 
 associações ao repositório separadamente. A resposta contém metadados seguros do usuário, não a senha ou seu hash. Um
 nome de usuário duplicado ou uma solicitação inválida devem ser corrigidos antes de tentar novamente. Não armazene
 senhas ou tokens de portador em arquivos rastreados, histórico de shell, capturas de tela ou relatórios de problemas.
+
+<a id="create-and-reset-local-accounts"></a>
+
+## Criar e redefinir contas locais
+
+A ação Redefinir senha permite ao administrador substituir uma senha local sem a anterior. Informe e confirme a nova
+senha. Sessões JWT existentes ficam inválidas; redefinir a própria encerra a sessão. Contas OIDC não mostram essa ação.
+Tokens MCP permanecem válidos.
+
+<a id="local-access-groups"></a>
+
+## Grupos de acesso locais
+
+Abra Administração → Grupos para criar, renomear, excluir e gerenciar membros. Nomes devem ser únicos e não vazios. A
+seleção oferece pesquisa e paginação; um usuário pode participar de vários grupos, sem grupos aninhados. Excluir exige
+confirmação e remove membros e concessões herdadas, preservando associações diretas.
+
+Em Acesso de grupos do repositório, atribua Viewer ou Manager, altere ou remova a concessão. Direitos diretos e herdados
+se somam; Manager prevalece. Gerenciamento ainda exige papel global Manager; administradores mantêm acesso total.
+Remoções valem na próxima solicitação, salvo outra concessão. Grupos locais aceitam contas locais e OIDC, sem
+sincronizar claims OIDC.
+
+```text
+POST   /api/v1/users                              { username, password, role, firstName?, lastName? }
+PUT    /api/v1/users/:id/password                 { newPassword }
+GET    /api/v1/user-groups                       ?page=1&perPage=10
+POST   /api/v1/user-groups                       { name }
+PUT    /api/v1/user-groups/:id                    { name }
+DELETE /api/v1/user-groups/:id
+GET    /api/v1/user-groups/:id/members            ?page=1&perPage=10
+PUT    /api/v1/user-groups/:id/members/:userId
+DELETE /api/v1/user-groups/:id/members/:userId
+GET    /api/v1/repositories/:id/group-memberships
+PUT    /api/v1/repositories/:id/group-memberships/:groupId  { role }
+DELETE /api/v1/repositories/:id/group-memberships/:groupId
+```

@@ -130,3 +130,15 @@ Ersetzen Sie `USERNAME` durch den genauen Login-Benutzernamen. Der Befehl erford
 Zeichen, aktualisiert nur das lokale Konto und macht alle vorhandenen Zugriffstoken ungültig. Melden Sie sich
 anschließend erneut mit dem neuen Passwort an. Der Befehl lehnt von OIDC verwaltete Konten ab, da diese kein lokales
 Kennwort haben.
+
+<a id="local-user-and-group-management"></a>
+
+## Lokale Zugriffsgruppen
+
+Im Bereich Gruppenzugriff eines Repositorys eine Gruppe mit Leseberechtigung oder Repository-Verwaltung zuweisen, Rolle
+ändern oder Zuweisung entfernen. Direkte und geerbte Rechte werden kombiniert; Manager gewinnt vor Viewer.
+Verwaltungsrechte benötigen weiterhin die globale Manager-Rolle; Systemadministration bleibt uneingeschränkt. Entzug
+wirkt beim nächsten Request, sofern kein anderer Zugriff verbleibt. Gruppen sind lokal, unterstützen lokale sowie
+OIDC-Konten und werden nicht aus OIDC-Claims synchronisiert.
+
+[Lokale Zugriffsgruppen](/docs/next/users#local-access-groups)

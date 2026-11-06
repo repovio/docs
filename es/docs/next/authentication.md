@@ -128,3 +128,14 @@ Reemplace `USERNAME` con el nombre de usuario de inicio de sesión exacto. El co
 y 256 caracteres, actualiza solo esa cuenta local e invalida todos sus tokens de acceso existentes. Inicie sesión
 nuevamente con la nueva contraseña después. El comando rechaza las cuentas administradas por OIDC porque no tienen
 contraseña local.
+
+<a id="local-user-and-group-management"></a>
+
+## Grupos de acceso locales
+
+En Acceso de grupos del repositorio asigne Viewer o Manager y cambie o retire el permiso. Los permisos directos y
+heredados se combinan; Manager prevalece. La gestión sigue requiriendo rol global Manager; los administradores tienen
+acceso total. La retirada se aplica en la siguiente solicitud salvo otro permiso vigente. Los grupos admiten cuentas
+locales y OIDC, sin sincronización de claims OIDC.
+
+[Grupos de acceso locales](/docs/next/users#local-access-groups)

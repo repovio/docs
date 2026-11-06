@@ -119,3 +119,13 @@ unset REPOVIO_NEW_PASSWORD
 Ganti `USERNAME` dengan nama pengguna login yang tepat. Perintah ini memerlukan kata sandi antara 12 dan 256 karakter,
 hanya memperbarui akun lokal tersebut, dan membatalkan semua token akses yang ada. Masuk lagi dengan kata sandi baru
 sesudahnya. Perintah ini menolak akun yang dikelola OIDC karena tidak memiliki kata sandi lokal.
+
+<a id="local-user-and-group-management"></a>
+
+## Grup akses lokal
+
+Pada Akses grup repositori, berikan Viewer atau Manager, ubah atau hapus hak. Hak langsung dan turunan digabung; Manager
+menang. Pengelolaan tetap memerlukan peran global Manager; administrator sistem tidak dibatasi. Pencabutan berlaku pada
+permintaan berikutnya kecuali ada hak lain. Grup menerima akun lokal dan OIDC tanpa sinkronisasi klaim OIDC.
+
+[Grup akses lokal](/docs/next/users#local-access-groups)

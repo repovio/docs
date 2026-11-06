@@ -34,3 +34,13 @@ precisam de associações explícitas ao repositório.
 Se a configuração falhar, verifique a disponibilidade da API/banco de dados e os logs de implantação sem publicar
 credenciais. Não redefina o banco de dados para repetir a configuração. Consulte
 [Recuperação de senha](/docs/next/authentication#reset-a-forgotten-password) para um administrador local existente.
+
+<a id="local-user-and-group-management"></a>
+
+## Criar e redefinir contas locais
+
+Em Administração → Usuários, selecione Novo usuário na barra. Informe nome único, nomes opcionais, senha de 12–256
+caracteres com confirmação e papel; Viewer é o padrão. A criação funciona com OIDC ativo. Identidades OIDC vêm do
+provedor e nunca são vinculadas por nome local coincidente.
+
+[Grupos de acesso locais](/docs/next/users#local-access-groups)

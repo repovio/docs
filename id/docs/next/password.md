@@ -25,3 +25,13 @@ Repovio sengaja tidak memiliki alur reset berbasis email. Operator penerapan dap
 [perintah pemulihan lokal](/docs/next/authentication#reset-a-forgotten-password) yang terdokumentasi; itu menolak akun
 OIDC dan membatalkan sesi yang ada. Jangan pernah memasukkan kata sandi pengganti ke dalam riwayat shell atau laporan
 masalah.
+
+<a id="local-user-and-group-management"></a>
+
+## Membuat dan mereset akun lokal
+
+Aksi Reset sandi pada baris akun lokal memungkinkan administrator mengganti sandi tanpa sandi lama. Isi sandi baru dan
+konfirmasi. Sesi JWT lama tidak berlaku; mereset akun sendiri mengeluarkan Anda. Akun OIDC tidak memiliki aksi ini.
+Token MCP tidak dicabut.
+
+[Grup akses lokal](/docs/next/users#local-access-groups)
