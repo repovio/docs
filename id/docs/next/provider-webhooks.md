@@ -3,6 +3,9 @@ title: 'Penyiapan webhook repositori'
 description: 'Konfigurasikan webhook baca-saja yang ditandatangani untuk repositori GitHub, GitLab, Forgejo, dan Gitea.'
 ---
 
+Petunjuk PAT/OAuth di halaman ini menggunakan webhook per repositori. Koneksi GitHub App memakai satu webhook pusat dan
+diatur melalui dialog aplikasi.
+
 Repovio dapat menerima webhook yang ditandatangani untuk menyinkronkan repositori yang dilacak lebih cepat dari interval
 polling normalnya. Itu tidak pernah membuat, memperbarui, menghapus, atau menguji webhook melalui API penyedia.
 Administrator mengonfigurasi setiap webhook repositori secara manual di GitHub, GitLab, Forgejo, atau Gitea.
@@ -104,3 +107,5 @@ Gitea [dokumentasi webhook](https://docs.gitea.com/usage/repository/webhooks/).
 - Atur `SCHEDULER_SYNC_INTERVAL_SECONDS=1800` untuk fallback 30 menit.
 - `SCHEDULER_ENABLED=false` mempertahankan permintaan yang antri tetapi menghentikan sementara antrean dan pemrosesan
   fallback.
+
+[Pengaturan GitHub App](/docs/next/github-app)

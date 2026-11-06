@@ -3,6 +3,9 @@ title: 'Provider OAuth setup'
 description: 'Register OAuth applications and configure read-only provider authentication for Repovio.'
 ---
 
+The PAT/OAuth instructions on this page use per-repository webhooks. GitHub App connections instead use one central
+webhook and are configured through the GitHub App dialog.
+
 Repovio connects provider accounts through OAuth or a personal access token (PAT). OAuth is available when at least one
 provider OAuth client is configured. Without any configured OAuth clients, the provider-account screen offers only PAT
 authentication. Repovio uses either resulting credential only for its read-only provider APIs and encrypts it before
@@ -55,3 +58,5 @@ role; unavailable alert types are shown without failing other repository synchro
 Repovio's adapters expose only validation, discovery, workflow synchronization, and webhook verification. They do not
 create, update, dispatch, rerun, cancel, or delete provider resources. OAuth client secrets stay in the API environment,
 and provider tokens are never returned by the Repovio API.
+
+[GitHub App setup](/docs/next/github-app)

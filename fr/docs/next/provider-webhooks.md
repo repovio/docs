@@ -3,6 +3,9 @@ title: 'Configuration du webhook du référentiel'
 description: 'Configurez les webhooks signés en lecture seule pour les référentiels GitHub, GitLab, Forgejo et Gitea.'
 ---
 
+Les instructions PAT/OAuth de cette page utilisent des webhooks par dépôt. Les connexions GitHub App utilisent un
+webhook central et se configurent dans leur boîte de dialogue.
+
 Repovio peut recevoir des webhooks signés pour synchroniser un référentiel suivi plus tôt que son intervalle
 d'interrogation normal. Il ne crée, ne met à jour, ne supprime ou ne teste jamais les webhooks via les API du
 fournisseur. Un administrateur configure manuellement chaque webhook de référentiel dans GitHub, GitLab, Forgejo ou
@@ -113,3 +116,5 @@ Repovio vérifie `X-Gitea-Signature` sur le corps brut et utilise `X-Gitea-Deliv
 - Réglez `SCHEDULER_SYNC_INTERVAL_SECONDS=1800` pour le repli de 30 minutes.
 - `SCHEDULER_ENABLED=false` conserve les demandes en file d'attente mais suspend la mise en file d'attente et le
   traitement de secours.
+
+[Configurer GitHub App](/docs/next/github-app)

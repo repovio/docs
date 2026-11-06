@@ -3,6 +3,9 @@ title: 'Configuração do provedor OAuth'
 description: 'Registre aplicativos OAuth e configure a autenticação do provedor somente leitura para Repovio.'
 ---
 
+As instruções PAT/OAuth desta página usam webhooks por repositório. Conexões GitHub App usam um webhook central e são
+configuradas pelo diálogo do aplicativo.
+
 Repovio conecta contas de provedores por meio de OAuth ou de um token de acesso pessoal (PAT). OAuth está disponível
 quando pelo menos um cliente provedor OAuth está configurado. Sem nenhum cliente OAuth configurado, a tela da conta do
 provedor oferece apenas autenticação PAT. Repovio usa a credencial resultante apenas para suas APIs de provedor somente
@@ -57,3 +60,5 @@ falhar em outros escopos de sincronização do repositório.
 Os adaptadores Repovio expõem apenas validação, descoberta, sincronização de fluxo de trabalho e verificação de webhook.
 Eles não criam, atualizam, despacham, executam novamente, cancelam ou excluem recursos do provedor. Os segredos do
 cliente OAuth permanecem no ambiente da API e os tokens do provedor nunca são retornados pela API Repovio.
+
+[Configurar GitHub App](/docs/next/github-app)

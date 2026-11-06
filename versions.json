@@ -49,7 +49,7 @@
     {
       "id": "next",
       "release": null,
-      "revision": "5da0384eae55e731f04067253c00881be19e2508",
+      "revision": "ac6b7ca637807f55fd5daa20780886b474a0ad3b",
       "status": "preview",
       "slugs": [
         "overview",
@@ -78,6 +78,7 @@
         "browser-push",
         "provider-accounts",
         "provider-oauth",
+        "github-app",
         "users",
         "settings",
         "profile",

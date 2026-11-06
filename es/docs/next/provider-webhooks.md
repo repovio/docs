@@ -3,6 +3,9 @@ title: 'Configuración del webhook del repositorio'
 description: 'Configure webhooks firmados de solo lectura para los repositorios GitHub, GitLab, Forgejo y Gitea.'
 ---
 
+Las instrucciones PAT/OAuth de esta página usan webhooks por repositorio. Las conexiones GitHub App usan un webhook
+central y se configuran desde su diálogo.
+
 Repovio puede recibir webhooks firmados para sincronizar un repositorio rastreado antes de su intervalo de sondeo
 normal. Nunca crea, actualiza, elimina ni prueba webhooks a través de las API del proveedor. Un administrador configura
 manualmente cada webhook del repositorio en GitHub, GitLab, Forgejo o Gitea.
@@ -109,3 +112,5 @@ Consulte el Gitea [documentación de webhook](https://docs.gitea.com/usage/repos
 - Establezca `SCHEDULER_SYNC_INTERVAL_SECONDS=1800` para el respaldo de 30 minutos.
 - `SCHEDULER_ENABLED=false` retiene las solicitudes en cola pero detiene el procesamiento y la puesta en cola de
   reserva.
+
+[Configurar GitHub App](/docs/next/github-app)

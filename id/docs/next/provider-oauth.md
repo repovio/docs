@@ -3,6 +3,9 @@ title: 'Penyiapan penyedia OAuth'
 description: 'Daftarkan aplikasi OAuth dan konfigurasikan autentikasi penyedia hanya-baca untuk Repovio.'
 ---
 
+Petunjuk PAT/OAuth di halaman ini menggunakan webhook per repositori. Koneksi GitHub App memakai satu webhook pusat dan
+diatur melalui dialog aplikasi.
+
 Repovio menghubungkan akun penyedia melalui OAuth atau token akses pribadi (PAT). OAuth tersedia ketika setidaknya satu
 klien penyedia OAuth dikonfigurasi. Tanpa klien OAuth yang dikonfigurasi, layar akun penyedia hanya menawarkan
 otentikasi PAT. Repovio menggunakan kredensial yang dihasilkan hanya untuk API penyedia hanya-baca dan mengenkripsinya
@@ -57,3 +60,5 @@ repositori lainnya.
 Adaptor Repovio hanya mengekspos validasi, penemuan, sinkronisasi alur kerja, dan verifikasi webhook. Mereka tidak
 membuat, memperbarui, mengirimkan, menjalankan kembali, membatalkan, atau menghapus sumber daya penyedia. Rahasia klien
 OAuth tetap berada di lingkungan API, dan token penyedia tidak pernah dikembalikan oleh API Repovio.
+
+[Pengaturan GitHub App](/docs/next/github-app)

@@ -3,44 +3,45 @@
 Both version columns refer to the exact application commits in `versions.json`. All listed destinations exist in both
 recorded revisions; release-specific branding and browser-storage differences remain versioned.
 
-| Feature / controls                                                                                                              | Handbook page          | v1.0    | next    |
-| ------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ------- | ------- |
-| Repovio overview: Read-only workflow runs, repository work and security alerts across your providers.                           | `overview`             | Covered | Covered |
-| Repovio user guide: Start using Repovio to view repositories, workflow status, and required approval actions.                   | `installation`         | Covered | Covered |
-| First-run setup: Create the first local administrator and understand one-time setup.                                            | `setup`                | Covered | Covered |
-| Sign in: Use local credentials or OpenID Connect and safely end a session.                                                      | `sign-in`              | Covered | Covered |
-| Navigation: Find application destinations, status, personal settings, and version information.                                  | `navigation`           | Covered | Covered |
-| Global search: Search destinations, repositories, provider accounts, and workflow runs.                                         | `search`               | Covered | Covered |
-| Deploying Repovio: Production deployment, TLS proxy, backup, restore, upgrade, and rollback guidance for Repovio.               | `deployment`           | Covered | Covered |
-| Dashboard: Read current workflow health, work summaries, and historical charts.                                                 | `guide-dashboard`      | Covered | Covered |
-| All runs: Search, filter, and inspect retained workflow history without changing provider resources.                            | `workflow-runs`        | Covered | Covered |
-| Awaiting approval: Find provider approval gates and open their external approval screens.                                       | `awaiting-approval`    | Covered | Covered |
-| Needs attention: Investigate workflow contexts whose newest completed run failed.                                               | `needs-attention`      | Covered | Covered |
-| Issues: Browse synchronized issues, filters, and read-only details.                                                             | `guide-issues`         | Covered | Covered |
-| Pull requests: Browse synchronized pull requests, filters, and read-only details.                                               | `guide-pull-requests`  | Covered | Covered |
-| Dependency alerts: Review dependency alerts with repository-scoped management access.                                           | `alerts-dependencies`  | Covered | Covered |
-| Code scanning alerts: Review code scanning alerts with repository-scoped management access.                                     | `alerts-code`          | Covered | Covered |
-| Secret scanning alerts: Review secret scanning alerts with repository-scoped management access.                                 | `alerts-secrets`       | Covered | Covered |
-| Repositories: Track repositories, inspect activity, and configure local synchronization and access.                             | `repositories`         | Covered | Covered |
-| Repository webhook setup: Configure signed read-only webhooks for GitHub, GitLab, Forgejo, and Gitea repositories.              | `provider-webhooks`    | Covered | Covered |
-| Repository synchronization jobs: Monitor and manually start Repovio repository synchronization jobs.                            | `guide-jobs`           | Covered | Covered |
-| Notification channels: Create global notification destinations, subscribe to events, and test delivery.                         | `notifications`        | Covered | Covered |
-| Event subscriptions: Choose events, repository filters, and workflow patterns inside a channel.                                 | `notification-rules`   | Covered | Covered |
-| Delivery history: Inspect notification outcomes and safe per-attempt delivery details.                                          | `notification-history` | Covered | Covered |
-| Browser push: Enable notifications per device and understand server and browser requirements.                                   | `browser-push`         | Covered | Covered |
-| Provider accounts: Connect and administer encrypted, read-only provider credentials.                                            | `provider-accounts`    | Covered | Covered |
-| Provider OAuth setup: Register OAuth applications and configure read-only provider authentication for Repovio.                  | `provider-oauth`       | Covered | Covered |
-| Users: Review local and identity-managed users, roles, deletion, and MCP token administration.                                  | `users`                | Covered | Covered |
-| Settings: Find personal settings and administrator-only authentication and system controls.                                     | `settings`             | Covered | Covered |
-| Profile: Change local account names and username with current-password verification.                                            | `profile`              | Covered | Covered |
-| Avatar: Upload, import, crop, or remove your profile picture.                                                                   | `avatar`               | Covered | Covered |
-| Password: Change a local password and understand session invalidation and recovery.                                             | `password`             | Covered | Covered |
-| Language: Choose an application language and distinguish it from documentation languages.                                       | `language`             | Covered | Covered |
-| Appearance: Choose system, light, or dark presentation without changing repository data.                                        | `appearance`           | Covered | Covered |
-| MCP access: Connect header-configurable MCP clients to Repovio's permission-aware read-only workflow tools.                     | `mcp`                  | Covered | Covered |
-| Authentication: Configure local authentication, optional OpenID Connect sign-in, and account recovery.                          | `authentication`       | Covered | Covered |
-| System settings: Configure independent retention policies and the default date/time format.                                     | `settings-system`      | Covered | Covered |
-| Interface localization: Supported interface languages, fallback behavior, and the process for maintaining Repovio translations. | `localization`         | Covered | Covered |
+| Feature / controls                                                                                                              | Handbook page          | v1.0        | next    |
+| ------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- | ------- |
+| Repovio overview: Read-only workflow runs, repository work and security alerts across your providers.                           | `overview`             | Covered     | Covered |
+| Repovio user guide: Start using Repovio to view repositories, workflow status, and required approval actions.                   | `installation`         | Covered     | Covered |
+| First-run setup: Create the first local administrator and understand one-time setup.                                            | `setup`                | Covered     | Covered |
+| Sign in: Use local credentials or OpenID Connect and safely end a session.                                                      | `sign-in`              | Covered     | Covered |
+| Navigation: Find application destinations, status, personal settings, and version information.                                  | `navigation`           | Covered     | Covered |
+| Global search: Search destinations, repositories, provider accounts, and workflow runs.                                         | `search`               | Covered     | Covered |
+| Deploying Repovio: Production deployment, TLS proxy, backup, restore, upgrade, and rollback guidance for Repovio.               | `deployment`           | Covered     | Covered |
+| Dashboard: Read current workflow health, work summaries, and historical charts.                                                 | `guide-dashboard`      | Covered     | Covered |
+| All runs: Search, filter, and inspect retained workflow history without changing provider resources.                            | `workflow-runs`        | Covered     | Covered |
+| Awaiting approval: Find provider approval gates and open their external approval screens.                                       | `awaiting-approval`    | Covered     | Covered |
+| Needs attention: Investigate workflow contexts whose newest completed run failed.                                               | `needs-attention`      | Covered     | Covered |
+| Issues: Browse synchronized issues, filters, and read-only details.                                                             | `guide-issues`         | Covered     | Covered |
+| Pull requests: Browse synchronized pull requests, filters, and read-only details.                                               | `guide-pull-requests`  | Covered     | Covered |
+| Dependency alerts: Review dependency alerts with repository-scoped management access.                                           | `alerts-dependencies`  | Covered     | Covered |
+| Code scanning alerts: Review code scanning alerts with repository-scoped management access.                                     | `alerts-code`          | Covered     | Covered |
+| Secret scanning alerts: Review secret scanning alerts with repository-scoped management access.                                 | `alerts-secrets`       | Covered     | Covered |
+| Repositories: Track repositories, inspect activity, and configure local synchronization and access.                             | `repositories`         | Covered     | Covered |
+| Repository webhook setup: Configure signed read-only webhooks for GitHub, GitLab, Forgejo, and Gitea repositories.              | `provider-webhooks`    | Covered     | Covered |
+| Repository synchronization jobs: Monitor and manually start Repovio repository synchronization jobs.                            | `guide-jobs`           | Covered     | Covered |
+| Notification channels: Create global notification destinations, subscribe to events, and test delivery.                         | `notifications`        | Covered     | Covered |
+| Event subscriptions: Choose events, repository filters, and workflow patterns inside a channel.                                 | `notification-rules`   | Covered     | Covered |
+| Delivery history: Inspect notification outcomes and safe per-attempt delivery details.                                          | `notification-history` | Covered     | Covered |
+| Browser push: Enable notifications per device and understand server and browser requirements.                                   | `browser-push`         | Covered     | Covered |
+| Provider accounts: Connect and administer encrypted, read-only provider credentials.                                            | `provider-accounts`    | Covered     | Covered |
+| Provider OAuth setup: Register OAuth applications and configure read-only provider authentication for Repovio.                  | `provider-oauth`       | Covered     | Covered |
+| GitHub App registration, encrypted configuration, installation connections, central webhooks, rotation and troubleshooting.     | `github-app`           | Unavailable | Covered |
+| Users: Review local and identity-managed users, roles, deletion, and MCP token administration.                                  | `users`                | Covered     | Covered |
+| Settings: Find personal settings and administrator-only authentication and system controls.                                     | `settings`             | Covered     | Covered |
+| Profile: Change local account names and username with current-password verification.                                            | `profile`              | Covered     | Covered |
+| Avatar: Upload, import, crop, or remove your profile picture.                                                                   | `avatar`               | Covered     | Covered |
+| Password: Change a local password and understand session invalidation and recovery.                                             | `password`             | Covered     | Covered |
+| Language: Choose an application language and distinguish it from documentation languages.                                       | `language`             | Covered     | Covered |
+| Appearance: Choose system, light, or dark presentation without changing repository data.                                        | `appearance`           | Covered     | Covered |
+| MCP access: Connect header-configurable MCP clients to Repovio's permission-aware read-only workflow tools.                     | `mcp`                  | Covered     | Covered |
+| Authentication: Configure local authentication, optional OpenID Connect sign-in, and account recovery.                          | `authentication`       | Covered     | Covered |
+| System settings: Configure independent retention policies and the default date/time format.                                     | `settings-system`      | Covered     | Covered |
+| Interface localization: Supported interface languages, fallback behavior, and the process for maintaining Repovio translations. | `localization`         | Covered     | Covered |
 
 ## Inventory sources
 
@@ -114,3 +115,14 @@ service/controller is named. Each linked heading is also present in the matching
 The API access and static reference pages exist only in `next`. They retain the `workingTreeSource` publication guard
 until their application revision is reviewed. Released versions without an API snapshot remain supported. Contract
 identifiers and generated descriptions retain the language of the authoritative OpenAPI contract.
+
+## Unreleased GitHub App support
+
+- `next`: [GitHub App setup](en/docs/next/github-app.md), covering App registration, read permissions, central webhooks,
+  installation connections, rotation and troubleshooting in all 13 locales.
+- Application implementation: [repovio/repovio#22](https://github.com/repovio/repovio/issues/22); documentation task:
+  [#6](https://github.com/repovio/docs/issues/6).
+- Reviewed feature source: application merge revision `ac6b7ca637807f55fd5daa20780886b474a0ad3b` from
+  [repovio/repovio#24](https://github.com/repovio/repovio/pull/24). The feature is merged but unreleased; historical
+  `v1.0` does not include it. The existing `workingTreeSource` publication guard still protects the API reference drafts
+  until their release review.

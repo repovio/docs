@@ -3,6 +3,9 @@ title: 'プロバイダー OAuth セットアップ'
 description: 'OAuth アプリケーションを登録し、Repovio の読み取り専用プロバイダー認証を構成します。'
 ---
 
+このページの PAT/OAuth 手順ではリポジトリごとの Webhook を使用します。GitHub
+App 接続では中央の Webhook を一つ使用し、専用ダイアログで設定します。
+
 Repovio プロバイダーアカウントを接続します OAuth またはパーソナル アクセス トークン (PAT)。 OAuth 少なくとも 1 つのプロバイダーがあれば利用可能です OAuth クライアントが構成されています。何も設定されていない状態で OAuth クライアントの場合、プロバイダー アカウント画面では PAT 認証のみが提供されます。 Repovio 結果として得られる資格情報のいずれかを読み取り専用プロバイダ API にのみ使用し、書き込む前に暗号化します。 PostgreSQL。
 
 <a id="register-oauth-applications"></a>
@@ -49,3 +52,5 @@ FORGEJO_OAUTH_CLIENT_SECRET=...
 
 Repovio のアダプターは、検証、検出、ワークフロー同期、および Webhook 検証のみを公開します。プロバイダー リソースの作成、更新、ディスパッチ、再実行、キャンセル、削除は行いません。 OAuth クライアント シークレットは API 環境に残り、プロバイダー トークンは Repovio
 API によって返されることはありません。
+
+[GitHub App の設定](/docs/next/github-app)

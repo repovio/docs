@@ -3,6 +3,9 @@ title: 'Akun penyedia'
 description: 'Hubungkan dan kelola kredensial penyedia terenkripsi dan hanya-baca.'
 ---
 
+Petunjuk PAT/OAuth di halaman ini menggunakan webhook per repositori. Koneksi GitHub App memakai satu webhook pusat dan
+diatur melalui dialog aplikasi.
+
 <a id="access-and-list"></a>
 
 ## Akses dan daftar
@@ -40,3 +43,5 @@ repositori yang dilacak, bukan akun penyedia. Penemuan kosong dapat berarti tida
 salah, cakupan baca yang tidak memadai, atau kredensial yang tidak valid. Membedakan kegagalan pemuatan opsi
 autentikasi, kesalahan verifikasi, pemberitahuan panggilan balik OAuth, dan kegagalan API; perbaiki penyebabnya sebelum
 mencoba lagi. Periksa pekerjaan untuk mengetahui adanya kegagalan sinkronisasi yang sedang berlangsung.
+
+[Pengaturan GitHub App](/docs/next/github-app)

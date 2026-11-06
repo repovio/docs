@@ -3,6 +3,9 @@ title: 'リポジトリ Webhook のセットアップ'
 description: 'GitHub、GitLab、Forgejo、および Gitea リポジトリの署名付き読み取り専用 Webhook を構成します。'
 ---
 
+このページの PAT/OAuth 手順ではリポジトリごとの Webhook を使用します。GitHub
+App 接続では中央の Webhook を一つ使用し、専用ダイアログで設定します。
+
 Repovio は、署名付き Webhook を受信して​​、通常のポーリング間隔より早く追跡対象リポジトリを同期できます。プロバイダー API を介して Webhook を作成、更新、削除、テストすることはありません。管理者は、GitHub、GitLab、Forgejo、または Gitea ですべてのリポジトリ Webhook を手動で構成します。
 
 **リポジトリ** を開き、追跡対象のリポジトリを選択し、その**リポジトリ Webhook**
@@ -94,3 +97,5 @@ Repovio は、生の本体に対して `X-Gitea-Signature` を検証し、冪等
 - `SCHEDULER_SYNC_INTERVAL_SECONDS=1800` を 30 分のフォールバックに設定します。
 - `SCHEDULER_ENABLED=false`
   はキューに入れられたリクエストを保持しますが、フォールバックのキューイングと処理を一時停止します。
+
+[GitHub App の設定](/docs/next/github-app)

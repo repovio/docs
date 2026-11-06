@@ -4,6 +4,9 @@ description:
   'Registrieren Sie OAuth-Anwendungen und konfigurieren Sie die schreibgeschützte Anbieterauthentifizierung für Repovio.'
 ---
 
+Die PAT-/OAuth-Anweisungen dieser Seite verwenden Webhooks pro Repository. GitHub-App-Verbindungen nutzen stattdessen
+einen zentralen Webhook und werden über den GitHub-App-Dialog eingerichtet.
+
 Repovio verbindet Anbieterkonten über OAuth oder ein persönliches Zugriffstoken (PAT). OAuth ist verfügbar, wenn
 mindestens ein Provider-OAuth-Client konfiguriert ist. Ohne konfigurierte OAuth-Clients bietet der
 Anbieter-Konto-Bildschirm nur PAT-Authentifizierung. Repovio verwendet die resultierenden Anmeldeinformationen nur für
@@ -59,3 +62,5 @@ Die Adapter von Repovio bieten nur Validierung, Erkennung, Workflow-Synchronisie
 erstellen, aktualisieren, versenden, wiederholen, stornieren oder löschen keine Anbieterressourcen.
 OAuth-Client-Geheimnisse bleiben in der API-Umgebung und Anbieter-Tokens werden niemals von der Repovio-API
 zurückgegeben.
+
+[GitHub App einrichten](/docs/next/github-app)
