@@ -4,6 +4,9 @@
 
 Public documentation sources in 13 languages for https://repovio.de.
 
+Use the [canonical Repovio glossary](https://github.com/repovio/repovio/blob/main/GLOSSARY.md) for product and domain
+terminology. Access requires permission to read the private application repository.
+
 Edit `<locale>/docs/<version>/<slug>.md`. English is the editorial reference. Every page requires title and description
 frontmatter. Update every supported language together and preserve executable examples and technical identifiers.
 
