@@ -288,7 +288,8 @@ curl --fail http://127.0.0.1:3001/api/health
 
 ## Дополнительные инструкции
 
-[Дополнительные инструкции](/docs/next/setup) · [Repovio](/docs/next/deployment) · [OIDC](/docs/next/authentication)
+[Дополнительные инструкции](/docs/next/setup) · [Войти](/docs/next/sign-in) · [Repovio](/docs/next/deployment) ·
+[OIDC](/docs/next/authentication)
 
 Дополнительные инструкции: [Authentik Compose](https://docs.goauthentik.io/install-config/install/docker-compose/) ·
 [Authentik OIDC](https://docs.goauthentik.io/add-secure-apps/providers/oauth2/)

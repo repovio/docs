@@ -112,20 +112,19 @@ service/controller is named. Each linked heading is also present in the matching
 
 ## API reference drafts
 
-The API access and static reference pages exist only in `next`. They retain the `workingTreeSource` publication guard
-until their application revision is reviewed. Released versions without an API snapshot remain supported. Contract
-identifiers and generated descriptions retain the language of the authoritative OpenAPI contract.
+The API access and static reference pages exist only in `next`. Their application source is reviewed for v2.0 as
+recorded below. Released versions without an API snapshot remain supported. Contract identifiers and generated
+descriptions retain the language of the authoritative OpenAPI contract.
 
-## Unreleased GitHub App support
+## GitHub App support in v2.0
 
 - `next`: [GitHub App setup](en/docs/next/github-app.md), covering App registration, read permissions, central webhooks,
   installation connections, rotation and troubleshooting in all 13 locales.
 - Application implementation: [repovio/repovio#22](https://github.com/repovio/repovio/issues/22); documentation task:
   [#6](https://github.com/repovio/docs/issues/6).
 - Reviewed feature source: application merge revision `ac6b7ca637807f55fd5daa20780886b474a0ad3b` from
-  [repovio/repovio#24](https://github.com/repovio/repovio/pull/24). The feature is merged but unreleased; historical
-  `v1.0` does not include it. The existing `workingTreeSource` publication guard still protects the API reference drafts
-  until their release review.
+  [repovio/repovio#24](https://github.com/repovio/repovio/pull/24). The feature ships in application v2.0; historical
+  `v1.0` does not include it.
 
 The next handbook also covers local account creation, administrative password resets, local access groups, and additive
 repository group grants on the Users, Repositories, Authentication, Password, and Setup pages. Installation includes
@@ -138,3 +137,11 @@ separate-volume requirements, verification, and recovery limits. Its branding gu
 PostgreSQL 17 from the later major upgrade. Its localization guide also covers sign-in/setup controls and local flag
 assets. These updates are editorial drafts for all 13 documentation languages; the immutable `v1.0` archive remains
 unchanged and does not gain these instructions retroactively.
+
+## v2.0 release review
+
+The `next` handbook is reviewed against application release `repovio@2.0.0` at
+`dd939a1aee7428e517e74e5bc12c65302a521816`. Its API access routes, local account and group permissions, GitHub App
+setup, PostgreSQL 18 Compose examples, and upgrade procedures match that release. The API snapshot is exported from this
+exact application revision during promotion. The working-tree publication guard is removed following this review; `next`
+remains unpublished until the normal archive, screenshot, and website validation steps complete.
