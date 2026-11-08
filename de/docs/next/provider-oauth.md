@@ -64,3 +64,48 @@ OAuth-Client-Geheimnisse bleiben in der API-Umgebung und Anbieter-Tokens werden 
 zurückgegeben.
 
 [GitHub App einrichten](/docs/next/github-app)
+
+<a id="gitlab-connection-lifecycle"></a>
+
+## Lebenszyklus von GitLab-Verbindungen
+
+Registrieren Sie eine vertrauliche GitLab-OAuth-Anwendung mit der oben angegebenen exakten Callback-URL und den
+Leseberechtigungen. Bewahren Sie das Client-Geheimnis in der API-Umgebung auf. Diese Anwendung kann nur die
+konfigurierte GitLab-Instanz verwenden; eine andere Instanz benötigt eine dazu passende Bereitstellungskonfiguration.
+
+Wählen Sie für ein neues Anbieter-Konto **Anbieter hinzufügen**, GitLab und OAuth und schließen Sie die Zustimmung ab.
+Wählen Sie bei einer bestehenden GitLab-Verbindung **Mit GitLab OAuth verbinden**, um sie direkt umzustellen. Verwaltete
+OAuth-Verbindungen bieten **Erneut autorisieren** an. Die Umstellung bindet die numerische GitLab-Benutzer-ID; spätere
+Autorisierungen müssen denselben GitLab-Benutzer verwenden, auch wenn sich sein Benutzername ändert. ID, aktueller Name
+und Aktivierungszustand des Anbieter-Kontos sowie verfolgte Repositories, Mitgliedschaften, Konfiguration und Verlauf
+bleiben erhalten. Ein Abbruch oder eine fehlgeschlagene Zustimmung verändert die bestehende Verbindung nicht.
+
+Bestehende Verbindungen ohne gespeicherte Aktualisierungsmetadaten benötigen eine neue Autorisierung. Repovio kann diese
+älteren OAuth-Tokens nicht von PATs unterscheiden; ein Upgrade kennzeichnet sie daher nicht automatisch neu und stellt
+sie nicht automatisch um.
+
+<a id="gitlab-token-recovery"></a>
+
+## Token-Rotation und Wiederherstellung
+
+Repovio verschlüsselt Zugriffs- und Aktualisierungstokens gemeinsam und erneuert Zugriffstokens automatisch, sobald
+höchstens 60 Sekunden verbleiben. Jede erfolgreiche Rotation ersetzt das vorherige Paar. Eine mit `invalid_grant`
+abgelehnte Aktualisierung kennzeichnet die Verbindung als erneut zu autorisieren und unterdrückt weitere automatische
+Aktualisierungen bis zur erfolgreichen Autorisierung. Verwenden Sie **Erneut autorisieren**; Löschen und Neuerstellen
+sind nicht erforderlich.
+
+Netzwerkfehler, Zeitüberschreitungen, Ratenbegrenzungen und Serverfehler verwenden das bestehende Wiederholungs- und
+Backoff-Verhalten. Fehlende Client-Konfiguration muss wiederhergestellt werden; eine geänderte Client-Identität
+erfordert eine neue Autorisierung, und eine abweichende Instanz wird abgelehnt. Zugangsdaten und unverarbeitete
+Anbieterfehler werden niemals angezeigt. Rotiert GitLab die Tokens, während die Antwort verloren geht oder der
+Datenbank-Commit fehlschlägt, können die alten Tokens bereits ungültig sein. Autorisieren Sie erneut; PostgreSQL und
+GitLab können diesen Vorgang nicht atomar festschreiben.
+
+<a id="gitlab-oauth-rollout"></a>
+
+## Bereitstellung und Rollback
+
+Wenden Sie zuerst die additive Datenbankmigration an und stellen Sie anschließend zusammenpassende API- und
+Web-Versionen bereit. Behalten Sie die zusätzlichen Spalten bei einem Anwendungs-Rollback bei. Ältere
+Anwendungsversionen aktualisieren GitLab-OAuth-Tokens nicht automatisch; ein Rollback kann bereits durch GitLab ungültig
+gemachte Tokens nicht wiederherstellen.

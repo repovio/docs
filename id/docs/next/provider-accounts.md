@@ -45,3 +45,7 @@ autentikasi, kesalahan verifikasi, pemberitahuan panggilan balik OAuth, dan kega
 mencoba lagi. Periksa pekerjaan untuk mengetahui adanya kegagalan sinkronisasi yang sedang berlangsung.
 
 [Pengaturan GitHub App](/docs/next/github-app)
+
+Koneksi GitLab kini mendukung konversi OAuth dan otorisasi ulang tanpa penggantian. Baca
+[siklus hidup koneksi GitLab](/docs/next/provider-oauth#gitlab-connection-lifecycle) sebelum mengganti koneksi yang ada;
+otorisasi ulang mempertahankan data terlacak dan status aktif.

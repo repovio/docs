@@ -47,3 +47,7 @@ de carga de opciones de autenticación, errores de verificación, avisos de devo
 corrija la causa antes de volver a intentarlo. Inspeccione los trabajos en busca de fallas de sincronización continuas.
 
 [Configurar GitHub App](/docs/next/github-app)
+
+Las conexiones GitLab permiten ahora conversión OAuth y nueva autorización sin reemplazarlas. Consulte el
+[ciclo de vida de las conexiones GitLab](/docs/next/provider-oauth#gitlab-connection-lifecycle) antes de sustituir una
+conexión; la nueva autorización conserva los datos seguidos y el estado habilitado.

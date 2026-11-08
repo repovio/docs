@@ -43,3 +43,7 @@ errors, OAuth callback notices, and API failures; correct the cause before retry
 synchronization failures.
 
 [GitHub App setup](/docs/next/github-app)
+
+GitLab connections now support in-place OAuth conversion and reauthorization. See
+[GitLab connection lifecycle](/docs/next/provider-oauth#gitlab-connection-lifecycle) before replacing an existing
+connection; reauthorization preserves its tracked data and enabled state.

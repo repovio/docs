@@ -48,3 +48,8 @@ API-Fehlern. Beheben Sie die Ursache, bevor Sie es erneut versuchen. Untersuchen
 Synchronisierungsfehler.
 
 [GitHub App einrichten](/docs/next/github-app)
+
+GitLab-Verbindungen unterstützen jetzt die direkte OAuth-Umstellung und erneute Autorisierung. Lesen Sie vor dem
+Ersetzen einer bestehenden Verbindung den
+[Lebenszyklus von GitLab-Verbindungen](/docs/next/provider-oauth#gitlab-connection-lifecycle); die erneute Autorisierung
+erhält verfolgte Daten und Aktivierungszustand.
