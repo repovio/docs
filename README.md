@@ -1,5 +1,11 @@
 # Repovio documentation
 
+> [!IMPORTANT]
+>
+> This repository is no longer maintained. Development has moved to the
+> [Repovio monorepo](https://github.com/repovio/repovio). Current sources:
+> [`apps/website/content`](https://github.com/repovio/repovio/tree/main/apps/website/content).
+
 <img src="branding/logo.svg" width="64" height="64" alt="Repovio" />
 
 Public documentation sources in 13 languages for https://repovio.de.
