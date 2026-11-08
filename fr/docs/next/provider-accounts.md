@@ -50,3 +50,7 @@ notifications de rappel OAuth et les échecs d'API ; corrigez la cause avant de
 détecter les échecs de synchronisation en cours.
 
 [Configurer GitHub App](/docs/next/github-app)
+
+Les connexions GitLab permettent désormais la conversion OAuth et une nouvelle autorisation sur place. Consultez le
+[cycle de vie des connexions GitLab](/docs/next/provider-oauth#gitlab-connection-lifecycle) avant de remplacer une
+connexion ; une nouvelle autorisation conserve les données suivies et l’état d’activation.

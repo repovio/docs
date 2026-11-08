@@ -33,3 +33,6 @@ App 对话框进行设置。
 与[存储库](/docs/next/repositories)分开添加存储库； webhook 配置属于单个跟踪存储库，而不是提供商帐户。空发现可能意味着没有存储库、不正确的实例、读取范围不足或凭据无效。区分认证选项加载失败、验证错误、OAuth回调通知、API失败；重试之前纠正原因。检查作业是否存在持续的同步失败。
 
 [设置 GitHub App](/docs/next/github-app)
+
+GitLab 连接现在支持原地 OAuth 转换和重新授权。替换现有连接前，请参阅
+[GitLab 连接生命周期](/docs/next/provider-oauth#gitlab-connection-lifecycle)；重新授权会保留跟踪数据与启用状态。

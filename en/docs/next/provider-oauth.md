@@ -60,3 +60,43 @@ create, update, dispatch, rerun, cancel, or delete provider resources. OAuth cli
 and provider tokens are never returned by the Repovio API.
 
 [GitHub App setup](/docs/next/github-app)
+
+<a id="gitlab-connection-lifecycle"></a>
+
+## GitLab connection lifecycle
+
+Register a confidential GitLab OAuth application with the exact callback URL and read scopes listed above. Keep the
+client secret in the API environment. Only the configured GitLab instance can use this application; a different instance
+requires its own matching deployment configuration.
+
+For a new Provider Account, choose **Add provider**, select GitLab and OAuth, and complete consent. For an existing
+GitLab connection, choose **Connect with GitLab OAuth** to convert it in place. Managed OAuth connections offer
+**Reauthorize**. Conversion binds the numeric GitLab user ID; later authorizations must use the same GitLab user, even
+if its username changes. The Provider Account ID, current name and enabled state, tracked Repositories, memberships,
+configuration, and history remain intact. Cancellation or failed consent leaves the existing connection unchanged.
+
+Existing connections without saved refresh metadata require one new authorization. Repovio cannot distinguish these
+older OAuth tokens from PATs, so upgrading does not automatically relabel or convert them.
+
+<a id="gitlab-token-recovery"></a>
+
+## Token rotation and recovery
+
+Repovio encrypts access and refresh tokens together and automatically renews access tokens when 60 seconds or less
+remain. Each successful rotation replaces the previous pair. A rejected refresh with `invalid_grant` marks the
+connection as requiring reauthorization and suppresses further automatic refresh attempts until authorization succeeds.
+Use **Reauthorize**; deleting and recreating the connection is unnecessary.
+
+Network errors, timeouts, rate limits, and server failures use existing retry/backoff behavior. Missing client
+configuration must be restored; changed client identity requires reauthorization, and an instance mismatch is rejected.
+Credentials and raw provider errors are never shown. If GitLab rotates tokens but its response is lost or the database
+commit fails, the old tokens may already be invalid. Reauthorize to recover; PostgreSQL and GitLab cannot commit this
+operation atomically.
+
+<a id="gitlab-oauth-rollout"></a>
+
+## Rollout and rollback
+
+Apply the additive database migration first, then deploy matching API and web versions. Retain the added columns during
+an application rollback. Older application versions do not automatically refresh GitLab OAuth tokens, and rolling back
+cannot restore tokens already invalidated by GitLab.

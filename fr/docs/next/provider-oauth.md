@@ -64,3 +64,48 @@ n'annulent pas ou ne suppriment pas les ressources du fournisseur. Les secrets c
 API et les jetons du fournisseur ne sont jamais renvoyés par l'API Repovio.
 
 [Configurer GitHub App](/docs/next/github-app)
+
+<a id="gitlab-connection-lifecycle"></a>
+
+## Cycle de vie des connexions GitLab
+
+Enregistrez une application OAuth GitLab confidentielle avec l’URL de retour exacte et les droits de lecture indiqués
+ci-dessus. Conservez le secret client dans l’environnement de l’API. Seule l’instance GitLab configurée peut utiliser
+cette application ; une autre instance exige une configuration de déploiement correspondante.
+
+Pour un nouveau compte fournisseur, choisissez **Ajouter un fournisseur**, GitLab et OAuth, puis accordez le
+consentement. Pour une connexion GitLab existante, choisissez **Connecter avec GitLab OAuth** pour la convertir sur
+place. Les connexions OAuth gérées proposent **Autoriser à nouveau**. La conversion associe l’identifiant numérique de
+l’utilisateur GitLab ; les autorisations suivantes doivent utiliser le même utilisateur, même si son nom change.
+L’identifiant, le nom actuel et l’état d’activation du compte fournisseur, les dépôts suivis, les appartenances, la
+configuration et l’historique sont conservés. Une annulation ou un échec du consentement laisse la connexion existante
+intacte.
+
+Les connexions sans métadonnées de renouvellement enregistrées nécessitent une nouvelle autorisation. Repovio ne peut
+pas distinguer ces anciens jetons OAuth des PAT ; une mise à niveau ne les reclasse donc pas et ne les convertit pas
+automatiquement.
+
+<a id="gitlab-token-recovery"></a>
+
+## Rotation des jetons et récupération
+
+Repovio chiffre ensemble les jetons d’accès et de renouvellement et renouvelle automatiquement les jetons d’accès
+lorsqu’il reste 60 secondes ou moins. Chaque rotation réussie remplace la paire précédente. Un renouvellement refusé
+avec `invalid_grant` signale qu’une nouvelle autorisation est nécessaire et suspend les tentatives automatiques jusqu’à
+sa réussite. Utilisez **Autoriser à nouveau** ; il est inutile de supprimer et recréer la connexion.
+
+Les erreurs réseau, délais dépassés, limitations de débit et erreurs serveur utilisent les mécanismes existants de
+nouvelle tentative et de temporisation. Rétablissez une configuration client manquante ; un changement d’identité du
+client exige une nouvelle autorisation, et une instance différente est refusée. Les identifiants et les erreurs brutes
+du fournisseur ne sont jamais affichés. Si GitLab renouvelle les jetons mais que la réponse est perdue ou que la
+validation en base échoue, les anciens jetons peuvent déjà être invalides. Autorisez à nouveau pour rétablir l’accès ;
+PostgreSQL et GitLab ne peuvent pas valider cette opération de manière atomique.
+
+<a id="gitlab-oauth-rollout"></a>
+
+## Déploiement et retour arrière
+
+Appliquez d’abord la migration additive de la base de données, puis déployez des versions correspondantes de l’API et de
+l’interface web. Conservez les colonnes ajoutées lors d’un retour arrière de l’application. Les anciennes versions ne
+renouvellent pas automatiquement les jetons OAuth GitLab, et un retour arrière ne restaure pas les jetons déjà invalidés
+par GitLab.

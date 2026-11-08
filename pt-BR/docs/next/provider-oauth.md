@@ -62,3 +62,44 @@ Eles não criam, atualizam, despacham, executam novamente, cancelam ou excluem r
 cliente OAuth permanecem no ambiente da API e os tokens do provedor nunca são retornados pela API Repovio.
 
 [Configurar GitHub App](/docs/next/github-app)
+
+<a id="gitlab-connection-lifecycle"></a>
+
+## Ciclo de vida das conexões GitLab
+
+Registre um aplicativo OAuth confidencial do GitLab com a URL de retorno exata e os escopos de leitura indicados acima.
+Mantenha o segredo do cliente no ambiente da API. Somente a instância GitLab configurada pode usar esse aplicativo;
+outra instância exige uma configuração de implantação correspondente.
+
+Para uma nova conta de provedor, escolha **Adicionar provedor**, GitLab e OAuth e conclua o consentimento. Em uma
+conexão GitLab existente, escolha **Conectar com GitLab OAuth** para convertê-la sem substituí-la. Conexões OAuth
+gerenciadas oferecem **Autorizar novamente**. A conversão vincula o ID numérico do usuário GitLab; autorizações
+posteriores devem usar o mesmo usuário, mesmo que seu nome mude. São preservados o ID, o nome atual e o estado
+habilitado da conta de provedor, os repositórios acompanhados, as associações, a configuração e o histórico.
+Cancelamento ou falha no consentimento mantém a conexão existente intacta.
+
+Conexões existentes sem metadados de renovação salvos exigem uma nova autorização. O Repovio não consegue distinguir
+esses tokens OAuth antigos de PATs; portanto, uma atualização não os reclassifica nem converte automaticamente.
+
+<a id="gitlab-token-recovery"></a>
+
+## Rotação de tokens e recuperação
+
+O Repovio criptografa os tokens de acesso e renovação juntos e renova automaticamente os de acesso quando restam 60
+segundos ou menos. Cada rotação bem-sucedida substitui o par anterior. Uma renovação rejeitada com `invalid_grant`
+indica que a conexão precisa de nova autorização e suspende novas tentativas automáticas até o sucesso. Use **Autorizar
+novamente**; não é necessário excluir e recriar a conexão.
+
+Erros de rede, tempo limite, limites de solicitações e falhas do servidor usam as tentativas e esperas existentes.
+Restaure a configuração do cliente se estiver ausente; uma identidade de cliente alterada exige nova autorização, e uma
+instância diferente é rejeitada. Credenciais e erros brutos do provedor nunca são exibidos. Se o GitLab rotacionar os
+tokens, mas a resposta se perder ou a confirmação no banco falhar, os tokens anteriores já podem ser inválidos. Autorize
+novamente para recuperar; PostgreSQL e GitLab não podem confirmar essa operação atomicamente.
+
+<a id="gitlab-oauth-rollout"></a>
+
+## Implantação e reversão
+
+Aplique primeiro a migração aditiva do banco de dados e depois implante versões correspondentes da API e da web.
+Preserve as colunas adicionadas durante uma reversão da aplicação. Versões antigas não renovam automaticamente os tokens
+OAuth do GitLab, e uma reversão não restaura tokens já invalidados pelo GitLab.

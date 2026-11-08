@@ -62,3 +62,44 @@ membuat, memperbarui, mengirimkan, menjalankan kembali, membatalkan, atau mengha
 OAuth tetap berada di lingkungan API, dan token penyedia tidak pernah dikembalikan oleh API Repovio.
 
 [Pengaturan GitHub App](/docs/next/github-app)
+
+<a id="gitlab-connection-lifecycle"></a>
+
+## Siklus hidup koneksi GitLab
+
+Daftarkan aplikasi OAuth GitLab rahasia dengan URL callback yang tepat dan cakupan baca yang tercantum di atas. Simpan
+rahasia klien di lingkungan API. Hanya instans GitLab yang dikonfigurasi yang dapat menggunakan aplikasi ini; instans
+lain memerlukan konfigurasi penerapan yang sesuai.
+
+Untuk Akun Penyedia baru, pilih **Tambah penyedia**, GitLab dan OAuth, lalu selesaikan persetujuan. Pada koneksi GitLab
+yang sudah ada, pilih **Hubungkan dengan GitLab OAuth** untuk mengonversinya tanpa mengganti koneksi. Koneksi OAuth
+terkelola menyediakan **Otorisasi ulang**. Konversi mengikat ID numerik pengguna GitLab; otorisasi berikutnya harus
+menggunakan pengguna GitLab yang sama meskipun nama penggunanya berubah. ID, nama saat ini, status aktif Akun Penyedia,
+Repositori yang dilacak, keanggotaan, konfigurasi, dan riwayat tetap dipertahankan. Pembatalan atau kegagalan
+persetujuan tidak mengubah koneksi yang ada.
+
+Koneksi yang belum menyimpan metadata penyegaran memerlukan satu otorisasi baru. Repovio tidak dapat membedakan token
+OAuth lama ini dari PAT, sehingga peningkatan tidak otomatis mengubah label atau mengonversinya.
+
+<a id="gitlab-token-recovery"></a>
+
+## Rotasi token dan pemulihan
+
+Repovio mengenkripsi token akses dan penyegaran bersama-sama serta memperbarui token akses secara otomatis ketika
+tersisa 60 detik atau kurang. Setiap rotasi yang berhasil mengganti pasangan sebelumnya. Penolakan penyegaran dengan
+`invalid_grant` menandai koneksi sebagai memerlukan otorisasi ulang dan menghentikan upaya otomatis sampai otorisasi
+berhasil. Gunakan **Otorisasi ulang**; tidak perlu menghapus dan membuat ulang koneksi.
+
+Kesalahan jaringan, batas waktu, batas laju, dan kegagalan server menggunakan mekanisme percobaan ulang dan jeda yang
+sudah ada. Pulihkan konfigurasi klien yang hilang; perubahan identitas klien memerlukan otorisasi ulang, dan instans
+yang tidak cocok ditolak. Kredensial dan kesalahan mentah penyedia tidak pernah ditampilkan. Jika GitLab merotasi token
+tetapi respons hilang atau commit basis data gagal, token lama mungkin sudah tidak valid. Lakukan otorisasi ulang untuk
+memulihkan; PostgreSQL dan GitLab tidak dapat melakukan commit operasi ini secara atomik.
+
+<a id="gitlab-oauth-rollout"></a>
+
+## Peluncuran dan rollback
+
+Terapkan migrasi basis data aditif terlebih dahulu, kemudian gunakan versi API dan web yang sesuai. Pertahankan kolom
+tambahan saat melakukan rollback aplikasi. Versi lama tidak otomatis menyegarkan token OAuth GitLab, dan rollback tidak
+dapat memulihkan token yang telah dibatalkan oleh GitLab.
